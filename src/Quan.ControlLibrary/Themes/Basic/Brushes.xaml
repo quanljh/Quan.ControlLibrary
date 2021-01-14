@@ -1,0 +1,41 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Quan.ControlLibrary"
+    xmlns:o="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
+
+    <SolidColorBrush x:Key="Quan.Brushes.BackgroundBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.Background}" />
+    <SolidColorBrush x:Key="Quan.Brushes.BackgroundLightBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.BackgroundLight}" />
+    <SolidColorBrush x:Key="Quan.Brushes.BorderBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.BorderBrush}" />
+    <SolidColorBrush x:Key="Quan.Brushes.ForegroundBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.Foreground}" />
+    <SolidColorBrush x:Key="Quan.Brushes.ForegroundLightBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.ForegroundLight}" />
+    <SolidColorBrush x:Key="Quan.Brushes.ForegroundVeryLightBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.ForegroundVeryLight}" />
+
+    <SolidColorBrush x:Key="Quan.Brushes.IconHoverBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.IconHover}" />
+    <SolidColorBrush x:Key="Quan.Brushes.IconForegroundBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.IconForeground}" />
+
+    <SolidColorBrush x:Key="Quan.Brushes.PrimaryColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.PrimaryColor}" />
+    <SolidColorBrush x:Key="Quan.Brushes.LightPrimaryColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.LightPrimaryColor}" />
+    <SolidColorBrush x:Key="Quan.Brushes.VeryLightPrimaryColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.VeryLightPrimaryColor}" />
+    <SolidColorBrush x:Key="Quan.Brushes.DarkPrimaryColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.DarkPrimaryColor}" />
+
+    <SolidColorBrush x:Key="Quan.Brushes.WarningColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.WarningColor}" />
+    <SolidColorBrush x:Key="Quan.Brushes.ErrorColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.ErrorColorColor}" />
+    <SolidColorBrush x:Key="Quan.Brushes.SuccessColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.SuccessColor}" />
+
+    <SolidColorBrush x:Key="Quan.Brushes.FocusColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.FocusColor}" />
+
+
+    <!--  DataGrid  -->
+    <SolidColorBrush x:Key="DataGrid.Border.Common" o:Freeze="True" Color="#bdbdbd" />
+    <SolidColorBrush x:Key="DataGrid.Border.LightGray" o:Freeze="True" Color="#dddddd" />
+    <SolidColorBrush x:Key="DataGrid.Border.DarkGray" o:Freeze="True" Color="#999999" />
+    <SolidColorBrush x:Key="DataGrid.Background.Common" o:Freeze="True" Color="#4cc5e0" />
+    <SolidColorBrush x:Key="DataGrid.Background.MouseOver" o:Freeze="True" Color="#93e0f5" />
+    <SolidColorBrush x:Key="DataGridRow.Background.Selection" o:Freeze="True" Color="#85d7ed" />
+    <SolidColorBrush x:Key="DataGrid.Border.MouseOver" o:Freeze="True" Color="#74d7f2" />
+    <SolidColorBrush x:Key="DataGrid.Background.Pressed" o:Freeze="True" Color="#328fb8" />
+    <SolidColorBrush x:Key="DataGrid.Border.Pressed" o:Freeze="True" Color="#328fb8" />
+    <SolidColorBrush x:Key="DataGrid.Background.Disabled" o:Freeze="True" Color="#FFF4F4F4" />
+
+</ResourceDictionary>

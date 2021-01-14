@@ -1,0 +1,6 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:Quan.ControlLibrary">
+
+    <ResourceDictionary.MergedDictionaries>
+        <local:SharedResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Basic/Colors/Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

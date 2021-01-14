@@ -1,0 +1,12 @@
+# Basic
+Basic\Brushes.xaml
+Basic\Fonts.xaml
+Basic\Geometries.xaml
+Basic\Common.xaml
+Basic\ContentControl.xaml
+
+# Controls
+Styles\Basic\Button.xaml
+Styles\Basic\PasswordBox.xaml
+Styles\QuanTextBox.xaml
+Styles\QuanWindow.xaml

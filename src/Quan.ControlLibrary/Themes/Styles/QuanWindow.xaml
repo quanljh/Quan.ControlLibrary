@@ -1,0 +1,200 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:Quan.ControlLibrary">
+
+    <ResourceDictionary.MergedDictionaries>
+        <local:SharedResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Basic/Fonts.xaml" />
+        <local:SharedResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Basic/Geometries.xaml" />
+        <local:SharedResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Basic/ContentControl.xaml" />
+        <local:SharedResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Basic/Button.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <ControlTemplate x:Key="Quan.Templates.Window.Default" TargetType="{x:Type local:QuanWindow}">
+        <!--  Outer border with the drop shadow margin  -->
+        <Border x:Name="PART_OuterBorder" Padding="5" BorderBrush="{TemplateBinding BorderBrush}">
+            <!--  Main window outline  -->
+            <Grid>
+
+                <!--  Outer dragging border  -->
+                <Border
+                    x:Name="PART_OuterDraggingBorder"
+                    Panel.ZIndex="2"
+                    BorderBrush="{DynamicResource Quan.Brushes.WarningColorBrush}"
+                    CornerRadius="{TemplateBinding WindowCornerRadius}" />
+
+                <!--  Opacity mask for corners on grid  -->
+                <Border x:Name="PART_OpacityMask" Background="{DynamicResource Quan.Brushes.BackgroundBrush}" CornerRadius="{TemplateBinding WindowCornerRadius}" />
+
+                <!--  Window border and drop shadow  -->
+                <Border
+                    x:Name="RadiusBorder"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding WindowCornerRadius}">
+                    <Border.Effect>
+                        <DropShadowEffect Opacity="0.5" ShadowDepth="2.5" />
+                    </Border.Effect>
+                </Border>
+
+                <!--  The main window content  -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <!--  Title Bar  -->
+                        <RowDefinition Height="Auto" />
+
+                        <!--  Window Content  -->
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!--  Dividing Line  -->
+                    <Border
+                        Grid.Row="0"
+                        BorderBrush="{DynamicResource Quan.Brushes.ForegroundVeryLightBrush}"
+                        BorderThickness="0,0,0,0.5"
+                        ClipToBounds="True">
+                        <Border.Effect>
+                            <DropShadowEffect Direction="270" Opacity="0.5" ShadowDepth="0.5" />
+                        </Border.Effect>
+                    </Border>
+
+                    <!--  Title Bar  -->
+                    <Grid Grid.Row="0">
+
+                        <Grid.ColumnDefinitions>
+                            <!--  Icon  -->
+                            <ColumnDefinition Width="Auto" />
+                            <!--  Title  -->
+                            <ColumnDefinition Width="*" />
+                            <!--  Windows Button  -->
+                            <ColumnDefinition Width="Auto" />
+
+                        </Grid.ColumnDefinitions>
+
+                        <!--  icon  -->
+                        <Image
+                            x:Name="PART_Icon"
+                            Width="22"
+                            Height="22"
+                            Margin="5,0,0,0"
+                            VerticalAlignment="Center"
+                            Focusable="False"
+                            IsHitTestVisible="False"
+                            Source="{TemplateBinding Icon}"
+                            Visibility="{Binding ShowIconOnTitleBar, RelativeSource={RelativeSource TemplatedParent}, Converter={local:BooleanToCollapsedConverter}}" />
+
+                        <!--  Title  -->
+                        <ContentControl
+                            x:Name="PART_TitleBar"
+                            Grid.Column="1"
+                            Height="{Binding TitleBarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                            VerticalContentAlignment="Center"
+                            Content="{TemplateBinding Title}"
+                            ContentTemplate="{TemplateBinding TitleTemplate}"
+                            Focusable="False"
+                            Style="{StaticResource Quan.Styles.ContentControl.Default}" />
+
+                        <StackPanel Grid.Column="2" Orientation="Horizontal" WindowChrome.IsHitTestVisibleInChrome="True">
+                            <Button
+                                x:Name="PART_MinButton"
+                                Width="45"
+                                Height="{Binding TitleBarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                local:IconElement.Geometry="{StaticResource WindowMinGeometry}"
+                                local:IconElement.Height="10"
+                                local:IconElement.Width="10"
+                                BorderThickness="1,0"
+                                Command="{x:Static SystemCommands.MinimizeWindowCommand}"
+                                Focusable="False"
+                                IsEnabled="{Binding IsMinButtonEnabled, RelativeSource={RelativeSource TemplatedParent}}"
+                                Style="{StaticResource Quan.Styles.Button.Icon}" />
+                            <Button
+                                x:Name="PART_MaxButton"
+                                Width="45"
+                                Height="{Binding TitleBarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                local:IconElement.Geometry="{StaticResource WindowMaxGeometry}"
+                                local:IconElement.Height="10"
+                                local:IconElement.Width="10"
+                                BorderThickness="1,0"
+                                Command="{x:Static SystemCommands.MaximizeWindowCommand}"
+                                Focusable="False"
+                                IsEnabled="{Binding IsMaxButtonEnabled, RelativeSource={RelativeSource TemplatedParent}}"
+                                Style="{StaticResource Quan.Styles.Button.Icon}" />
+                            <Button
+                                x:Name="PART_RestoreButton"
+                                Width="45"
+                                Height="{Binding TitleBarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                local:IconElement.Geometry="{StaticResource WindowRestoreGeometry}"
+                                local:IconElement.Height="10"
+                                local:IconElement.Width="10"
+                                BorderThickness="1,0"
+                                Command="{x:Static SystemCommands.RestoreWindowCommand}"
+                                Focusable="False"
+                                IsEnabled="{Binding IsMaxButtonEnabled, RelativeSource={RelativeSource TemplatedParent}}"
+                                Style="{StaticResource Quan.Styles.Button.Icon}" />
+                            <Button
+                                x:Name="PART_CloseButton"
+                                Width="45"
+                                Height="{Binding TitleBarHeight, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                                local:IconElement.Geometry="{StaticResource CloseGeometry}"
+                                local:IconElement.Height="10"
+                                local:IconElement.Width="10"
+                                BorderThickness="1,0,0,0"
+                                Command="{x:Static SystemCommands.CloseWindowCommand}"
+                                Focusable="False"
+                                IsEnabled="{Binding IsCloseButtonEnabled, RelativeSource={RelativeSource TemplatedParent}}"
+                                Style="{StaticResource Quan.Styles.Button.Icon}" />
+                        </StackPanel>
+                    </Grid>
+
+                    <!--  Page Content  -->
+                    <Border Grid.Row="1" Padding="{TemplateBinding Padding}" ClipToBounds="True">
+                        <AdornerDecorator>
+                            <ContentPresenter />
+                        </AdornerDecorator>
+                    </Border>
+
+                    <!--  Corner clipping  -->
+                    <Grid.OpacityMask>
+                        <VisualBrush Visual="{Binding ElementName=PART_OpacityMask}" />
+                    </Grid.OpacityMask>
+                </Grid>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="WindowState" Value="Maximized">
+                <Setter TargetName="PART_MaxButton" Property="Visibility" Value="Collapsed" />
+                <Setter TargetName="PART_RestoreButton" Property="Visibility" Value="Visible" />
+            </Trigger>
+            <Trigger Property="WindowState" Value="Normal">
+                <Setter TargetName="PART_MaxButton" Property="Visibility" Value="Visible" />
+                <Setter TargetName="PART_RestoreButton" Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <Trigger SourceName="PART_MinButton" Property="IsMouseOver" Value="True">
+                <Setter TargetName="PART_MinButton" Property="Background" Value="{DynamicResource Quan.Brushes.IconHoverBrush}" />
+            </Trigger>
+            <Trigger SourceName="PART_MaxButton" Property="IsMouseOver" Value="True">
+                <Setter TargetName="PART_MaxButton" Property="Background" Value="{DynamicResource Quan.Brushes.IconHoverBrush}" />
+            </Trigger>
+            <Trigger SourceName="PART_RestoreButton" Property="IsMouseOver" Value="True">
+                <Setter TargetName="PART_RestoreButton" Property="Background" Value="{DynamicResource Quan.Brushes.IconHoverBrush}" />
+            </Trigger>
+            <Trigger SourceName="PART_CloseButton" Property="IsMouseOver" Value="True">
+                <Setter TargetName="PART_CloseButton" Property="Background" Value="Red" />
+                <Setter TargetName="PART_CloseButton" Property="Foreground" Value="{DynamicResource Quan.Brushes.IconForegroundBrush}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="Quan.Styles.Window.Default" TargetType="{x:Type local:QuanWindow}">
+        <Setter Property="Background" Value="{DynamicResource Quan.Brushes.BackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.BorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.ForegroundBrush}" />
+        <Setter Property="AllowsTransparency" Value="True" />
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template" Value="{StaticResource Quan.Templates.Window.Default}" />
+        <Setter Property="TextElement.FontSize" Value="{StaticResource FontSizeRegular}" />
+    </Style>
+
+    <Style BasedOn="{StaticResource Quan.Styles.Window.Default}" TargetType="{x:Type local:QuanWindow}" />
+
+</ResourceDictionary>
