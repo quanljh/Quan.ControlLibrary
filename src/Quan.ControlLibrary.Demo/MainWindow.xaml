@@ -1,0 +1,15 @@
+﻿<q:QuanWindow
+    x:Class="WpfApp2.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WpfApp2"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:q="http://quan.app.com/winfx/xaml/controls"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    Icon="/Quan.ControlLibrary;Component/Resources/Images/Logo/quan.ico"
+    mc:Ignorable="d">
+    <Grid Background="{StaticResource Quan.Brushes.SuccessColorBrush }" />
+</q:QuanWindow>

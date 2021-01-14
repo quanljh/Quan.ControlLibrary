@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Page Remove="Properties\DesignTimeResources.xaml" />
+  </ItemGroup>
+
+	<ItemGroup>
+    <None Include="Properties\DesignTimeResources.xaml">
+      <ContainsDesignTimeResources>True</ContainsDesignTimeResources>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Quan.ControlLibrary\Quan.ControlLibrary.csproj">
+		  <SetTargetFramework>TargetFramework=netcoreapp3.1</SetTargetFramework>
+	  </ProjectReference>
+	</ItemGroup>
+
+</Project>
