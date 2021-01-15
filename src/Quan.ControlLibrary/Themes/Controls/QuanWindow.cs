@@ -123,7 +123,7 @@ namespace Quan.ControlLibrary
 
         public static readonly DependencyProperty TitleTemplateProperty = DependencyProperty.Register("TitleTemplate", typeof(DataTemplate), typeof(QuanWindow), new PropertyMetadata(null));
 
-        public static readonly DependencyProperty ResizeBorderThicknessProperty = DependencyProperty.Register("ResizeBorderThickness", typeof(Thickness), typeof(QuanWindow), new PropertyMetadata(new Thickness(4)));
+        public static readonly DependencyProperty ResizeBorderThicknessProperty = DependencyProperty.Register("ResizeBorderThickness", typeof(Thickness), typeof(QuanWindow), new PropertyMetadata(new Thickness(9)));
 
         public static readonly DependencyProperty IsMinButtonEnabledProperty = DependencyProperty.Register("IsMinButtonEnabled", typeof(bool), typeof(QuanWindow), new PropertyMetadata(true));
 
@@ -154,6 +154,7 @@ namespace Quan.ControlLibrary
             {
                 CornerRadius = new CornerRadius(),
                 GlassFrameThickness = new Thickness(0, 0, 0, 0),
+                ResizeBorderThickness = new Thickness(9),
                 UseAeroCaptionButtons = false
             };
 

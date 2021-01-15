@@ -9,14 +9,18 @@
   <ItemGroup>
     <Page Remove="Properties\DesignTimeResources.xaml" />
   </ItemGroup>
-
+	
 	<ItemGroup>
     <None Include="Properties\DesignTimeResources.xaml">
-      <ContainsDesignTimeResources>True</ContainsDesignTimeResources>
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <ContainsDesignTimeResources>True</ContainsDesignTimeResources>
     </None>
   </ItemGroup>
+	
+	<ItemGroup>
+	  <PackageReference Include="Prism.Unity" Version="8.0.0.1909" />
+	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Quan.ControlLibrary\Quan.ControlLibrary.csproj">

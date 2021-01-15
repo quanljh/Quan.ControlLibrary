@@ -247,11 +247,15 @@
         <!--  Window border and drop shadow  -->
         <Border x:Name="RadiusBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding WindowCornerRadius}">
           <Border.Effect>
-            <DropShadowEffect Opacity="0.5" ShadowDepth="2.5" />
+            <DropShadowEffect Opacity="0.5" ShadowDepth="3.5" />
           </Border.Effect>
         </Border>
         <!--  The main window content  -->
         <Grid>
+          <!--  Corner clipping  -->
+          <Grid.OpacityMask>
+            <VisualBrush Visual="{Binding ElementName=PART_OpacityMask}" />
+          </Grid.OpacityMask>
           <Grid.RowDefinitions>
             <!--  Title Bar  -->
             <RowDefinition Height="Auto" />
@@ -286,15 +290,11 @@
             </StackPanel>
           </Grid>
           <!--  Page Content  -->
-          <Border Grid.Row="1" Padding="{TemplateBinding Padding}" ClipToBounds="True">
+          <Border Grid.Row="1" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" ClipToBounds="True">
             <AdornerDecorator>
               <ContentPresenter />
             </AdornerDecorator>
           </Border>
-          <!--  Corner clipping  -->
-          <Grid.OpacityMask>
-            <VisualBrush Visual="{Binding ElementName=PART_OpacityMask}" />
-          </Grid.OpacityMask>
         </Grid>
       </Grid>
     </Border>
