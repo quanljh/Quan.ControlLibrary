@@ -209,6 +209,7 @@ namespace Quan.ControlLibrary
                 throw new ArgumentNullException(nameof(doc));
             }
 
+#if !(NET46 || NET461)
             var output = new FormattedText(
               GetText(doc),
               CultureInfo.CurrentCulture,
@@ -216,6 +217,15 @@ namespace Quan.ControlLibrary
               new Typeface(doc.FontFamily, doc.FontStyle, doc.FontWeight, doc.FontStretch),
               doc.FontSize,
               doc.Foreground, VisualTreeHelper.GetDpi(richTextBox).PixelsPerDip);
+#else 
+            var output = new FormattedText(
+                GetText(doc),
+                CultureInfo.CurrentCulture,
+                doc.FlowDirection,
+                new Typeface(doc.FontFamily, doc.FontStyle, doc.FontWeight, doc.FontStretch),
+                doc.FontSize,
+                doc.Foreground);
+#endif
 
             int offset = 0;
 

@@ -25,6 +25,8 @@
 
     <SolidColorBrush x:Key="Quan.Brushes.FocusColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.FocusColor}" />
 
+    <!--  Window  -->
+    <SolidColorBrush x:Key="Quan.Brushes.WindowBorder" o:Freeze="True" Color="#707070" />
 
     <!--  DataGrid  -->
     <SolidColorBrush x:Key="DataGrid.Border.Common" o:Freeze="True" Color="#bdbdbd" />
