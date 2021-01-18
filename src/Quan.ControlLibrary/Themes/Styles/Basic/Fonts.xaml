@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <FontFamily x:Key="Quan.Fonts.Regular">pack://application:,,,/Quan.ControlLibrary;component/Resources/Fonts/#Noto Sans</FontFamily>
+    <FontFamily x:Key="Quan.Fonts.FontAwesome">pack://application:,,,/Quan.ControlLibrary;component/Resources/Fonts/FontAwesome.otf#Font Awesome 5 Free Regular</FontFamily>
+
+    <system:Double x:Key="Quan.FontSize.VeryVerySmall">6</system:Double>
+    <system:Double x:Key="Quan.FontSize.VerySmall">8</system:Double>
+    <system:Double x:Key="Quan.FontSize.Smaller">10</system:Double>
+    <system:Double x:Key="Quan.FontSize.Small">12</system:Double>
+    <system:Double x:Key="Quan.FontSize.Regular">14</system:Double>
+    <system:Double x:Key="Quan.FontSize.Bigger">16</system:Double>
+    <system:Double x:Key="Quan.FontSize.Large">20</system:Double>
+    <system:Double x:Key="Quan.FontSize.XLarge">24</system:Double>
+    <system:Double x:Key="Quan.FontSize.XXLarge">30</system:Double>
+
+
+    <system:String x:Key="Quan.FontIcons.Close"><![CDATA[&#xf00d;]]></system:String>
+
+</ResourceDictionary>

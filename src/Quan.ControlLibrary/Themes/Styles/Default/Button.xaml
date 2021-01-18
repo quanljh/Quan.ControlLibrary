@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:Quan.ControlLibrary">
     <ResourceDictionary.MergedDictionaries>
-        <local:SharedResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Basic/Common.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Basic/Common.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="Quan.Styles.Button.BaseBase" BasedOn="{StaticResource Quan.Styles.Common.BaseStyle}" TargetType="ButtonBase">
@@ -29,9 +29,9 @@
                             Orientation="Horizontal">
                             <Path
                                 x:Name="IconContent"
-                                Width="{TemplateBinding local:IconElement.Width}"
-                                Height="{TemplateBinding local:IconElement.Height}"
-                                Data="{TemplateBinding local:IconElement.Geometry}"
+                                Width="{TemplateBinding local:IconHelper.Width}"
+                                Height="{TemplateBinding local:IconHelper.Height}"
+                                Data="{TemplateBinding local:IconHelper.Geometry}"
                                 Fill="{TemplateBinding Foreground}"
                                 SnapsToDevicePixels="True"
                                 Stretch="Uniform" />
@@ -47,7 +47,7 @@
                         <Trigger Property="Content" Value="{x:Null}">
                             <Setter TargetName="ContentPresenter" Property="Visibility" Value="Collapsed" />
                         </Trigger>
-                        <Trigger Property="local:IconElement.Geometry" Value="{x:Null}">
+                        <Trigger Property="local:IconHelper.Geometry" Value="{x:Null}">
                             <Setter TargetName="IconContent" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="ContentPresenter" Property="Margin" Value="0" />
                         </Trigger>
@@ -68,7 +68,6 @@
         </Style.Triggers>
     </Style>
 
-
     <Style x:Key="Quan.Styles.Button.Icon" BasedOn="{StaticResource Quan.Styles.Button.Base}" TargetType="Button">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
@@ -87,9 +86,9 @@
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                             <Path
-                                Width="{TemplateBinding local:IconElement.Width}"
-                                Height="{TemplateBinding local:IconElement.Height}"
-                                Data="{TemplateBinding local:IconElement.Geometry}"
+                                Width="{TemplateBinding local:IconHelper.Width}"
+                                Height="{TemplateBinding local:IconHelper.Height}"
+                                Data="{TemplateBinding local:IconHelper.Geometry}"
                                 Fill="{TemplateBinding Foreground}"
                                 SnapsToDevicePixels="True"
                                 Stretch="Uniform" />
@@ -99,4 +98,37 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <ControlTemplate x:Key="Quan.Templates.Button.FontIcon" TargetType="{x:Type ButtonBase}">
+        <Grid Background="{TemplateBinding Background}">
+            <ContentPresenter
+                x:Name="PART_ContentPresenter"
+                Margin="{TemplateBinding Padding}"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                Opacity="0.75"
+                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="PART_ContentPresenter" Property="Opacity" Value="1" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter TargetName="PART_ContentPresenter" Property="Opacity" Value=".5" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.DisabledColorBrush}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="Quan.Styles.Button.FontIcon" TargetType="{x:Type ButtonBase}">
+        <Setter Property="FontFamily" Value="{StaticResource Quan.Fonts.FontAwesome}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Template" Value="{StaticResource Quan.Templates.Button.FontIcon}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+
 </ResourceDictionary>

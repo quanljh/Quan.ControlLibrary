@@ -20,6 +20,7 @@
 	
 	<ItemGroup>
 	  <PackageReference Include="Prism.Unity" Version="8.0.0.1909" />
+	  <PackageReference Include="ReactiveProperty.WPF" Version="7.6.1" />
 	</ItemGroup>
 
 	<ItemGroup>

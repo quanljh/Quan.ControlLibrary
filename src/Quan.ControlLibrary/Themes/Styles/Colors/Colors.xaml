@@ -6,6 +6,7 @@
     <Color x:Key="Quan.Colors.Foreground">#000000</Color>
     <Color x:Key="Quan.Colors.ForegroundLight">#686868</Color>
     <Color x:Key="Quan.Colors.ForegroundVeryLight">#bdbdbd</Color>
+    <Color x:Key="Quan.Colors.ForegroundHighLight">#ffffff</Color>
 
     <Color x:Key="Quan.Colors.IconHover">#20000000</Color>
     <Color x:Key="Quan.Colors.IconForeground">#ffffff</Color>
@@ -19,6 +20,7 @@
     <Color x:Key="Quan.Colors.ErrorColor">#ff4747</Color>
     <Color x:Key="Quan.Colors.SuccessColor">#00c541</Color>
     <Color x:Key="Quan.Colors.FocusColor">#ff82cf</Color>
+    <Color x:Key="Quan.Colors.DisabledColor">#ADADAD</Color>
 
 
     <Color x:Key="ForegroundMain">#686868</Color>

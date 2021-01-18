@@ -16,7 +16,7 @@ namespace Quan.ControlLibrary
             {
                 MergedDictionaries.Add(new ResourceDictionary()
                 {
-                    Source = new Uri("pack://application:,,,/Quan.ControlLibrary;Component/Themes/SkinDefault.xaml")
+                    Source = new Uri("pack://application:,,,/Quan.ControlLibrary;Component/Themes/ThemeDefault.xaml")
                 });
                 MergedDictionaries.Add(new ResourceDictionary()
                 {

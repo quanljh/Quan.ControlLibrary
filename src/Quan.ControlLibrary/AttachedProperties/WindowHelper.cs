@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace Quan.ControlLibrary
 {
-    public static class WindowHelper
+    public class WindowHelper
     {
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static readonly DependencyProperty FixMaximizedWindowProperty =

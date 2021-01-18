@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Prism.Commands;
 using Prism.Mvvm;
+using Reactive.Bindings;
 
 namespace Quan.ControlLibrary
 {
@@ -30,6 +31,8 @@ namespace Quan.ControlLibrary
 
         public ObservableCollection<string> Customers { get; private set; } = new ObservableCollection<string>();
 
+        public ReactiveProperty<string> UserName { get; }
+
         #endregion
 
         #region Commands
@@ -44,6 +47,9 @@ namespace Quan.ControlLibrary
         public MainWindowViewModel(ICusomerStore cusomerStore)
         {
             _customerStore = cusomerStore;
+
+            UserName = new ReactiveProperty<string>(mode: ReactivePropertyMode.Default | ReactivePropertyMode.IgnoreInitialValidationError)
+                .SetValidateNotifyError(x => string.IsNullOrEmpty(x) ? "Email or Username is empty!" : null);
         }
 
         #endregion

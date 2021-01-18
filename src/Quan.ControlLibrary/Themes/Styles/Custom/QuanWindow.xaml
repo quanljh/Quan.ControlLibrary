@@ -5,10 +5,10 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <ResourceDictionary.MergedDictionaries>
-        <local:SharedResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Basic/Fonts.xaml" />
-        <local:SharedResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Basic/Geometries.xaml" />
-        <local:SharedResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Basic/ContentControl.xaml" />
-        <local:SharedResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Basic/Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Basic/Fonts.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Basic/Geometries.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Basic/ContentControl.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Default/Button.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <sys:Double x:Key="TitleBarHeight">32</sys:Double>
@@ -80,9 +80,9 @@
                             x:Name="PART_MinButton"
                             Width="46"
                             Height="{StaticResource TitleBarHeight}"
-                            local:IconElement.Geometry="{StaticResource WindowMinGeometry}"
-                            local:IconElement.Height="10"
-                            local:IconElement.Width="10"
+                            local:IconHelper.Geometry="{StaticResource WindowMinGeometry}"
+                            local:IconHelper.Height="10"
+                            local:IconHelper.Width="10"
                             BorderThickness="1,0"
                             Command="{x:Static SystemCommands.MinimizeWindowCommand}"
                             Focusable="False"
@@ -92,9 +92,9 @@
                             x:Name="PART_MaxButton"
                             Width="46"
                             Height="{StaticResource TitleBarHeight}"
-                            local:IconElement.Geometry="{StaticResource WindowMaxGeometry}"
-                            local:IconElement.Height="10"
-                            local:IconElement.Width="10"
+                            local:IconHelper.Geometry="{StaticResource WindowMaxGeometry}"
+                            local:IconHelper.Height="10"
+                            local:IconHelper.Width="10"
                             BorderThickness="1,0"
                             Command="{x:Static SystemCommands.MaximizeWindowCommand}"
                             Focusable="False"
@@ -104,9 +104,9 @@
                             x:Name="PART_RestoreButton"
                             Width="46"
                             Height="{StaticResource TitleBarHeight}"
-                            local:IconElement.Geometry="{StaticResource WindowRestoreGeometry}"
-                            local:IconElement.Height="10"
-                            local:IconElement.Width="10"
+                            local:IconHelper.Geometry="{StaticResource WindowRestoreGeometry}"
+                            local:IconHelper.Height="10"
+                            local:IconHelper.Width="10"
                             BorderThickness="1,0"
                             Command="{x:Static SystemCommands.RestoreWindowCommand}"
                             Focusable="False"
@@ -116,9 +116,9 @@
                             x:Name="PART_CloseButton"
                             Width="46"
                             Height="{StaticResource TitleBarHeight}"
-                            local:IconElement.Geometry="{StaticResource CloseGeometry}"
-                            local:IconElement.Height="10"
-                            local:IconElement.Width="10"
+                            local:IconHelper.Geometry="{StaticResource CloseGeometry}"
+                            local:IconHelper.Height="10"
+                            local:IconHelper.Width="10"
                             BorderThickness="1,0,0,0"
                             Command="{x:Static SystemCommands.CloseWindowCommand}"
                             Focusable="False"
@@ -168,6 +168,8 @@
     <Style x:Key="Quan.Styles.Window.Default" TargetType="{x:Type local:QuanWindow}">
         <Setter Property="Background" Value="{DynamicResource Quan.Brushes.BackgroundBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.WindowBorder}" />
+        <Setter Property="FontFamily" Value="{StaticResource Quan.Fonts.Regular}" />
+        <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Regular}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.ForegroundBrush}" />
         <Setter Property="UseLayoutRounding" Value="True" />

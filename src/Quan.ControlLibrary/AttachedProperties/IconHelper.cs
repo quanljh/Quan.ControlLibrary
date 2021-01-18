@@ -3,12 +3,12 @@ using System.Windows.Media;
 
 namespace Quan.ControlLibrary
 {
-    public class IconElement
+    public class IconHelper
     {
         public static readonly DependencyProperty GeometryProperty = DependencyProperty.RegisterAttached(
             "Geometry",
             typeof(Geometry),
-            typeof(IconElement),
+            typeof(IconHelper),
             new PropertyMetadata(default(Geometry)));
 
         public static Geometry GetGeometry(DependencyObject element) => (Geometry)element.GetValue(GeometryProperty);
@@ -19,7 +19,7 @@ namespace Quan.ControlLibrary
         public static readonly DependencyProperty HeightProperty = DependencyProperty.RegisterAttached(
             "Height",
             typeof(double),
-            typeof(IconElement),
+            typeof(IconHelper),
             new PropertyMetadata(double.NaN));
 
         public static double GetHeight(DependencyObject element) => (double)element.GetValue(HeightProperty);
@@ -29,7 +29,7 @@ namespace Quan.ControlLibrary
         public static readonly DependencyProperty WidthProperty = DependencyProperty.RegisterAttached(
             "Width",
             typeof(double),
-            typeof(IconElement),
+            typeof(IconHelper),
             new PropertyMetadata(double.NaN));
 
         public static double GetWidth(DependencyObject element) => (double)element.GetValue(WidthProperty);

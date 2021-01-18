@@ -1,0 +1,177 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Quan.ControlLibrary"
+    xmlns:o="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
+
+    <ResourceDictionary.MergedDictionaries>
+        <local:SharedResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Basic/Fonts.xaml" />
+        <local:SharedResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Default/Button.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Storyboard x:Key="Quan.Storyboards.TextBox.GotFocus" o:Freeze="True">
+        <DoubleAnimation
+            Storyboard.TargetName="PART_GuideMessage"
+            Storyboard.TargetProperty="Opacity"
+            To="0.2"
+            Duration="0:0:0.2" />
+    </Storyboard>
+
+    <Storyboard x:Key="Quan.Storyboards.TextBox.LostFocus" o:Freeze="True">
+        <DoubleAnimation Storyboard.TargetName="PART_GuideMessage" Storyboard.TargetProperty="Opacity" Duration="0:0:0.2" />
+    </Storyboard>
+
+    <ControlTemplate x:Key="QuanTextBox.ValidationTemplate">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <AdornedElementPlaceholder x:Name="Placeholder" />
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Border
+                    Grid.Row="1"
+                    Margin="0,-1,0,0"
+                    Padding="5"
+                    Background="{DynamicResource Quan.Brushes.ErrorColorBrush}"
+                    CornerRadius="5">
+                    <TextBlock Foreground="{DynamicResource Quan.Brushes.ForegroundHighLightBrush}" Text="{Binding ElementName=Placeholder, Path=AdornedElement.(Validation.Errors)/ErrorContent}" />
+                </Border>
+                <Path
+                    Grid.Row="0"
+                    HorizontalAlignment="Center"
+                    Data="M 0 10 L 5 0 10 10 "
+                    Fill="{DynamicResource Quan.Brushes.ErrorColorBrush}"
+                    StrokeThickness="1" />
+            </Grid>
+        </Grid>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="Quan.Templates.TextBox.Default" TargetType="{x:Type local:QuanTextBox}">
+        <Grid SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+            <Border
+                x:Name="border"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="1" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <!--  Floating Guide Message  -->
+                    <RowDefinition Height="Auto" />
+                    <!--  Text Content  -->
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <!--<ColumnDefinition Width="Auto" />-->
+                </Grid.ColumnDefinitions>
+
+                <ScrollViewer
+                    x:Name="PART_ContentHost"
+                    Grid.Row="1"
+                    Margin="0"
+                    Padding="{TemplateBinding Padding}"
+                    Focusable="False"
+                    HorizontalScrollBarVisibility="Hidden"
+                    VerticalScrollBarVisibility="Hidden" />
+
+
+                <TextBlock
+                    x:Name="PART_GuideMessage"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="9,0,0,0"
+                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                    FontFamily="{TemplateBinding FontFamily}"
+                    Foreground="{DynamicResource Quan.Brushes.ForegroundLightBrush}"
+                    IsHitTestVisible="False"
+                    Text="{TemplateBinding local:TextBoxHelper.GuideText}"
+                    Visibility="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={local:StringToVisibilityConverter}}" />
+
+                <Button
+                    x:Name="PART_ClearTextButton"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Width="26"
+                    Content="{StaticResource Quan.FontIcons.Close}"
+                    Focusable="False"
+                    Style="{StaticResource Quan.Styles.Button.FontIcon}" />
+
+                <!--<Line
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Stroke="{DynamicResource Quan.Brushes.BorderBrush}"
+                    X1="0"
+                    X2="0"
+                    Y1="3"
+                    Y2="23" />
+
+                <Button
+                    x:Name="PART_FunctionButton"
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Width="26"
+                    local:IconHelper.Geometry="{TemplateBinding local:TextBoxHelper.ButtonContent}"
+                    local:IconHelper.Height="10"
+                    local:IconHelper.Width="10"
+                    BorderThickness="1,0"
+                    Focusable="False"
+                    Style="{StaticResource Quan.Styles.Button.Icon}" />-->
+            </Grid>
+        </Grid>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="border" Property="Opacity" Value="0.56" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.LightPrimaryColorBrush}" />
+            </Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True">
+                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.PrimaryColorBrush}" />
+            </Trigger>
+            <Trigger Property="Validation.HasError" Value="true">
+                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.ErrorColorBrush}" />
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="local:TextBoxHelper.HasText" Value="False" />
+                    <Condition Property="IsFocused" Value="True" />
+                </MultiTrigger.Conditions>
+                <MultiTrigger.EnterActions>
+                    <BeginStoryboard Storyboard="{StaticResource Quan.Storyboards.TextBox.GotFocus}" />
+                </MultiTrigger.EnterActions>
+                <MultiTrigger.ExitActions>
+                    <BeginStoryboard Storyboard="{StaticResource Quan.Storyboards.TextBox.LostFocus}" />
+                </MultiTrigger.ExitActions>
+            </MultiTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="Quan.Styles.TextBox.Default" TargetType="{x:Type local:QuanTextBox}">
+        <Setter Property="FontFamily" Value="{StaticResource Quan.Fonts.Regular}" />
+        <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Regular}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.BorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Background" Value="{DynamicResource Quan.Brushes.BackgroundBrush}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Padding" Value="3,0" />
+        <Setter Property="MinHeight" Value="26" />
+        <Setter Property="Height" Value="26" />
+        <Setter Property="Template" Value="{StaticResource Quan.Templates.TextBox.Default}" />
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource QuanTextBox.ValidationTemplate}" />
+        <Setter Property="local:TextBoxHelper.IsMonitoring" Value="True" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+    </Style>
+
+    <Style BasedOn="{StaticResource Quan.Styles.TextBox.Default}" TargetType="{x:Type local:QuanTextBox}" />
+
+</ResourceDictionary>
