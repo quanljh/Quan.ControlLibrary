@@ -6,7 +6,7 @@
   </PropertyGroup>
 
 	<ItemGroup>
-    <None Remove="Resources\Fonts\FontAwesome.otf" />
+    <None Remove="Resources\Fonts\FontAwesome.ttf" />
     <None Remove="Resources\Fonts\NotoSans-Bold.ttf" />
     <None Remove="Resources\Fonts\NotoSans-BoldItalic.ttf" />
     <None Remove="Resources\Images\Logo\quan.ico" />
@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\Fonts\FontAwesome.otf" />
+    <Resource Include="Resources\Fonts\FontAwesome.ttf" />
     <Resource Include="Resources\Fonts\NotoSans-Bold.ttf" />
 	  <Resource Include="Resources\Fonts\NotoSans-BoldItalic.ttf" />
 	  <Resource Include="Resources\Fonts\NotoSans-Italic.ttf" />

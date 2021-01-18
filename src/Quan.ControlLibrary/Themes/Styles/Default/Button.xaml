@@ -124,6 +124,7 @@
 
     <Style x:Key="Quan.Styles.Button.FontIcon" TargetType="{x:Type ButtonBase}">
         <Setter Property="FontFamily" Value="{StaticResource Quan.Fonts.FontAwesome}" />
+        <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Bigger}" />
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="0" />
