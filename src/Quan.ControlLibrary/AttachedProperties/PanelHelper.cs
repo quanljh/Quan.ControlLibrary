@@ -28,13 +28,16 @@ namespace Quan.ControlLibrary
             }
             else
             {
-                var margin = GetChildMarginProperty(panel);
-
                 foreach (var child in panel.Children)
                 {
-                    if (child is FrameworkElement chidElement && e.NewValue is Thickness thickness)
+                    if (child is FrameworkElement chidElement && e.NewValue is Thickness margin)
                     {
-                        chidElement.Margin = margin;
+                        chidElement.Margin = new Thickness(
+                            chidElement.Margin.Left + margin.Left,
+                            chidElement.Margin.Top + margin.Top,
+                            chidElement.Margin.Right + margin.Right,
+                            chidElement.Margin.Bottom + margin.Bottom
+                            );
                     }
                 }
             }
@@ -50,7 +53,12 @@ namespace Quan.ControlLibrary
             {
                 if (child is FrameworkElement chidElement)
                 {
-                    chidElement.Margin = margin;
+                    chidElement.Margin = new Thickness(
+                        chidElement.Margin.Left + margin.Left,
+                        chidElement.Margin.Top + margin.Top,
+                        chidElement.Margin.Right + margin.Right,
+                        chidElement.Margin.Bottom + margin.Bottom
+                    );
                 }
             }
 

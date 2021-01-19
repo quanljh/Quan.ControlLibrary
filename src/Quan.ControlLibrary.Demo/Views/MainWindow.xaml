@@ -15,12 +15,65 @@
 
         <ListView BorderThickness="0" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}" />
         <Button
+            x:Name="Button"
             Width="80"
             Height="40"
+            VerticalAlignment="Bottom"
             Command="{Binding LoadCommand}"
-            Content="LOAD" />
+            Content="LOAD">
+            <Button.RenderTransform>
+                <!--<TranslateTransform x:Name="ButtonTransform" X="0" Y="0" />-->
+                <!--<RotateTransform x:Name="RotateTransform" Angle="0" CenterX="40" CenterY="20" />-->
+                <ScaleTransform x:Name="ScaleTransform" CenterX=".5" CenterY=".5" />
+            </Button.RenderTransform>
+            <Button.RenderTransformOrigin>
+                <Point X="0.5" Y="0.5" />
+            </Button.RenderTransformOrigin>
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.Click">
+                    <!--<BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                AutoReverse="True"
+                                RepeatBehavior="Forever"
+                                Storyboard.TargetName="ButtonTransform"
+                                Storyboard.TargetProperty="Y"
+                                From="0"
+                                To="40"
+                                Duration="00:00:01">
+                                <DoubleAnimation.EasingFunction>
+                                    <BounceEase Bounces="1" Bounciness="1.5" EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>-->
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="ScaleTransform"
+                                Storyboard.TargetProperty="ScaleX"
+                                From="1"
+                                To="0.5"
+                                Duration="00:00:01">
+                                <!--<DoubleAnimation.EasingFunction>
+                                    <BounceEase Bounces="1" Bounciness="1.5" EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>-->
+                            </DoubleAnimation>
+                            <DoubleAnimation
+                                Storyboard.TargetName="ScaleTransform"
+                                Storyboard.TargetProperty="ScaleY"
+                                From="1"
+                                To="0.5"
+                                Duration="00:00:01" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
+
         <q:QuanTextBox
             Width="200"
+            Margin="0,100,0,0"
             q:TextBoxHelper.GuideText="Email or username"
             q:TextBoxHelper.IsShowClearButton="True"
             Text="{Binding UserName.Value}" />
