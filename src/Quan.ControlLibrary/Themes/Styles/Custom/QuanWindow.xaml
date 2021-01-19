@@ -20,7 +20,7 @@
         GlassFrameThickness="0,1,0,0"
         UseAeroCaptionButtons="False" />
 
-    <ControlTemplate x:Key="Quan.Templates.Window.Default" TargetType="{x:Type local:QuanWindow}">
+    <ControlTemplate x:Key="Quan.Templates.QuanWindow.Default" TargetType="{x:Type local:QuanWindow}">
         <!--  Window border  -->
         <Border
             x:Name="MainBorder"
@@ -150,32 +150,32 @@
                 <Setter TargetName="PART_RestoreButton" Property="Visibility" Value="Collapsed" />
             </Trigger>
             <Trigger SourceName="PART_MinButton" Property="IsMouseOver" Value="True">
-                <Setter TargetName="PART_MinButton" Property="Background" Value="{DynamicResource Quan.Brushes.IconHoverBrush}" />
+                <Setter TargetName="PART_MinButton" Property="Background" Value="{DynamicResource Quan.Brushes.IconHover}" />
             </Trigger>
             <Trigger SourceName="PART_MaxButton" Property="IsMouseOver" Value="True">
-                <Setter TargetName="PART_MaxButton" Property="Background" Value="{DynamicResource Quan.Brushes.IconHoverBrush}" />
+                <Setter TargetName="PART_MaxButton" Property="Background" Value="{DynamicResource Quan.Brushes.IconHover}" />
             </Trigger>
             <Trigger SourceName="PART_RestoreButton" Property="IsMouseOver" Value="True">
-                <Setter TargetName="PART_RestoreButton" Property="Background" Value="{DynamicResource Quan.Brushes.IconHoverBrush}" />
+                <Setter TargetName="PART_RestoreButton" Property="Background" Value="{DynamicResource Quan.Brushes.IconHover}" />
             </Trigger>
             <Trigger SourceName="PART_CloseButton" Property="IsMouseOver" Value="True">
                 <Setter TargetName="PART_CloseButton" Property="Background" Value="Red" />
-                <Setter TargetName="PART_CloseButton" Property="Foreground" Value="{DynamicResource Quan.Brushes.IconForegroundBrush}" />
+                <Setter TargetName="PART_CloseButton" Property="Foreground" Value="{DynamicResource Quan.Brushes.IconForeground}" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style x:Key="Quan.Styles.Window.Default" TargetType="{x:Type local:QuanWindow}">
-        <Setter Property="Background" Value="{DynamicResource Quan.Brushes.BackgroundBrush}" />
+    <Style x:Key="Quan.Styles.QuanWindow.Default" TargetType="{x:Type local:QuanWindow}">
+        <Setter Property="Background" Value="{DynamicResource Quan.Brushes.Background}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.WindowBorder}" />
         <Setter Property="FontFamily" Value="{StaticResource Quan.Fonts.Regular}" />
         <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Regular}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.ForegroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.Foreground}" />
         <Setter Property="UseLayoutRounding" Value="True" />
-        <Setter Property="Template" Value="{StaticResource Quan.Templates.Window.Default}" />
+        <Setter Property="Template" Value="{StaticResource Quan.Templates.QuanWindow.Default}" />
         <Setter Property="WindowChrome.WindowChrome" Value="{StaticResource DefaultWindowChrome}" />
-        <Setter Property="TextElement.FontSize" Value="{StaticResource FontSizeRegular}" />
+        <Setter Property="TextElement.FontSize" Value="{StaticResource Quan.FontSize.Regular}" />
         <Setter Property="local:WindowHelper.FixMaximizedWindow" Value="True" />
         <Style.Triggers>
             <Trigger Property="WindowChrome.WindowChrome" Value="{x:Null}">
@@ -184,6 +184,6 @@
         </Style.Triggers>
     </Style>
 
-    <Style BasedOn="{StaticResource Quan.Styles.Window.Default}" TargetType="{x:Type local:QuanWindow}" />
+    <Style BasedOn="{StaticResource Quan.Styles.QuanWindow.Default}" TargetType="{x:Type local:QuanWindow}" />
 
 </ResourceDictionary>

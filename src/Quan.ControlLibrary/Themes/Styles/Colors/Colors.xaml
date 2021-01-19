@@ -5,62 +5,35 @@
     <Color x:Key="Quan.Colors.BorderBrush">#efefef</Color>
     <Color x:Key="Quan.Colors.Foreground">#000000</Color>
     <Color x:Key="Quan.Colors.ForegroundLight">#686868</Color>
-    <Color x:Key="Quan.Colors.ForegroundVeryLight">#bdbdbd</Color>
     <Color x:Key="Quan.Colors.ForegroundHighLight">#ffffff</Color>
 
-    <Color x:Key="Quan.Colors.IconHover">#20000000</Color>
+    <Color x:Key="Quan.Colors.IconHover">#19000000</Color>
     <Color x:Key="Quan.Colors.IconForeground">#ffffff</Color>
 
-    <Color x:Key="Quan.Colors.PrimaryColor">#3099c5</Color>
-    <Color x:Key="Quan.Colors.LightPrimaryColor">#45b6e5</Color>
-    <Color x:Key="Quan.Colors.VeryLightPrimaryColor">#c3e5f3</Color>
-    <Color x:Key="Quan.Colors.DarkPrimaryColor">#c3e5f3</Color>
+    <Color x:Key="Quan.Colors.Primary">#3099c5</Color>
+    <Color x:Key="Quan.Colors.LightPrimary">#45b6e5</Color>
+    <Color x:Key="Quan.Colors.VeryLightPrimary">#c3e5f3</Color>
+    <Color x:Key="Quan.Colors.DarkPrimary">#c3e5f3</Color>
 
-    <Color x:Key="Quan.Colors.WarningColor">#ffa800</Color>
-    <Color x:Key="Quan.Colors.ErrorColor">#ff4747</Color>
-    <Color x:Key="Quan.Colors.SuccessColor">#00c541</Color>
-    <Color x:Key="Quan.Colors.FocusColor">#ff82cf</Color>
-    <Color x:Key="Quan.Colors.DisabledColor">#ADADAD</Color>
+    <Color x:Key="Quan.Colors.Warning">#ffa800</Color>
+    <Color x:Key="Quan.Colors.Error">#ff4747</Color>
+    <Color x:Key="Quan.Colors.Success">#00c541</Color>
+    <Color x:Key="Quan.Colors.Focus">#ff82cf</Color>
+    <Color x:Key="Quan.Colors.Disabled">#ADADAD</Color>
 
+    <Color x:Key="Quan.Colors.Gray1">#FF333333</Color>
+    <Color x:Key="Quan.Colors.Gray2">#FF7F7F7F</Color>
+    <Color x:Key="Quan.Colors.Gray3">#FF9D9D9D</Color>
+    <Color x:Key="Quan.Colors.Gray4">#FFA59F93</Color>
+    <Color x:Key="Quan.Colors.Gray5">#FFB9B9B9</Color>
+    <Color x:Key="Quan.Colors.Gray6">#FFCCCCCC</Color>
+    <Color x:Key="Quan.Colors.Gray7">#FFD8D8D9</Color>
+    <Color x:Key="Quan.Colors.Gray8">#FFE0E0E0</Color>
+    <Color x:Key="Quan.Colors.Gray9">#5EC9C9C9</Color>
+    <Color x:Key="Quan.Colors.Gray10">#FFF7F7F7</Color>
 
-    <Color x:Key="ForegroundMain">#686868</Color>
-    <SolidColorBrush x:Key="ForegroundMainBrush" Color="{StaticResource ForegroundMain}" />
-
-    <Color x:Key="ForegroundVeryDark">#000000</Color>
-    <SolidColorBrush x:Key="ForegroundVeryDarkBrush" Color="{StaticResource ForegroundVeryDark}" />
-
-    <Color x:Key="ForegroundLight">#ffffff</Color>
-    <SolidColorBrush x:Key="ForegroundLightBrush" Color="{StaticResource ForegroundLight}" />
-
-    <Color x:Key="ForegroundGray">#bdbdbd</Color>
-    <SolidColorBrush x:Key="ForegroundGrayBrush" Color="{StaticResource ForegroundGray}" />
-
-    <Color x:Key="WordBlue">#3099c5</Color>
-    <SolidColorBrush x:Key="WordBlueBrush" Color="{StaticResource WordBlue}" />
-
-    <Color x:Key="WordTransparentBlue">#3099c5</Color>
-    <SolidColorBrush x:Key="WordTransparentBlueBrush" Color="{StaticResource WordTransparentBlue}" />
-
-    <Color x:Key="WordLightBlue">#45b6e5</Color>
-    <SolidColorBrush x:Key="WordLightBlueBrush" Color="{StaticResource WordLightBlue}" />
-
-    <Color x:Key="WordVeryLightBlue">#c3e5f3</Color>
-    <SolidColorBrush x:Key="WordVeryLightBlueBrush" Color="{StaticResource WordVeryLightBlue}" />
-
-    <Color x:Key="WordVeryVeryLightBlue">#ecf6fb</Color>
-    <SolidColorBrush x:Key="WordVeryVeryLightBlueBrush" Color="{StaticResource WordVeryVeryLightBlue}" />
-
-    <Color x:Key="WordDarkBlue">#0c6991</Color>
-    <SolidColorBrush x:Key="WordDarkBlueBrush" Color="{StaticResource WordDarkBlue}" />
-
-    <Color x:Key="WordOrange">#ffa800</Color>
-    <SolidColorBrush x:Key="WordOrangeBrush" Color="{StaticResource WordOrange}" />
-
-    <Color x:Key="WordRed">#ff4747</Color>
-    <SolidColorBrush x:Key="WordRedBrush" Color="{StaticResource WordRed}" />
-
-    <Color x:Key="WordGreen">#00c541</Color>
-    <SolidColorBrush x:Key="WordGreenBrush" Color="{StaticResource WordGreen}" />
+    <!--  Window  -->
+    <Color x:Key="Quan.Colors.WindowBorder">#707070</Color>
 
 
 </ResourceDictionary>

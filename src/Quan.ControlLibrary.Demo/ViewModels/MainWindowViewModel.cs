@@ -5,7 +5,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Reactive.Bindings;
 
-namespace Quan.ControlLibrary
+namespace Quan.ControlLibrary.Demo
 {
     public class MainWindowViewModel : BindableBase
     {

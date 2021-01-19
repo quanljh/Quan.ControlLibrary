@@ -3,9 +3,9 @@
         <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Basic/Common.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="Quan.Styles.Button.BaseBase" BasedOn="{StaticResource Quan.Styles.Common.BaseStyle}" TargetType="ButtonBase">
+    <Style x:Key="Quan.Styles.Button.BaseBase" BasedOn="{StaticResource Quan.Styles.Common.BaseStyle}" TargetType="{x:Type ButtonBase}">
         <Setter Property="Height" Value="30" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.BorderBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Border}" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="HorizontalAlignment" Value="Center" />
@@ -15,13 +15,13 @@
     </Style>
 
 
-    <Style x:Key="Quan.Styles.Button.Base" BasedOn="{StaticResource Quan.Styles.Button.BaseBase}" TargetType="Button">
-        <Setter Property="Background" Value="{DynamicResource Quan.Brushes.BackgroundBrush}" />
-        <Setter Property="local:BorderElement.CornerRadius" Value="5" />
+    <Style x:Key="Quan.Styles.Button.Base" BasedOn="{StaticResource Quan.Styles.Button.BaseBase}" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{DynamicResource Quan.Brushes.Background}" />
+        <Setter Property="local:BorderHelper.CornerRadius" Value="5" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{Binding Path=(local:BorderElement.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}">
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{Binding Path=(local:BorderHelper.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}">
                         <StackPanel
                             Margin="{TemplateBinding Padding}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -68,18 +68,18 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="Quan.Styles.Button.Icon" BasedOn="{StaticResource Quan.Styles.Button.Base}" TargetType="Button">
+    <Style x:Key="Quan.Styles.Button.Icon" BasedOn="{StaticResource Quan.Styles.Button.Base}" TargetType="{x:Type Button}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="local:BorderElement.CornerRadius" Value="0" />
+        <Setter Property="local:BorderHelper.CornerRadius" Value="0" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="Button">
+                <ControlTemplate TargetType="{x:Type Button}">
                     <Border
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="{Binding Path=(local:BorderElement.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}">
+                        CornerRadius="{Binding Path=(local:BorderHelper.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}">
                         <ContentControl
                             Margin="{TemplateBinding Padding}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -99,7 +99,7 @@
         </Setter>
     </Style>
 
-    <ControlTemplate x:Key="Quan.Templates.Button.FontIcon" TargetType="{x:Type ButtonBase}">
+    <ControlTemplate x:Key="Quan.Templates.Button.FontIcon" TargetType="{x:Type Button}">
         <Grid Background="{TemplateBinding Background}">
             <ContentPresenter
                 x:Name="PART_ContentPresenter"
@@ -117,14 +117,15 @@
                 <Setter TargetName="PART_ContentPresenter" Property="Opacity" Value=".5" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.DisabledColorBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.Disabled}" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style x:Key="Quan.Styles.Button.FontIcon" TargetType="{x:Type ButtonBase}">
+    <Style x:Key="Quan.Styles.Button.FontIcon" TargetType="{x:Type Button}">
         <Setter Property="FontFamily" Value="{StaticResource Quan.Fonts.FontAwesome}" />
-        <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Bigger}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Large}" />
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="0" />

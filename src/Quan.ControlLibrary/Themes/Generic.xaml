@@ -15,17 +15,6 @@
   <Geometry x:Key="WindowMinGeometry" o:Freeze="True">M0,4 L10,4 L10,5 L0,5 z</Geometry>
   <Geometry x:Key="WindowRestoreGeometry" o:Freeze="True">M1,3 L1,9 L7,9 L7,3 z M3,1 L3,2 L8,2 L8,7 L9,7 L9,1 z M2,0 L10,0 L10,8 L8,8 L8,10 L0,10 L0,2 L2,2 z</Geometry>
   <Geometry x:Key="WindowMaxGeometry" o:Freeze="True">M1,1 L1,9 L9,9 L9,1 z M0,0 L10,0 L10,10 L0,10 z</Geometry>
-  <SolidColorBrush x:Key="Quan.Brushes.WindowBorder" o:Freeze="True" Color="#707070" />
-  <SolidColorBrush x:Key="DataGrid.Border.Common" o:Freeze="True" Color="#bdbdbd" />
-  <SolidColorBrush x:Key="DataGrid.Border.LightGray" o:Freeze="True" Color="#dddddd" />
-  <SolidColorBrush x:Key="DataGrid.Border.DarkGray" o:Freeze="True" Color="#999999" />
-  <SolidColorBrush x:Key="DataGrid.Background.Common" o:Freeze="True" Color="#4cc5e0" />
-  <SolidColorBrush x:Key="DataGrid.Background.MouseOver" o:Freeze="True" Color="#93e0f5" />
-  <SolidColorBrush x:Key="DataGridRow.Background.Selection" o:Freeze="True" Color="#85d7ed" />
-  <SolidColorBrush x:Key="DataGrid.Border.MouseOver" o:Freeze="True" Color="#74d7f2" />
-  <SolidColorBrush x:Key="DataGrid.Background.Pressed" o:Freeze="True" Color="#328fb8" />
-  <SolidColorBrush x:Key="DataGrid.Border.Pressed" o:Freeze="True" Color="#328fb8" />
-  <SolidColorBrush x:Key="DataGrid.Background.Disabled" o:Freeze="True" Color="#FFF4F4F4" />
   <Storyboard x:Key="Quan.Storyboard.GotFocus" o:Freeze="True">
     <DoubleAnimation Storyboard.TargetName="PART_GuideMessage" />
   </Storyboard>
@@ -45,24 +34,34 @@
     <DoubleAnimation Storyboard.TargetName="PART_GuideMessage" Storyboard.TargetProperty="Opacity" Duration="0:0:0.2" />
   </Storyboard>
   <system:Double x:Key="TitleBarHeight">32</system:Double>
-  <SolidColorBrush x:Key="Quan.Brushes.BackgroundBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.Background}" />
-  <SolidColorBrush x:Key="Quan.Brushes.BackgroundLightBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.BackgroundLight}" />
-  <SolidColorBrush x:Key="Quan.Brushes.BorderBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.BorderBrush}" />
-  <SolidColorBrush x:Key="Quan.Brushes.ForegroundBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.Foreground}" />
-  <SolidColorBrush x:Key="Quan.Brushes.ForegroundLightBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.ForegroundLight}" />
-  <SolidColorBrush x:Key="Quan.Brushes.ForegroundVeryLightBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.ForegroundVeryLight}" />
-  <SolidColorBrush x:Key="Quan.Brushes.ForegroundHighLightBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.ForegroundHighLight}" />
-  <SolidColorBrush x:Key="Quan.Brushes.IconHoverBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.IconHover}" />
-  <SolidColorBrush x:Key="Quan.Brushes.IconForegroundBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.IconForeground}" />
-  <SolidColorBrush x:Key="Quan.Brushes.PrimaryColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.PrimaryColor}" />
-  <SolidColorBrush x:Key="Quan.Brushes.LightPrimaryColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.LightPrimaryColor}" />
-  <SolidColorBrush x:Key="Quan.Brushes.VeryLightPrimaryColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.VeryLightPrimaryColor}" />
-  <SolidColorBrush x:Key="Quan.Brushes.DarkPrimaryColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.DarkPrimaryColor}" />
-  <SolidColorBrush x:Key="Quan.Brushes.WarningColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.WarningColor}" />
-  <SolidColorBrush x:Key="Quan.Brushes.ErrorColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.ErrorColor}" />
-  <SolidColorBrush x:Key="Quan.Brushes.SuccessColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.SuccessColor}" />
-  <SolidColorBrush x:Key="Quan.Brushes.FocusColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.FocusColor}" />
-  <SolidColorBrush x:Key="Quan.Brushes.DisabledColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.DisabledColor}" />
+  <SolidColorBrush x:Key="Quan.Brushes.Background" o:Freeze="True" Color="{DynamicResource Quan.Colors.Background}" />
+  <SolidColorBrush x:Key="Quan.Brushes.BackgroundLight" o:Freeze="True" Color="{DynamicResource Quan.Colors.BackgroundLight}" />
+  <SolidColorBrush x:Key="Quan.Brushes.Border" o:Freeze="True" Color="{DynamicResource Quan.Colors.BorderBrush}" />
+  <SolidColorBrush x:Key="Quan.Brushes.Foreground" o:Freeze="True" Color="{DynamicResource Quan.Colors.Foreground}" />
+  <SolidColorBrush x:Key="Quan.Brushes.ForegroundLight" o:Freeze="True" Color="{DynamicResource Quan.Colors.ForegroundLight}" />
+  <SolidColorBrush x:Key="Quan.Brushes.ForegroundHighLight" o:Freeze="True" Color="{DynamicResource Quan.Colors.ForegroundHighLight}" />
+  <SolidColorBrush x:Key="Quan.Brushes.IconHover" o:Freeze="True" Color="{DynamicResource Quan.Colors.IconHover}" />
+  <SolidColorBrush x:Key="Quan.Brushes.IconForeground" o:Freeze="True" Color="{DynamicResource Quan.Colors.IconForeground}" />
+  <SolidColorBrush x:Key="Quan.Brushes.Primary" o:Freeze="True" Color="{DynamicResource Quan.Colors.Primary}" />
+  <SolidColorBrush x:Key="Quan.Brushes.LightPrimary" o:Freeze="True" Color="{DynamicResource Quan.Colors.LightPrimary}" />
+  <SolidColorBrush x:Key="Quan.Brushes.VeryLightPrimary" o:Freeze="True" Color="{DynamicResource Quan.Colors.VeryLightPrimary}" />
+  <SolidColorBrush x:Key="Quan.Brushes.DarkPrimary" o:Freeze="True" Color="{DynamicResource Quan.Colors.DarkPrimary}" />
+  <SolidColorBrush x:Key="Quan.Brushes.Warning" o:Freeze="True" Color="{DynamicResource Quan.Colors.Warning}" />
+  <SolidColorBrush x:Key="Quan.Brushes.Error" o:Freeze="True" Color="{DynamicResource Quan.Colors.Error}" />
+  <SolidColorBrush x:Key="Quan.Brushes.Success" o:Freeze="True" Color="{DynamicResource Quan.Colors.Success}" />
+  <SolidColorBrush x:Key="Quan.Brushes.Focus" o:Freeze="True" Color="{DynamicResource Quan.Colors.Focus}" />
+  <SolidColorBrush x:Key="Quan.Brushes.Disabled" o:Freeze="True" Color="{DynamicResource Quan.Colors.Disabled}" />
+  <SolidColorBrush x:Key="Quan.Brushes.Gray1" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray1}" />
+  <SolidColorBrush x:Key="Quan.Brushes.Gray2" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray2}" />
+  <SolidColorBrush x:Key="Quan.Brushes.Gray3" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray3}" />
+  <SolidColorBrush x:Key="Quan.Brushes.Gray4" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray4}" />
+  <SolidColorBrush x:Key="Quan.Brushes.Gray5" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray5}" />
+  <SolidColorBrush x:Key="Quan.Brushes.Gray6" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray6}" />
+  <SolidColorBrush x:Key="Quan.Brushes.Gray7" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray7}" />
+  <SolidColorBrush x:Key="Quan.Brushes.Gray8" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray8}" />
+  <SolidColorBrush x:Key="Quan.Brushes.Gray9" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray9}" />
+  <SolidColorBrush x:Key="Quan.Brushes.Gray10" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray10}" />
+  <SolidColorBrush x:Key="Quan.Brushes.WindowBorder" o:Freeze="True" Color="{DynamicResource Quan.Colors.WindowBorder}" />
   <Style x:Key="Quan.Styles.Common.FocusVisual">
     <Setter Property="Control.Template">
       <Setter.Value>
@@ -73,14 +72,14 @@
     </Setter>
   </Style>
   <Style x:Key="Quan.Styles.Common.BaseStyle" TargetType="Control">
-    <Setter Property="Foreground" Value="{DynamicResource Quan.Colors.ForegroundBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.Foreground}" />
     <Setter Property="FontFamily" Value="{StaticResource Quan.Fonts.Regular}" />
     <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Regular}" />
     <Setter Property="FocusVisualStyle" Value="{StaticResource Quan.Styles.Common.FocusVisual}" />
   </Style>
-  <Style x:Key="Quan.Styles.Button.BaseBase" BasedOn="{StaticResource Quan.Styles.Common.BaseStyle}" TargetType="ButtonBase">
+  <Style x:Key="Quan.Styles.Button.BaseBase" BasedOn="{StaticResource Quan.Styles.Common.BaseStyle}" TargetType="{x:Type ButtonBase}">
     <Setter Property="Height" Value="30" />
-    <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.BorderBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Border}" />
     <Setter Property="Padding" Value="0" />
     <Setter Property="BorderThickness" Value="0" />
     <Setter Property="HorizontalAlignment" Value="Center" />
@@ -88,13 +87,13 @@
     <Setter Property="HorizontalContentAlignment" Value="Center" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
   </Style>
-  <Style x:Key="Quan.Styles.Button.Base" BasedOn="{StaticResource Quan.Styles.Button.BaseBase}" TargetType="Button">
-    <Setter Property="Background" Value="{DynamicResource Quan.Brushes.BackgroundBrush}" />
-    <Setter Property="local:BorderElement.CornerRadius" Value="5" />
+  <Style x:Key="Quan.Styles.Button.Base" BasedOn="{StaticResource Quan.Styles.Button.BaseBase}" TargetType="{x:Type Button}">
+    <Setter Property="Background" Value="{DynamicResource Quan.Brushes.Background}" />
+    <Setter Property="local:BorderHelper.CornerRadius" Value="5" />
     <Setter Property="Template">
       <Setter.Value>
-        <ControlTemplate TargetType="Button">
-          <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{Binding Path=(local:BorderElement.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}">
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{Binding Path=(local:BorderHelper.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}">
             <StackPanel Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Orientation="Horizontal">
               <Path x:Name="IconContent" Width="{TemplateBinding local:IconHelper.Width}" Height="{TemplateBinding local:IconHelper.Height}" Data="{TemplateBinding local:IconHelper.Geometry}" Fill="{TemplateBinding Foreground}" SnapsToDevicePixels="True" Stretch="Uniform" />
               <ContentPresenter x:Name="ContentPresenter" Margin="6,0,0,0" VerticalAlignment="Center" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
@@ -124,14 +123,14 @@
       </Trigger>
     </Style.Triggers>
   </Style>
-  <Style x:Key="Quan.Styles.Button.Icon" BasedOn="{StaticResource Quan.Styles.Button.Base}" TargetType="Button">
+  <Style x:Key="Quan.Styles.Button.Icon" BasedOn="{StaticResource Quan.Styles.Button.Base}" TargetType="{x:Type Button}">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="BorderBrush" Value="Transparent" />
-    <Setter Property="local:BorderElement.CornerRadius" Value="0" />
+    <Setter Property="local:BorderHelper.CornerRadius" Value="0" />
     <Setter Property="Template">
       <Setter.Value>
-        <ControlTemplate TargetType="Button">
-          <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{Binding Path=(local:BorderElement.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}">
+        <ControlTemplate TargetType="{x:Type Button}">
+          <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{Binding Path=(local:BorderHelper.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}">
             <ContentControl Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
               <Path Width="{TemplateBinding local:IconHelper.Width}" Height="{TemplateBinding local:IconHelper.Height}" Data="{TemplateBinding local:IconHelper.Geometry}" Fill="{TemplateBinding Foreground}" SnapsToDevicePixels="True" Stretch="Uniform" />
             </ContentControl>
@@ -140,7 +139,7 @@
       </Setter.Value>
     </Setter>
   </Style>
-  <ControlTemplate x:Key="Quan.Templates.Button.FontIcon" TargetType="{x:Type ButtonBase}">
+  <ControlTemplate x:Key="Quan.Templates.Button.FontIcon" TargetType="{x:Type Button}">
     <Grid Background="{TemplateBinding Background}">
       <ContentPresenter x:Name="PART_ContentPresenter" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Opacity="0.75" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
     </Grid>
@@ -152,13 +151,14 @@
         <Setter TargetName="PART_ContentPresenter" Property="Opacity" Value=".5" />
       </Trigger>
       <Trigger Property="IsEnabled" Value="False">
-        <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.DisabledColorBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.Disabled}" />
       </Trigger>
     </ControlTemplate.Triggers>
   </ControlTemplate>
-  <Style x:Key="Quan.Styles.Button.FontIcon" TargetType="{x:Type ButtonBase}">
+  <Style x:Key="Quan.Styles.Button.FontIcon" TargetType="{x:Type Button}">
     <Setter Property="FontFamily" Value="{StaticResource Quan.Fonts.FontAwesome}" />
-    <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Bigger}" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Large}" />
     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
     <Setter Property="HorizontalContentAlignment" Value="Center" />
     <Setter Property="Padding" Value="0" />
@@ -210,17 +210,17 @@
           <RowDefinition Height="Auto" />
           <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Border Grid.Row="1" Margin="0,-1,0,0" Padding="5" Background="{DynamicResource Quan.Brushes.ErrorColorBrush}" CornerRadius="5">
-          <TextBlock Foreground="{DynamicResource Quan.Brushes.ForegroundHighLightBrush}" Text="{Binding ElementName=Placeholder, Path=AdornedElement.(Validation.Errors)/ErrorContent}" />
+        <Border Grid.Row="1" Margin="0,-1,0,0" Padding="5" Background="{DynamicResource Quan.Brushes.Error}" CornerRadius="5">
+          <TextBlock Foreground="{DynamicResource Quan.Brushes.ForegroundHighLight}" Text="{Binding ElementName=Placeholder, Path=AdornedElement.(Validation.Errors)/ErrorContent}" />
         </Border>
-        <Path Grid.Row="0" HorizontalAlignment="Center" Data="M 0 10 L 5 0 10 10 " Fill="{DynamicResource Quan.Brushes.ErrorColorBrush}" StrokeThickness="1" />
+        <Path Grid.Row="0" HorizontalAlignment="Center" Data="M 0 10 L 5 0 10 10 " Fill="{DynamicResource Quan.Brushes.Error}" StrokeThickness="1" />
       </Grid>
     </Grid>
   </ControlTemplate>
-  <ControlTemplate x:Key="Quan.Templates.TextBox.Default" TargetType="{x:Type local:QuanTextBox}">
+  <ControlTemplate x:Key="Quan.Templates.QuanTextBox.Default" TargetType="{x:Type local:QuanTextBox}">
     <Grid SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-      <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="1" />
-      <Grid>
+      <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding local:BorderHelper.CornerRadius}" />
+      <Grid Margin="{TemplateBinding BorderThickness}">
         <Grid.RowDefinitions>
           <!--  Floating Guide Message  -->
           <RowDefinition Height="Auto" />
@@ -233,8 +233,8 @@
           <!--<ColumnDefinition Width="Auto" />-->
         </Grid.ColumnDefinitions>
         <ScrollViewer x:Name="PART_ContentHost" Grid.Row="1" Margin="0" Padding="{TemplateBinding Padding}" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
-        <TextBlock x:Name="PART_GuideMessage" Grid.Row="1" Grid.Column="0" Margin="9,0,0,0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" FontFamily="{TemplateBinding FontFamily}" Foreground="{DynamicResource Quan.Brushes.ForegroundLightBrush}" IsHitTestVisible="False" Text="{TemplateBinding local:TextBoxHelper.GuideText}" Visibility="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={local:StringToVisibilityConverter}}" />
-        <Button x:Name="PART_ClearTextButton" Grid.Row="1" Grid.Column="1" Width="26" Content="{StaticResource Quan.FontIcons.Close}" Focusable="False" Style="{StaticResource Quan.Styles.Button.FontIcon}" />
+        <TextBlock x:Name="PART_GuideMessage" Grid.Row="1" Grid.Column="0" Margin="9,0,0,0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" FontFamily="{TemplateBinding FontFamily}" Foreground="{DynamicResource Quan.Brushes.ForegroundLight}" IsHitTestVisible="False" Text="{TemplateBinding local:TextBoxHelper.GuideText}" Visibility="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={local:StringToVisibilityConverter}}" />
+        <Button x:Name="PART_ClearTextButton" Grid.Row="1" Grid.Column="1" Width="26" local:TextBoxHelper.IsUseClearButton="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" Content="{StaticResource Quan.FontIcons.Close}" Focusable="False" IsTabStop="False" Style="{StaticResource Quan.Styles.Button.FontIcon}" Visibility="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={local:BooleanToCollapsedConverter}}" />
         <!--<Line
                     Grid.Row="1"
                     Grid.Column="2"
@@ -262,13 +262,24 @@
         <Setter TargetName="border" Property="Opacity" Value="0.56" />
       </Trigger>
       <Trigger Property="IsMouseOver" Value="True">
-        <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.LightPrimaryColorBrush}" />
+        <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.LightPrimary}" />
       </Trigger>
       <Trigger Property="IsKeyboardFocused" Value="True">
-        <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.PrimaryColorBrush}" />
+        <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Primary}" />
+      </Trigger>
+      <Trigger Property="IsReadOnly" Value="True">
+        <Setter TargetName="PART_ClearTextButton" Property="IsEnabled" Value="False" />
       </Trigger>
       <Trigger Property="Validation.HasError" Value="true">
-        <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.ErrorColorBrush}" />
+        <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Error}" />
+      </Trigger>
+      <Trigger SourceName="PART_ClearTextButton" Property="IsMouseOver" Value="True">
+        <Setter TargetName="PART_ClearTextButton" Property="Background" Value="{DynamicResource Quan.Brushes.Gray8}" />
+        <Setter TargetName="PART_ClearTextButton" Property="Foreground" Value="{DynamicResource Quan.Brushes.LightPrimary}" />
+      </Trigger>
+      <Trigger SourceName="PART_ClearTextButton" Property="IsPressed" Value="True">
+        <Setter TargetName="PART_ClearTextButton" Property="Background" Value="{DynamicResource Quan.Brushes.Foreground}" />
+        <Setter TargetName="PART_ClearTextButton" Property="Foreground" Value="{DynamicResource Quan.Brushes.Background}" />
       </Trigger>
       <MultiTrigger>
         <MultiTrigger.Conditions>
@@ -284,25 +295,25 @@
       </MultiTrigger>
     </ControlTemplate.Triggers>
   </ControlTemplate>
-  <Style x:Key="Quan.Styles.TextBox.Default" TargetType="{x:Type local:QuanTextBox}">
+  <Style x:Key="Quan.Styles.QuanTextBox.Default" TargetType="{x:Type local:QuanTextBox}">
     <Setter Property="FontFamily" Value="{StaticResource Quan.Fonts.Regular}" />
     <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Regular}" />
-    <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.BorderBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Border}" />
     <Setter Property="BorderThickness" Value="1" />
-    <Setter Property="Background" Value="{DynamicResource Quan.Brushes.BackgroundBrush}" />
+    <Setter Property="Background" Value="{DynamicResource Quan.Brushes.Background}" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="SnapsToDevicePixels" Value="True" />
     <Setter Property="Padding" Value="3,0" />
     <Setter Property="MinHeight" Value="26" />
     <Setter Property="Height" Value="26" />
-    <Setter Property="Template" Value="{StaticResource Quan.Templates.TextBox.Default}" />
+    <Setter Property="Template" Value="{StaticResource Quan.Templates.QuanTextBox.Default}" />
     <Setter Property="Validation.ErrorTemplate" Value="{StaticResource QuanTextBox.ValidationTemplate}" />
     <Setter Property="local:TextBoxHelper.IsMonitoring" Value="True" />
     <Setter Property="FocusVisualStyle" Value="{x:Null}" />
   </Style>
-  <Style BasedOn="{StaticResource Quan.Styles.TextBox.Default}" TargetType="{x:Type local:QuanTextBox}" />
+  <Style BasedOn="{StaticResource Quan.Styles.QuanTextBox.Default}" TargetType="{x:Type local:QuanTextBox}" />
   <WindowChrome x:Key="DefaultWindowChrome" CaptionHeight="{StaticResource TitleBarHeight}" CornerRadius="0" GlassFrameThickness="0,1,0,0" UseAeroCaptionButtons="False" />
-  <ControlTemplate x:Key="Quan.Templates.Window.Default" TargetType="{x:Type local:QuanWindow}">
+  <ControlTemplate x:Key="Quan.Templates.QuanWindow.Default" TargetType="{x:Type local:QuanWindow}">
     <!--  Window border  -->
     <Border x:Name="MainBorder" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
       <!--  The window content  -->
@@ -352,31 +363,31 @@
         <Setter TargetName="PART_RestoreButton" Property="Visibility" Value="Collapsed" />
       </Trigger>
       <Trigger SourceName="PART_MinButton" Property="IsMouseOver" Value="True">
-        <Setter TargetName="PART_MinButton" Property="Background" Value="{DynamicResource Quan.Brushes.IconHoverBrush}" />
+        <Setter TargetName="PART_MinButton" Property="Background" Value="{DynamicResource Quan.Brushes.IconHover}" />
       </Trigger>
       <Trigger SourceName="PART_MaxButton" Property="IsMouseOver" Value="True">
-        <Setter TargetName="PART_MaxButton" Property="Background" Value="{DynamicResource Quan.Brushes.IconHoverBrush}" />
+        <Setter TargetName="PART_MaxButton" Property="Background" Value="{DynamicResource Quan.Brushes.IconHover}" />
       </Trigger>
       <Trigger SourceName="PART_RestoreButton" Property="IsMouseOver" Value="True">
-        <Setter TargetName="PART_RestoreButton" Property="Background" Value="{DynamicResource Quan.Brushes.IconHoverBrush}" />
+        <Setter TargetName="PART_RestoreButton" Property="Background" Value="{DynamicResource Quan.Brushes.IconHover}" />
       </Trigger>
       <Trigger SourceName="PART_CloseButton" Property="IsMouseOver" Value="True">
         <Setter TargetName="PART_CloseButton" Property="Background" Value="Red" />
-        <Setter TargetName="PART_CloseButton" Property="Foreground" Value="{DynamicResource Quan.Brushes.IconForegroundBrush}" />
+        <Setter TargetName="PART_CloseButton" Property="Foreground" Value="{DynamicResource Quan.Brushes.IconForeground}" />
       </Trigger>
     </ControlTemplate.Triggers>
   </ControlTemplate>
-  <Style x:Key="Quan.Styles.Window.Default" TargetType="{x:Type local:QuanWindow}">
-    <Setter Property="Background" Value="{DynamicResource Quan.Brushes.BackgroundBrush}" />
+  <Style x:Key="Quan.Styles.QuanWindow.Default" TargetType="{x:Type local:QuanWindow}">
+    <Setter Property="Background" Value="{DynamicResource Quan.Brushes.Background}" />
     <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.WindowBorder}" />
     <Setter Property="FontFamily" Value="{StaticResource Quan.Fonts.Regular}" />
     <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Regular}" />
     <Setter Property="BorderThickness" Value="1" />
-    <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.ForegroundBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.Foreground}" />
     <Setter Property="UseLayoutRounding" Value="True" />
-    <Setter Property="Template" Value="{StaticResource Quan.Templates.Window.Default}" />
+    <Setter Property="Template" Value="{StaticResource Quan.Templates.QuanWindow.Default}" />
     <Setter Property="WindowChrome.WindowChrome" Value="{StaticResource DefaultWindowChrome}" />
-    <Setter Property="TextElement.FontSize" Value="{StaticResource FontSizeRegular}" />
+    <Setter Property="TextElement.FontSize" Value="{StaticResource Quan.FontSize.Regular}" />
     <Setter Property="local:WindowHelper.FixMaximizedWindow" Value="True" />
     <Style.Triggers>
       <Trigger Property="WindowChrome.WindowChrome" Value="{x:Null}">
@@ -384,5 +395,5 @@
       </Trigger>
     </Style.Triggers>
   </Style>
-  <Style BasedOn="{StaticResource Quan.Styles.Window.Default}" TargetType="{x:Type local:QuanWindow}" />
+  <Style BasedOn="{StaticResource Quan.Styles.QuanWindow.Default}" TargetType="{x:Type local:QuanWindow}" />
 </ResourceDictionary>

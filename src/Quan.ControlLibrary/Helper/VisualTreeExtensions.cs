@@ -10,7 +10,7 @@ namespace Quan.ControlLibrary
 
     public static class VisualTreeExtensions
     {
-        internal static DependencyObject FindVisualTreeRoot(this DependencyObject d)
+        internal static DependencyObject GetVisualTreeRoot(this DependencyObject d)
         {
             var current = d;
             var result = d;
@@ -34,9 +34,9 @@ namespace Quan.ControlLibrary
         /// <typeparam name="T">The type of parent element</typeparam>
         /// <param name="obj">The source element</param>
         /// <returns></returns>
-        public static T FindVisualParent<T>(this DependencyObject obj) where T : class
+        public static T GetVisualParent<T>(this DependencyObject obj) where T : class
         {
-            var parent = VisualTreeHelper.GetParent(obj.FindVisualTreeRoot());
+            var parent = VisualTreeHelper.GetParent(obj.GetVisualTreeRoot());
             while (parent != null)
             {
                 if (parent is T element)
@@ -49,6 +49,21 @@ namespace Quan.ControlLibrary
         }
 
         /// <summary>
+        /// Gets all visual parents of a given element on it's visual tree
+        /// </summary>
+        /// <param name="dp">The source element</param>
+        /// <returns>All visual parents of <paramref name="dp"/> element</returns>
+        public static IEnumerable<DependencyObject> GetVisualParents(this DependencyObject dp)
+        {
+            var parent = VisualTreeHelper.GetParent(dp);
+            while (parent != null)
+            {
+                yield return parent;
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+        }
+
+        /// <summary>
         /// Find the first parent element within specific type from source element's visual tree
         /// </summary>
         /// <typeparam name="T">The type of parent element</typeparam>
@@ -57,7 +72,7 @@ namespace Quan.ControlLibrary
         /// <returns></returns>
         public static T FindVisualParentByName<T>(this DependencyObject obj, string name = null) where T : FrameworkElement
         {
-            var parent = VisualTreeHelper.GetParent(obj.FindVisualTreeRoot());
+            var parent = VisualTreeHelper.GetParent(obj.GetVisualTreeRoot());
             while (parent != null)
             {
                 if (parent is T element && (element.Name == name || string.IsNullOrEmpty(name)))
@@ -85,7 +100,7 @@ namespace Quan.ControlLibrary
             if (itemsControl == null) throw new ArgumentNullException(nameof(itemsControl));
             if (itemContainerSearchType == null) throw new ArgumentNullException(nameof(itemContainerSearchType));
 
-            var visualTreeRoot = d.FindVisualTreeRoot();
+            var visualTreeRoot = d.GetVisualTreeRoot();
             var currentVisual = VisualTreeHelper.GetParent(visualTreeRoot);
 
             while (currentVisual != null && itemSearchType != null)
@@ -115,7 +130,7 @@ namespace Quan.ControlLibrary
         {
             if (itemsControl == null) throw new ArgumentNullException(nameof(itemsControl));
 
-            var visualTreeRoot = d.FindVisualTreeRoot();
+            var visualTreeRoot = d.GetVisualTreeRoot();
             var currentVisual = VisualTreeHelper.GetParent(visualTreeRoot);
             DependencyObject lastFoundItemByType = null;
 

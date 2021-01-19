@@ -4,41 +4,41 @@
     xmlns:local="clr-namespace:Quan.ControlLibrary"
     xmlns:o="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
 
-    <SolidColorBrush x:Key="Quan.Brushes.BackgroundBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.Background}" />
-    <SolidColorBrush x:Key="Quan.Brushes.BackgroundLightBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.BackgroundLight}" />
-    <SolidColorBrush x:Key="Quan.Brushes.BorderBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.BorderBrush}" />
-    <SolidColorBrush x:Key="Quan.Brushes.ForegroundBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.Foreground}" />
-    <SolidColorBrush x:Key="Quan.Brushes.ForegroundLightBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.ForegroundLight}" />
-    <SolidColorBrush x:Key="Quan.Brushes.ForegroundVeryLightBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.ForegroundVeryLight}" />
-    <SolidColorBrush x:Key="Quan.Brushes.ForegroundHighLightBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.ForegroundHighLight}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Background" o:Freeze="True" Color="{DynamicResource Quan.Colors.Background}" />
+    <SolidColorBrush x:Key="Quan.Brushes.BackgroundLight" o:Freeze="True" Color="{DynamicResource Quan.Colors.BackgroundLight}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Border" o:Freeze="True" Color="{DynamicResource Quan.Colors.BorderBrush}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Foreground" o:Freeze="True" Color="{DynamicResource Quan.Colors.Foreground}" />
+    <SolidColorBrush x:Key="Quan.Brushes.ForegroundLight" o:Freeze="True" Color="{DynamicResource Quan.Colors.ForegroundLight}" />
+    <SolidColorBrush x:Key="Quan.Brushes.ForegroundHighLight" o:Freeze="True" Color="{DynamicResource Quan.Colors.ForegroundHighLight}" />
 
-    <SolidColorBrush x:Key="Quan.Brushes.IconHoverBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.IconHover}" />
-    <SolidColorBrush x:Key="Quan.Brushes.IconForegroundBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.IconForeground}" />
+    <SolidColorBrush x:Key="Quan.Brushes.IconHover" o:Freeze="True" Color="{DynamicResource Quan.Colors.IconHover}" />
+    <SolidColorBrush x:Key="Quan.Brushes.IconForeground" o:Freeze="True" Color="{DynamicResource Quan.Colors.IconForeground}" />
 
-    <SolidColorBrush x:Key="Quan.Brushes.PrimaryColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.PrimaryColor}" />
-    <SolidColorBrush x:Key="Quan.Brushes.LightPrimaryColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.LightPrimaryColor}" />
-    <SolidColorBrush x:Key="Quan.Brushes.VeryLightPrimaryColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.VeryLightPrimaryColor}" />
-    <SolidColorBrush x:Key="Quan.Brushes.DarkPrimaryColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.DarkPrimaryColor}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Primary" o:Freeze="True" Color="{DynamicResource Quan.Colors.Primary}" />
+    <SolidColorBrush x:Key="Quan.Brushes.LightPrimary" o:Freeze="True" Color="{DynamicResource Quan.Colors.LightPrimary}" />
+    <SolidColorBrush x:Key="Quan.Brushes.VeryLightPrimary" o:Freeze="True" Color="{DynamicResource Quan.Colors.VeryLightPrimary}" />
+    <SolidColorBrush x:Key="Quan.Brushes.DarkPrimary" o:Freeze="True" Color="{DynamicResource Quan.Colors.DarkPrimary}" />
 
-    <SolidColorBrush x:Key="Quan.Brushes.WarningColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.WarningColor}" />
-    <SolidColorBrush x:Key="Quan.Brushes.ErrorColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.ErrorColor}" />
-    <SolidColorBrush x:Key="Quan.Brushes.SuccessColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.SuccessColor}" />
-    <SolidColorBrush x:Key="Quan.Brushes.FocusColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.FocusColor}" />
-    <SolidColorBrush x:Key="Quan.Brushes.DisabledColorBrush" o:Freeze="True" Color="{DynamicResource Quan.Colors.DisabledColor}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Warning" o:Freeze="True" Color="{DynamicResource Quan.Colors.Warning}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Error" o:Freeze="True" Color="{DynamicResource Quan.Colors.Error}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Success" o:Freeze="True" Color="{DynamicResource Quan.Colors.Success}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Focus" o:Freeze="True" Color="{DynamicResource Quan.Colors.Focus}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Disabled" o:Freeze="True" Color="{DynamicResource Quan.Colors.Disabled}" />
+
+    <SolidColorBrush x:Key="Quan.Brushes.Gray1" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray1}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Gray2" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray2}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Gray3" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray3}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Gray4" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray4}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Gray5" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray5}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Gray6" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray6}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Gray7" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray7}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Gray8" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray8}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Gray9" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray9}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Gray10" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray10}" />
 
     <!--  Window  -->
-    <SolidColorBrush x:Key="Quan.Brushes.WindowBorder" o:Freeze="True" Color="#707070" />
+    <SolidColorBrush x:Key="Quan.Brushes.WindowBorder" o:Freeze="True" Color="{DynamicResource Quan.Colors.WindowBorder}" />
 
-    <!--  DataGrid  -->
-    <SolidColorBrush x:Key="DataGrid.Border.Common" o:Freeze="True" Color="#bdbdbd" />
-    <SolidColorBrush x:Key="DataGrid.Border.LightGray" o:Freeze="True" Color="#dddddd" />
-    <SolidColorBrush x:Key="DataGrid.Border.DarkGray" o:Freeze="True" Color="#999999" />
-    <SolidColorBrush x:Key="DataGrid.Background.Common" o:Freeze="True" Color="#4cc5e0" />
-    <SolidColorBrush x:Key="DataGrid.Background.MouseOver" o:Freeze="True" Color="#93e0f5" />
-    <SolidColorBrush x:Key="DataGridRow.Background.Selection" o:Freeze="True" Color="#85d7ed" />
-    <SolidColorBrush x:Key="DataGrid.Border.MouseOver" o:Freeze="True" Color="#74d7f2" />
-    <SolidColorBrush x:Key="DataGrid.Background.Pressed" o:Freeze="True" Color="#328fb8" />
-    <SolidColorBrush x:Key="DataGrid.Border.Pressed" o:Freeze="True" Color="#328fb8" />
-    <SolidColorBrush x:Key="DataGrid.Background.Disabled" o:Freeze="True" Color="#FFF4F4F4" />
+
 
 </ResourceDictionary>

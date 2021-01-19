@@ -1,10 +1,9 @@
 ﻿using Prism.Ioc;
+using Prism.Mvvm;
 using Prism.Unity;
 using System.Windows;
-using Prism.Mvvm;
-using Quan.ControlLibrary;
 
-namespace WpfApp2
+namespace Quan.ControlLibrary.Demo
 {
     /// <summary>
     /// Interaction logic for App.xaml

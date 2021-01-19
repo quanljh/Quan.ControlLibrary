@@ -1,6 +1,6 @@
 ﻿using Quan.ControlLibrary;
 
-namespace WpfApp2
+namespace Quan.ControlLibrary.Demo
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

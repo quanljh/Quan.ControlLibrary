@@ -37,29 +37,29 @@
                     Grid.Row="1"
                     Margin="0,-1,0,0"
                     Padding="5"
-                    Background="{DynamicResource Quan.Brushes.ErrorColorBrush}"
+                    Background="{DynamicResource Quan.Brushes.Error}"
                     CornerRadius="5">
-                    <TextBlock Foreground="{DynamicResource Quan.Brushes.ForegroundHighLightBrush}" Text="{Binding ElementName=Placeholder, Path=AdornedElement.(Validation.Errors)/ErrorContent}" />
+                    <TextBlock Foreground="{DynamicResource Quan.Brushes.ForegroundHighLight}" Text="{Binding ElementName=Placeholder, Path=AdornedElement.(Validation.Errors)/ErrorContent}" />
                 </Border>
                 <Path
                     Grid.Row="0"
                     HorizontalAlignment="Center"
                     Data="M 0 10 L 5 0 10 10 "
-                    Fill="{DynamicResource Quan.Brushes.ErrorColorBrush}"
+                    Fill="{DynamicResource Quan.Brushes.Error}"
                     StrokeThickness="1" />
             </Grid>
         </Grid>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="Quan.Templates.TextBox.Default" TargetType="{x:Type local:QuanTextBox}">
+    <ControlTemplate x:Key="Quan.Templates.QuanTextBox.Default" TargetType="{x:Type local:QuanTextBox}">
         <Grid SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
             <Border
                 x:Name="border"
                 Background="{TemplateBinding Background}"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
-                CornerRadius="1" />
-            <Grid>
+                CornerRadius="{TemplateBinding local:BorderHelper.CornerRadius}" />
+            <Grid Margin="{TemplateBinding BorderThickness}">
                 <Grid.RowDefinitions>
                     <!--  Floating Guide Message  -->
                     <RowDefinition Height="Auto" />
@@ -90,7 +90,7 @@
                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                     FontFamily="{TemplateBinding FontFamily}"
-                    Foreground="{DynamicResource Quan.Brushes.ForegroundLightBrush}"
+                    Foreground="{DynamicResource Quan.Brushes.ForegroundLight}"
                     IsHitTestVisible="False"
                     Text="{TemplateBinding local:TextBoxHelper.GuideText}"
                     Visibility="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={local:StringToVisibilityConverter}}" />
@@ -100,9 +100,12 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     Width="26"
+                    local:TextBoxHelper.IsUseClearButton="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
                     Content="{StaticResource Quan.FontIcons.Close}"
                     Focusable="False"
-                    Style="{StaticResource Quan.Styles.Button.FontIcon}" />
+                    IsTabStop="False"
+                    Style="{StaticResource Quan.Styles.Button.FontIcon}"
+                    Visibility="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={local:BooleanToCollapsedConverter}}" />
 
                 <!--<Line
                     Grid.Row="1"
@@ -132,14 +135,26 @@
                 <Setter TargetName="border" Property="Opacity" Value="0.56" />
             </Trigger>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.LightPrimaryColorBrush}" />
+                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.LightPrimary}" />
             </Trigger>
             <Trigger Property="IsKeyboardFocused" Value="True">
-                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.PrimaryColorBrush}" />
+                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Primary}" />
+            </Trigger>
+            <Trigger Property="IsReadOnly" Value="True">
+                <Setter TargetName="PART_ClearTextButton" Property="IsEnabled" Value="False" />
             </Trigger>
             <Trigger Property="Validation.HasError" Value="true">
-                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.ErrorColorBrush}" />
+                <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Error}" />
             </Trigger>
+            <Trigger SourceName="PART_ClearTextButton" Property="IsMouseOver" Value="True">
+                <Setter TargetName="PART_ClearTextButton" Property="Background" Value="{DynamicResource Quan.Brushes.Gray8}" />
+                <Setter TargetName="PART_ClearTextButton" Property="Foreground" Value="{DynamicResource Quan.Brushes.LightPrimary}" />
+            </Trigger>
+            <Trigger SourceName="PART_ClearTextButton" Property="IsPressed" Value="True">
+                <Setter TargetName="PART_ClearTextButton" Property="Background" Value="{DynamicResource Quan.Brushes.Foreground}" />
+                <Setter TargetName="PART_ClearTextButton" Property="Foreground" Value="{DynamicResource Quan.Brushes.Background}" />
+            </Trigger>
+
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="local:TextBoxHelper.HasText" Value="False" />
@@ -152,26 +167,27 @@
                     <BeginStoryboard Storyboard="{StaticResource Quan.Storyboards.TextBox.LostFocus}" />
                 </MultiTrigger.ExitActions>
             </MultiTrigger>
+
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <Style x:Key="Quan.Styles.TextBox.Default" TargetType="{x:Type local:QuanTextBox}">
+    <Style x:Key="Quan.Styles.QuanTextBox.Default" TargetType="{x:Type local:QuanTextBox}">
         <Setter Property="FontFamily" Value="{StaticResource Quan.Fonts.Regular}" />
         <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Regular}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.BorderBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Border}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Background" Value="{DynamicResource Quan.Brushes.BackgroundBrush}" />
+        <Setter Property="Background" Value="{DynamicResource Quan.Brushes.Background}" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Padding" Value="3,0" />
         <Setter Property="MinHeight" Value="26" />
         <Setter Property="Height" Value="26" />
-        <Setter Property="Template" Value="{StaticResource Quan.Templates.TextBox.Default}" />
+        <Setter Property="Template" Value="{StaticResource Quan.Templates.QuanTextBox.Default}" />
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource QuanTextBox.ValidationTemplate}" />
         <Setter Property="local:TextBoxHelper.IsMonitoring" Value="True" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
     </Style>
 
-    <Style BasedOn="{StaticResource Quan.Styles.TextBox.Default}" TargetType="{x:Type local:QuanTextBox}" />
+    <Style BasedOn="{StaticResource Quan.Styles.QuanTextBox.Default}" TargetType="{x:Type local:QuanTextBox}" />
 
 </ResourceDictionary>

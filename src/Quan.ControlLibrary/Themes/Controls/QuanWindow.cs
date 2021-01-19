@@ -21,11 +21,7 @@ namespace Quan.ControlLibrary
         private Image _icon;
         private Border _mainContentBorder;
 
-        private double _dpiScaleX;
-        private double _dpiScaleY;
-
         #endregion
-
 
         #region Public Properties
 
@@ -99,17 +95,6 @@ namespace Quan.ControlLibrary
             base.OnApplyTemplate();
             _icon = (Image)GetTemplateChild(PART_Icon);
             _mainContentBorder = (Border)GetTemplateChild(PART_MainContentBorder);
-
-#if !(NET46 || NET461)
-            var dpi = VisualTreeHelper.GetDpi(this);
-            _dpiScaleX = dpi.DpiScaleX;
-            _dpiScaleY = dpi.DpiScaleY;
-#else
-            var source = PresentationSource.FromVisual(this);
-            _dpiScaleX = source.CompositionTarget.TransformFromDevice.M11;
-            _dpiScaleX = source.CompositionTarget.TransformFromDevice.M22;
-#endif
-
             SubscribeEvents();
         }
 
@@ -142,7 +127,17 @@ namespace Quan.ControlLibrary
                 {
                     var pointToWindow = _mainContentBorder.TranslatePoint(new Point(0, 0), this);
                     var pointToScreen = PointToScreen(pointToWindow);
-                    SystemCommands.ShowSystemMenu(this, DpiHelper.DevicePixelsToLogical(pointToScreen, _dpiScaleX, _dpiScaleY));
+
+#if !(NET46 || NET461)
+                    var dpi = VisualTreeHelper.GetDpi(this);
+                    var dpiScaleX = dpi.DpiScaleX;
+                    var dpiScaleY = dpi.DpiScaleY;
+#else
+                    var source = PresentationSource.FromVisual(this);
+                    var dpiScaleX = source.CompositionTarget.TransformFromDevice.M11;
+                    var dpiScaleY = source.CompositionTarget.TransformFromDevice.M22;
+#endif
+                    SystemCommands.ShowSystemMenu(this, DpiHelper.DevicePixelsToLogical(pointToScreen, dpiScaleX, dpiScaleY));
                 }
             }
         }

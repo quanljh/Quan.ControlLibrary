@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Quan.ControlLibrary
+namespace Quan.ControlLibrary.Demo
 {
     public interface ICusomerStore
     {
