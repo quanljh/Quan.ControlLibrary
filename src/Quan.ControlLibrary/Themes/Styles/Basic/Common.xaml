@@ -30,8 +30,13 @@
         <Setter Property="FocusVisualStyle" Value="{StaticResource Quan.Styles.Common.FocusVisual}" />
     </Style>
 
+    <!--#region Animation-->
+
     <Storyboard x:Key="Quan.Storyboard.GotFocus" o:Freeze="True">
         <DoubleAnimation Storyboard.TargetName="PART_GuideMessage" />
     </Storyboard>
 
+    <CircleEase x:Key="CircleEasingFuction" EasingMode="EaseOut" />
+
+    <!--#endregion-->
 </ResourceDictionary>

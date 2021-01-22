@@ -7,7 +7,6 @@ namespace Quan.ControlLibrary
 {
     public abstract class BaseValueConverter<TSoucre, TTarget> : MarkupExtension, IValueConverter
     {
-
         #region Markup Extension Methods
 
         /// <summary>
@@ -18,7 +17,6 @@ namespace Quan.ControlLibrary
         public override object ProvideValue(IServiceProvider serviceProvider) => this;
 
         #endregion
-
 
         #region Value Converter Methods
 

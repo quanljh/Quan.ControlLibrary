@@ -86,14 +86,14 @@
                     x:Name="PART_GuideMessage"
                     Grid.Row="1"
                     Grid.Column="0"
-                    Margin="9,0,0,0"
+                    Margin="5,0,0,0"
                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                     FontFamily="{TemplateBinding FontFamily}"
                     Foreground="{DynamicResource Quan.Brushes.ForegroundLight}"
                     IsHitTestVisible="False"
                     Text="{TemplateBinding local:TextBoxHelper.GuideText}"
-                    Visibility="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={local:StringToVisibilityConverter}}" />
+                    Visibility="{Binding Path=(local:TextBoxHelper.HasText), RelativeSource={RelativeSource TemplatedParent}, Converter={local:BooleanToCollapsedConverter}}" />
 
                 <Button
                     x:Name="PART_ClearTextButton"
@@ -181,7 +181,6 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Padding" Value="3,0" />
         <Setter Property="MinHeight" Value="26" />
-        <Setter Property="Height" Value="26" />
         <Setter Property="Template" Value="{StaticResource Quan.Templates.QuanTextBox.Default}" />
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource QuanTextBox.ValidationTemplate}" />
         <Setter Property="local:TextBoxHelper.IsMonitoring" Value="True" />

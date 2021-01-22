@@ -233,7 +233,7 @@
           <!--<ColumnDefinition Width="Auto" />-->
         </Grid.ColumnDefinitions>
         <ScrollViewer x:Name="PART_ContentHost" Grid.Row="1" Margin="0" Padding="{TemplateBinding Padding}" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
-        <TextBlock x:Name="PART_GuideMessage" Grid.Row="1" Grid.Column="0" Margin="9,0,0,0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" FontFamily="{TemplateBinding FontFamily}" Foreground="{DynamicResource Quan.Brushes.ForegroundLight}" IsHitTestVisible="False" Text="{TemplateBinding local:TextBoxHelper.GuideText}" Visibility="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={local:StringToVisibilityConverter}}" />
+        <TextBlock x:Name="PART_GuideMessage" Grid.Row="1" Grid.Column="0" Margin="5,0,0,0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" FontFamily="{TemplateBinding FontFamily}" Foreground="{DynamicResource Quan.Brushes.ForegroundLight}" IsHitTestVisible="False" Text="{TemplateBinding local:TextBoxHelper.GuideText}" Visibility="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={local:StringToVisibilityConverter}}" />
         <Button x:Name="PART_ClearTextButton" Grid.Row="1" Grid.Column="1" Width="26" local:TextBoxHelper.IsUseClearButton="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" Content="{StaticResource Quan.FontIcons.Close}" Focusable="False" IsTabStop="False" Style="{StaticResource Quan.Styles.Button.FontIcon}" Visibility="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={local:BooleanToCollapsedConverter}}" />
         <!--<Line
                     Grid.Row="1"
@@ -305,7 +305,6 @@
     <Setter Property="SnapsToDevicePixels" Value="True" />
     <Setter Property="Padding" Value="3,0" />
     <Setter Property="MinHeight" Value="26" />
-    <Setter Property="Height" Value="26" />
     <Setter Property="Template" Value="{StaticResource Quan.Templates.QuanTextBox.Default}" />
     <Setter Property="Validation.ErrorTemplate" Value="{StaticResource QuanTextBox.ValidationTemplate}" />
     <Setter Property="local:TextBoxHelper.IsMonitoring" Value="True" />

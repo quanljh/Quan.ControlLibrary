@@ -22,39 +22,39 @@
             Command="{Binding LoadCommand}"
             Content="LOAD">
             <Button.RenderTransform>
-                <!--<TranslateTransform x:Name="ButtonTransform" X="0" Y="0" />-->
+                <TransformGroup>
+                    <TranslateTransform x:Name="ButtonTransform" X="0" Y="0" />
+                    <ScaleTransform x:Name="ScaleTransform" CenterX="0" CenterY="0" />
+                </TransformGroup>
                 <!--<RotateTransform x:Name="RotateTransform" Angle="0" CenterX="40" CenterY="20" />-->
-                <ScaleTransform x:Name="ScaleTransform" CenterX=".5" CenterY=".5" />
             </Button.RenderTransform>
             <Button.RenderTransformOrigin>
-                <Point X="0.5" Y="0.5" />
+                <Point X="0" Y="0" />
             </Button.RenderTransformOrigin>
             <Button.Triggers>
                 <EventTrigger RoutedEvent="Button.Click">
-                    <!--<BeginStoryboard>
+                    <BeginStoryboard>
                         <Storyboard>
                             <DoubleAnimation
-                                AutoReverse="True"
-                                RepeatBehavior="Forever"
                                 Storyboard.TargetName="ButtonTransform"
                                 Storyboard.TargetProperty="Y"
                                 From="0"
-                                To="40"
-                                Duration="00:00:01">
-                                <DoubleAnimation.EasingFunction>
+                                To="-10"
+                                Duration="00:00:0.3">
+                                <!--<DoubleAnimation.EasingFunction>
                                     <BounceEase Bounces="1" Bounciness="1.5" EasingMode="EaseOut" />
-                                </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation.EasingFunction>-->
                             </DoubleAnimation>
                         </Storyboard>
-                    </BeginStoryboard>-->
+                    </BeginStoryboard>
                     <BeginStoryboard>
                         <Storyboard>
                             <DoubleAnimation
                                 Storyboard.TargetName="ScaleTransform"
                                 Storyboard.TargetProperty="ScaleX"
                                 From="1"
-                                To="0.5"
-                                Duration="00:00:01">
+                                To="0.8"
+                                Duration="00:00:0.3">
                                 <!--<DoubleAnimation.EasingFunction>
                                     <BounceEase Bounces="1" Bounciness="1.5" EasingMode="EaseOut" />
                                 </DoubleAnimation.EasingFunction>-->
@@ -63,8 +63,8 @@
                                 Storyboard.TargetName="ScaleTransform"
                                 Storyboard.TargetProperty="ScaleY"
                                 From="1"
-                                To="0.5"
-                                Duration="00:00:01" />
+                                To="0.8"
+                                Duration="00:00:0.3" />
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
