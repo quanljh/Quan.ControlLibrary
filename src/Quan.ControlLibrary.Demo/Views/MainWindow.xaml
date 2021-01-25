@@ -76,7 +76,10 @@
             Margin="0,100,0,0"
             q:TextBoxHelper.GuideText="Email or username"
             q:TextBoxHelper.IsShowClearButton="True"
+            DisplayMode="Floating"
             Text="{Binding UserName.Value}" />
+
+        <q:QuanTextBox Width="200" q:TextBoxHelper.GuideText="Email or username" q:TextBoxHelper.IsShowClearButton="True" />
 
         <q:QuanTextBox Width="200">
             <q:QuanTextBox.Style>

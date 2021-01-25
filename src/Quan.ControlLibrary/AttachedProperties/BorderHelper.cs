@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace Quan.ControlLibrary
 {
-    public class BorderHelper
+    public static class BorderHelper
     {
         public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.RegisterAttached(
             "CornerRadius",

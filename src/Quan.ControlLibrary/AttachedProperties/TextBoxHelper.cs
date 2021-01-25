@@ -13,7 +13,7 @@ using System.Windows.Threading;
 
 namespace Quan.ControlLibrary
 {
-    public class TextBoxHelper
+    public static class TextBoxHelper
     {
         #region IsMonitoring
 
@@ -40,6 +40,11 @@ namespace Quan.ControlLibrary
                 {
                     textBox.TextChanged += TextBox_OnTextChanged;
                     textBox.GotFocus += TextBox_OnGotFocus;
+                }
+                else if (!(bool)e.NewValue)
+                {
+                    textBox.TextChanged -= TextBox_OnTextChanged;
+                    textBox.GotFocus -= TextBox_OnGotFocus;
                 }
             }
         }
@@ -102,6 +107,24 @@ namespace Quan.ControlLibrary
         public static string GetGuideText(DependencyObject element) => (string)element.GetValue(GuideTextProperty);
 
         public static void SetGuideText(DependencyObject element, string value) => element.SetValue(GuideTextProperty, value);
+
+        #endregion
+
+        #region GuideTextOpacity
+
+        public static readonly DependencyProperty GuideTextOpacityProperty =
+            DependencyProperty.RegisterAttached("GuideTextOpacity",
+                typeof(double),
+                typeof(TextBoxHelper),
+                new PropertyMetadata(.46));
+
+        [Category(Constants.QUAN_APP)]
+        [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
+        [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
+        [AttachedPropertyBrowsableForType(typeof(ComboBox))]
+        public static double GetGuideTextOpacity(DependencyObject element) => (double)element.GetValue(GuideTextOpacityProperty);
+
+        public static void SetGuideTextOpacity(DependencyObject element, double value) => element.SetValue(GuideTextOpacityProperty, value);
 
         #endregion
 

@@ -25,33 +25,64 @@
                             FontSize="{TemplateBinding FontSize}"
                             IsHitTestVisible="False"
                             IsTabStop="False"
+                            Opacity="{TemplateBinding FloatingOpacity}"
                             RenderTransformOrigin="0,0"
                             Visibility="{TemplateBinding IsUseFloating,
-                                                         Converter={local:BooleanToCollapsedConverter}}">
-                            <ContentControl.RenderTransform>
-                                <MultiBinding Converter="{local:FloatingTextTransformConverter}">
-                                    <Binding ElementName="ScaleHost" Path="Scale" />
-                                    <Binding Path="FloatingScale" RelativeSource="{RelativeSource TemplatedParent}" />
-                                    <Binding Path="FloatingOffset" RelativeSource="{RelativeSource TemplatedParent}" />
-                                </MultiBinding>
-                            </ContentControl.RenderTransform>
-                        </ContentControl>
+                                                         Converter={local:BooleanToCollapsedConverter},
+                                                         ConverterParameter=True}" />
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="ContentStates">
                                 <VisualStateGroup.Transitions>
-                                    <VisualTransition GeneratedDuration="0:0:0.3" GeneratedEasingFunction="{StaticResource CircleEasingFuction}" To="FloatingPosition" />
-                                    <VisualTransition GeneratedDuration="0:0:0.3" GeneratedEasingFunction="{StaticResource CircleEasingFuction}" To="OriginalPosition" />
+                                    <VisualTransition To="FloatingPosition">
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="FloatingContent"
+                                                Storyboard.TargetProperty="Opacity"
+                                                To="0"
+                                                Duration="0" />
+                                        </Storyboard>
+                                    </VisualTransition>
+                                    <VisualTransition To="FocusedPosition">
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                EasingFunction="{StaticResource CircleEasingFuction}"
+                                                Storyboard.TargetName="FloatingContent"
+                                                Storyboard.TargetProperty="Opacity"
+                                                To="0.2"
+                                                Duration="0:0:0.3" />
+                                        </Storyboard>
+                                    </VisualTransition>
+                                    <VisualTransition To="OriginalPosition">
+                                        <Storyboard>
+                                            <DoubleAnimation
+                                                EasingFunction="{StaticResource CircleEasingFuction}"
+                                                Storyboard.TargetName="FloatingContent"
+                                                Storyboard.TargetProperty="Opacity"
+                                                Duration="0:0:0.3" />
+                                        </Storyboard>
+                                    </VisualTransition>
                                 </VisualStateGroup.Transitions>
                                 <VisualState x:Name="FloatingPosition">
                                     <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" To="{TemplateBinding FloatingOpacity}" />
-                                        <DoubleAnimation Storyboard.TargetName="ScaleHost" Storyboard.TargetProperty="Scale" To="1" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="FloatingContent"
+                                            Storyboard.TargetProperty="Opacity"
+                                            To="0"
+                                            Duration="0" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="FocusedPosition">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="FloatingContent"
+                                            Storyboard.TargetProperty="Opacity"
+                                            To="0.2"
+                                            Duration="0" />
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="OriginalPosition">
                                     <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" />
-                                        <DoubleAnimation Storyboard.TargetName="ScaleHost" Storyboard.TargetProperty="Scale" />
+                                        <DoubleAnimation Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" Duration="0" />
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
@@ -76,6 +107,7 @@
                                     FontSize="{TemplateBinding FontSize}"
                                     IsHitTestVisible="False"
                                     IsTabStop="False"
+                                    Opacity="{TemplateBinding FloatingOpacity}"
                                     RenderTransformOrigin="0,0"
                                     Visibility="{TemplateBinding IsUseFloating,
                                                                  Converter={local:BooleanToCollapsedConverter}}">
@@ -90,19 +122,54 @@
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup x:Name="ContentStates">
                                         <VisualStateGroup.Transitions>
-                                            <VisualTransition GeneratedDuration="0:0:0.3" GeneratedEasingFunction="{StaticResource CircleEasingFuction}" To="FloatingPosition" />
-                                            <VisualTransition GeneratedDuration="0:0:0.3" GeneratedEasingFunction="{StaticResource CircleEasingFuction}" To="OriginalPosition" />
+                                            <VisualTransition To="FloatingPosition">
+                                                <Storyboard>
+                                                    <DoubleAnimation
+                                                        EasingFunction="{StaticResource CircleEasingFuction}"
+                                                        Storyboard.TargetName="FloatingContent"
+                                                        Storyboard.TargetProperty="Opacity"
+                                                        To="{TemplateBinding FloatingOpacity}"
+                                                        Duration="0:0:0.3" />
+                                                    <DoubleAnimation
+                                                        Storyboard.TargetName="ScaleHost"
+                                                        Storyboard.TargetProperty="Scale"
+                                                        To="1"
+                                                        Duration="0:0:0.3" />
+                                                </Storyboard>
+                                            </VisualTransition>
+                                            <VisualTransition To="OriginalPosition">
+                                                <Storyboard>
+                                                    <DoubleAnimation
+                                                        EasingFunction="{StaticResource CircleEasingFuction}"
+                                                        Storyboard.TargetName="FloatingContent"
+                                                        Storyboard.TargetProperty="Opacity"
+                                                        Duration="0:0:0.3" />
+                                                    <DoubleAnimation
+                                                        EasingFunction="{StaticResource CircleEasingFuction}"
+                                                        Storyboard.TargetName="ScaleHost"
+                                                        Storyboard.TargetProperty="Scale"
+                                                        Duration="0:0:0.3" />
+                                                </Storyboard>
+                                            </VisualTransition>
                                         </VisualStateGroup.Transitions>
                                         <VisualState x:Name="FloatingPosition">
                                             <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" To="{TemplateBinding FloatingOpacity}" />
-                                                <DoubleAnimation Storyboard.TargetName="ScaleHost" Storyboard.TargetProperty="Scale" To="1" />
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="FloatingContent"
+                                                    Storyboard.TargetProperty="Opacity"
+                                                    To="{TemplateBinding FloatingOpacity}"
+                                                    Duration="0" />
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="ScaleHost"
+                                                    Storyboard.TargetProperty="Scale"
+                                                    To="1"
+                                                    Duration="0" />
                                             </Storyboard>
                                         </VisualState>
                                         <VisualState x:Name="OriginalPosition">
                                             <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" />
-                                                <DoubleAnimation Storyboard.TargetName="ScaleHost" Storyboard.TargetProperty="Scale" />
+                                                <DoubleAnimation Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" Duration="0" />
+                                                <DoubleAnimation Storyboard.TargetName="ScaleHost" Storyboard.TargetProperty="Scale" Duration="0" />
                                             </Storyboard>
                                         </VisualState>
                                     </VisualStateGroup>

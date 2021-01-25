@@ -3,7 +3,7 @@ using System.Windows.Media;
 
 namespace Quan.ControlLibrary
 {
-    public class IconHelper
+    public static class IconHelper
     {
         public static readonly DependencyProperty GeometryProperty = DependencyProperty.RegisterAttached(
             "Geometry",

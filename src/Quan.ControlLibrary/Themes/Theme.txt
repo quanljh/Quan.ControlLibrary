@@ -10,5 +10,6 @@ Styles\Default\Button.xaml
 Styles\Default\PasswordBox.xaml
 
 # Custom Controls
+Styles\Custom\QuanFloatingText.xaml
 Styles\Custom\QuanTextBox.xaml
 Styles\Custom\QuanWindow.xaml

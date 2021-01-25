@@ -48,8 +48,10 @@ namespace Quan.ControlLibrary.Demo
         {
             _customerStore = cusomerStore;
 
-            UserName = new ReactiveProperty<string>(mode: ReactivePropertyMode.Default | ReactivePropertyMode.IgnoreInitialValidationError)
-                .SetValidateNotifyError(x => string.IsNullOrEmpty(x) ? "Email or Username is empty!" : null);
+            //UserName = new ReactiveProperty<string>(mode: ReactivePropertyMode.Default | ReactivePropertyMode.IgnoreInitialValidationError)
+            //    .SetValidateNotifyError(x => string.IsNullOrEmpty(x) ? "Email or Username is empty!" : null);
+
+            UserName = new ReactiveProperty<string>();
         }
 
         #endregion

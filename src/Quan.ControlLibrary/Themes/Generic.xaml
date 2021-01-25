@@ -18,6 +18,7 @@
   <Storyboard x:Key="Quan.Storyboard.GotFocus" o:Freeze="True">
     <DoubleAnimation Storyboard.TargetName="PART_GuideMessage" />
   </Storyboard>
+  <CircleEase x:Key="CircleEasingFuction" EasingMode="EaseInOut" />
   <Style x:Key="Quan.Styles.ContentControl.Default" TargetType="{x:Type ContentControl}">
     <Setter Property="Template">
       <Setter.Value>
@@ -198,6 +199,111 @@
       </Setter.Value>
     </Setter>
   </Style>
+  <Style TargetType="{x:Type local:QuanFloatingText}">
+    <Setter Property="IsHitTestVisible" Value="False" />
+    <Setter Property="IsTabStop" Value="False" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+    <Setter Property="HorizontalContentAlignment" Value="Left" />
+    <Setter Property="VerticalContentAlignment" Value="Bottom" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type local:QuanFloatingText}">
+          <Grid Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+            <ContentControl x:Name="FloatingContent" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding FloatingText}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" IsHitTestVisible="False" IsTabStop="False" Opacity="{TemplateBinding FloatingOpacity}" RenderTransformOrigin="0,0" Visibility="{TemplateBinding IsUseFloating,&#xD;&#xA;                                                         Converter={local:BooleanToCollapsedConverter},&#xD;&#xA;                                                         ConverterParameter=True}" />
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="ContentStates">
+                <VisualStateGroup.Transitions>
+                  <VisualTransition To="FloatingPosition">
+                    <Storyboard>
+                      <DoubleAnimation Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" To="0" Duration="0" />
+                    </Storyboard>
+                  </VisualTransition>
+                  <VisualTransition To="FocusedPosition">
+                    <Storyboard>
+                      <DoubleAnimation EasingFunction="{StaticResource CircleEasingFuction}" Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" To="0.2" Duration="0:0:0.3" />
+                    </Storyboard>
+                  </VisualTransition>
+                  <VisualTransition To="OriginalPosition">
+                    <Storyboard>
+                      <DoubleAnimation EasingFunction="{StaticResource CircleEasingFuction}" Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" Duration="0:0:0.3" />
+                    </Storyboard>
+                  </VisualTransition>
+                </VisualStateGroup.Transitions>
+                <VisualState x:Name="FloatingPosition">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" To="0" Duration="0" />
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="FocusedPosition">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" To="0.2" Duration="0" />
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="OriginalPosition">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" Duration="0" />
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Style.Triggers>
+      <Trigger Property="IsUseFloating" Value="True">
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type local:QuanFloatingText}">
+              <Grid Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                <local:QuanScaleHost x:Name="ScaleHost" />
+                <ContentControl x:Name="FloatingContent" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding FloatingText}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" IsHitTestVisible="False" IsTabStop="False" Opacity="{TemplateBinding FloatingOpacity}" RenderTransformOrigin="0,0" Visibility="{TemplateBinding IsUseFloating,&#xD;&#xA;                                                                 Converter={local:BooleanToCollapsedConverter}}">
+                  <ContentControl.RenderTransform>
+                    <MultiBinding Converter="{local:FloatingTextTransformConverter}">
+                      <Binding ElementName="ScaleHost" Path="Scale" />
+                      <Binding Path="FloatingScale" RelativeSource="{RelativeSource TemplatedParent}" />
+                      <Binding Path="FloatingOffset" RelativeSource="{RelativeSource TemplatedParent}" />
+                    </MultiBinding>
+                  </ContentControl.RenderTransform>
+                </ContentControl>
+                <VisualStateManager.VisualStateGroups>
+                  <VisualStateGroup x:Name="ContentStates">
+                    <VisualStateGroup.Transitions>
+                      <VisualTransition To="FloatingPosition">
+                        <Storyboard>
+                          <DoubleAnimation EasingFunction="{StaticResource CircleEasingFuction}" Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" To="{TemplateBinding FloatingOpacity}" Duration="0:0:0.3" />
+                          <DoubleAnimation Storyboard.TargetName="ScaleHost" Storyboard.TargetProperty="Scale" To="1" Duration="0:0:0.3" />
+                        </Storyboard>
+                      </VisualTransition>
+                      <VisualTransition To="OriginalPosition">
+                        <Storyboard>
+                          <DoubleAnimation EasingFunction="{StaticResource CircleEasingFuction}" Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" Duration="0:0:0.3" />
+                          <DoubleAnimation EasingFunction="{StaticResource CircleEasingFuction}" Storyboard.TargetName="ScaleHost" Storyboard.TargetProperty="Scale" Duration="0:0:0.3" />
+                        </Storyboard>
+                      </VisualTransition>
+                    </VisualStateGroup.Transitions>
+                    <VisualState x:Name="FloatingPosition">
+                      <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" To="{TemplateBinding FloatingOpacity}" Duration="0" />
+                        <DoubleAnimation Storyboard.TargetName="ScaleHost" Storyboard.TargetProperty="Scale" To="1" Duration="0" />
+                      </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="OriginalPosition">
+                      <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" Duration="0" />
+                        <DoubleAnimation Storyboard.TargetName="ScaleHost" Storyboard.TargetProperty="Scale" Duration="0" />
+                      </Storyboard>
+                    </VisualState>
+                  </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+              </Grid>
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
   <ControlTemplate x:Key="QuanTextBox.ValidationTemplate">
     <Grid>
       <Grid.RowDefinitions>
@@ -221,20 +327,14 @@
     <Grid SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
       <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding local:BorderHelper.CornerRadius}" />
       <Grid Margin="{TemplateBinding BorderThickness}">
-        <Grid.RowDefinitions>
-          <!--  Floating Guide Message  -->
-          <RowDefinition Height="Auto" />
-          <!--  Text Content  -->
-          <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="*" />
           <ColumnDefinition Width="Auto" />
           <!--<ColumnDefinition Width="Auto" />-->
         </Grid.ColumnDefinitions>
-        <ScrollViewer x:Name="PART_ContentHost" Grid.Row="1" Margin="0" Padding="{TemplateBinding Padding}" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
-        <TextBlock x:Name="PART_GuideMessage" Grid.Row="1" Grid.Column="0" Margin="5,0,0,0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" FontFamily="{TemplateBinding FontFamily}" Foreground="{DynamicResource Quan.Brushes.ForegroundLight}" IsHitTestVisible="False" Text="{TemplateBinding local:TextBoxHelper.GuideText}" Visibility="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Converter={local:StringToVisibilityConverter}}" />
-        <Button x:Name="PART_ClearTextButton" Grid.Row="1" Grid.Column="1" Width="26" local:TextBoxHelper.IsUseClearButton="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" Content="{StaticResource Quan.FontIcons.Close}" Focusable="False" IsTabStop="False" Style="{StaticResource Quan.Styles.Button.FontIcon}" Visibility="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={local:BooleanToCollapsedConverter}}" />
+        <ScrollViewer x:Name="PART_ContentHost" Margin="0" Padding="{TemplateBinding Padding}" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
+        <TextBlock x:Name="PART_GuideMessage" Grid.Column="0" Margin="5,0,0,0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" FontFamily="{TemplateBinding FontFamily}" IsHitTestVisible="False" Opacity="{TemplateBinding local:TextBoxHelper.GuideTextOpacity}" Text="{TemplateBinding local:TextBoxHelper.GuideText}" Visibility="{Binding Path=(local:TextBoxHelper.HasText), RelativeSource={RelativeSource TemplatedParent}, Converter={local:BooleanToCollapsedConverter}, ConverterParameter=True}" />
+        <Button x:Name="PART_ClearTextButton" Grid.Column="1" Width="26" local:TextBoxHelper.IsUseClearButton="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" Content="{StaticResource Quan.FontIcons.Close}" Focusable="False" IsTabStop="False" Style="{StaticResource Quan.Styles.Button.FontIcon}" Visibility="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={local:BooleanToCollapsedConverter}}" />
         <!--<Line
                     Grid.Row="1"
                     Grid.Column="2"
@@ -295,6 +395,68 @@
       </MultiTrigger>
     </ControlTemplate.Triggers>
   </ControlTemplate>
+  <ControlTemplate x:Key="Quan.Templates.QuanTextBox.Floating" TargetType="{x:Type local:QuanTextBox}">
+    <Grid SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+      <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding local:BorderHelper.CornerRadius}" />
+      <Grid Margin="{TemplateBinding BorderThickness}">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="Auto" />
+          <!--<ColumnDefinition Width="Auto" />-->
+        </Grid.ColumnDefinitions>
+        <ScrollViewer x:Name="PART_ContentHost" Margin="0" Padding="{TemplateBinding Padding}" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
+        <local:QuanFloatingText x:Name="PART_GuideMessage" Grid.Column="0" Margin="5,0,0,0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" FloatingOffset="{TemplateBinding local:FloatingTextHelper.FloatingOffset}" FloatingOpacity="{TemplateBinding local:FloatingTextHelper.FloatingOpacity}" FloatingProxy="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static local:FloatingProxyFabricConverter.Instance}}" FloatingScale="{TemplateBinding local:FloatingTextHelper.FloatingScale}" FloatingText="{TemplateBinding local:TextBoxHelper.GuideText}" FontFamily="{TemplateBinding FontFamily}" IsUseFloating="{TemplateBinding local:FloatingTextHelper.IsUseFloating}" />
+        <Button x:Name="PART_ClearTextButton" Grid.Column="1" Width="26" local:TextBoxHelper.IsUseClearButton="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" Content="{StaticResource Quan.FontIcons.Close}" Focusable="False" IsTabStop="False" Style="{StaticResource Quan.Styles.Button.FontIcon}" Visibility="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={local:BooleanToCollapsedConverter}}" />
+        <!--<Line
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Stroke="{DynamicResource Quan.Brushes.BorderBrush}"
+                    X1="0"
+                    X2="0"
+                    Y1="3"
+                    Y2="23" />
+
+                <Button
+                    x:Name="PART_FunctionButton"
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Width="26"
+                    local:IconHelper.Geometry="{TemplateBinding local:TextBoxHelper.ButtonContent}"
+                    local:IconHelper.Height="10"
+                    local:IconHelper.Width="10"
+                    BorderThickness="1,0"
+                    Focusable="False"
+                    Style="{StaticResource Quan.Styles.Button.Icon}" />-->
+      </Grid>
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter TargetName="border" Property="Opacity" Value="0.56" />
+      </Trigger>
+      <Trigger Property="IsMouseOver" Value="True">
+        <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.LightPrimary}" />
+      </Trigger>
+      <Trigger Property="IsKeyboardFocused" Value="True">
+        <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Primary}" />
+        <Setter TargetName="PART_GuideMessage" Property="Foreground" Value="{Binding Path=(local:FloatingTextHelper.Foreground), RelativeSource={RelativeSource TemplatedParent}}" />
+        <Setter TargetName="PART_GuideMessage" Property="FloatingOpacity" Value="1" />
+      </Trigger>
+      <Trigger Property="IsReadOnly" Value="True">
+        <Setter TargetName="PART_ClearTextButton" Property="IsEnabled" Value="False" />
+      </Trigger>
+      <Trigger Property="Validation.HasError" Value="true">
+        <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Error}" />
+      </Trigger>
+      <Trigger SourceName="PART_ClearTextButton" Property="IsMouseOver" Value="True">
+        <Setter TargetName="PART_ClearTextButton" Property="Background" Value="{DynamicResource Quan.Brushes.Gray8}" />
+        <Setter TargetName="PART_ClearTextButton" Property="Foreground" Value="{DynamicResource Quan.Brushes.LightPrimary}" />
+      </Trigger>
+      <Trigger SourceName="PART_ClearTextButton" Property="IsPressed" Value="True">
+        <Setter TargetName="PART_ClearTextButton" Property="Background" Value="{DynamicResource Quan.Brushes.Foreground}" />
+        <Setter TargetName="PART_ClearTextButton" Property="Foreground" Value="{DynamicResource Quan.Brushes.Background}" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
   <Style x:Key="Quan.Styles.QuanTextBox.Default" TargetType="{x:Type local:QuanTextBox}">
     <Setter Property="FontFamily" Value="{StaticResource Quan.Fonts.Regular}" />
     <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Regular}" />
@@ -309,6 +471,13 @@
     <Setter Property="Validation.ErrorTemplate" Value="{StaticResource QuanTextBox.ValidationTemplate}" />
     <Setter Property="local:TextBoxHelper.IsMonitoring" Value="True" />
     <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+    <Style.Triggers>
+      <Trigger Property="DisplayMode" Value="Floating">
+        <Setter Property="Template" Value="{StaticResource Quan.Templates.QuanTextBox.Floating}" />
+        <Setter Property="local:FloatingTextHelper.Foreground" Value="{DynamicResource Quan.Brushes.Primary}" />
+        <Setter Property="local:FloatingTextHelper.IsUseFloating" Value="True" />
+      </Trigger>
+    </Style.Triggers>
   </Style>
   <Style BasedOn="{StaticResource Quan.Styles.QuanTextBox.Default}" TargetType="{x:Type local:QuanTextBox}" />
   <WindowChrome x:Key="DefaultWindowChrome" CaptionHeight="{StaticResource TitleBarHeight}" CornerRadius="0" GlassFrameThickness="0,1,0,0" UseAeroCaptionButtons="False" />

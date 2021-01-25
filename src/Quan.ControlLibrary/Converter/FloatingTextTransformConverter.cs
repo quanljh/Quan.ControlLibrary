@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Media;
+using Point = System.Drawing.Point;
 
 namespace Quan.ControlLibrary
 {
@@ -15,9 +12,9 @@ namespace Quan.ControlLibrary
         public override Transform Convert(object[] values, object parameter, CultureInfo culture)
         {
             if (values == null
-                || values.Length != 4
+                || values.Length != 3
                 || values.Any(o => o == null)
-                || !double.TryParse(values[1].ToString(), out double scale)
+                || !double.TryParse(values[0].ToString(), out double scale)
                 || !double.TryParse(values[1].ToString(), out double floatingScale)
                 || !(values[2] is Point offset))
             {
