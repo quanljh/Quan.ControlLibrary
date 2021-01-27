@@ -32,10 +32,6 @@
 
     <!--#region Animation-->
 
-    <Storyboard x:Key="Quan.Storyboard.GotFocus" o:Freeze="True">
-        <DoubleAnimation Storyboard.TargetName="PART_GuideMessage" />
-    </Storyboard>
-
     <CircleEase x:Key="CircleEasingFuction" EasingMode="EaseInOut" />
 
     <!--#endregion-->
