@@ -1,5 +1,5 @@
-﻿using System.Drawing;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Media;
 
 namespace Quan.ControlLibrary
 {
@@ -7,15 +7,15 @@ namespace Quan.ControlLibrary
     {
         #region BorderBrush
 
-        public static readonly DependencyProperty BorderBrushProperty =
-            DependencyProperty.RegisterAttached("BorderBrush",
+        public static readonly DependencyProperty BackgroundProperty =
+            DependencyProperty.RegisterAttached("Background",
                 typeof(Brush),
                 typeof(RippleHelper),
                 new PropertyMetadata(Brushes.Transparent));
 
-        public static Brush GetBorderBrush(DependencyObject element) => (Brush)element.GetValue(BorderBrushProperty);
+        public static Brush GetBackground(DependencyObject element) => (Brush)element.GetValue(BackgroundProperty);
 
-        public static void SetBorderBrush(DependencyObject element, Brush value) => element.SetValue(BorderBrushProperty, value);
+        public static void SetBackground(DependencyObject element, Brush value) => element.SetValue(BackgroundProperty, value);
 
         #endregion
     }

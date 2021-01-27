@@ -2,7 +2,7 @@
 
     <Color x:Key="Quan.Colors.Background">#ffffff</Color>
     <Color x:Key="Quan.Colors.BackgroundLight">#fafafa</Color>
-    <Color x:Key="Quan.Colors.BorderBrush">#efefef</Color>
+    <Color x:Key="Quan.Colors.BorderBrush">#FF9D9D9D</Color>
     <Color x:Key="Quan.Colors.Foreground">#000000</Color>
     <Color x:Key="Quan.Colors.ForegroundLight">#686868</Color>
     <Color x:Key="Quan.Colors.ForegroundHighLight">#ffffff</Color>
@@ -11,9 +11,9 @@
     <Color x:Key="Quan.Colors.IconForeground">#ffffff</Color>
 
     <Color x:Key="Quan.Colors.Primary">#3099c5</Color>
-    <Color x:Key="Quan.Colors.LightPrimary">#45b6e5</Color>
+    <Color x:Key="Quan.Colors.LightPrimary">#6fb7d6</Color>
     <Color x:Key="Quan.Colors.VeryLightPrimary">#c3e5f3</Color>
-    <Color x:Key="Quan.Colors.DarkPrimary">#c3e5f3</Color>
+    <Color x:Key="Quan.Colors.DarkPrimary">#1183ca</Color>
 
     <Color x:Key="Quan.Colors.Warning">#ffa800</Color>
     <Color x:Key="Quan.Colors.Error">#ff4747</Color>

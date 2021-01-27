@@ -106,14 +106,13 @@
                 Margin="{TemplateBinding Padding}"
                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                Opacity="0.75"
                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="PART_ContentPresenter" Property="Opacity" Value="1" />
+                <Setter TargetName="PART_ContentPresenter" Property="Opacity" Value=".75" />
             </Trigger>
-            <Trigger Property="IsMouseOver" Value="False">
+            <Trigger Property="IsPressed" Value="True">
                 <Setter TargetName="PART_ContentPresenter" Property="Opacity" Value=".5" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
@@ -126,7 +125,7 @@
         <Setter Property="FontFamily" Value="{StaticResource Quan.Fonts.FontAwesome}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Large}" />
-        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.Border}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Template" Value="{StaticResource Quan.Templates.Button.FontIcon}" />

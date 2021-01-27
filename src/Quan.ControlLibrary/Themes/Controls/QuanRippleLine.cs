@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace Quan.ControlLibrary
@@ -23,7 +18,36 @@ namespace Quan.ControlLibrary
 
         #region Dependency Properties
 
+        #region IsActive
 
+        public bool IsActive
+        {
+            get => (bool)GetValue(IsActiveProperty);
+            set => SetValue(IsActiveProperty, value);
+        }
+
+        public static readonly DependencyProperty IsActiveProperty =
+            DependencyProperty.Register("IsActive", typeof(bool), typeof(QuanRippleLine), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender, IsActive_OnPropertyChangedCallback));
+
+        private static void IsActive_OnPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((QuanRippleLine)d).GotoVisualState(true);
+        }
+
+        #endregion
+
+        #region CornerRadius
+
+        public CornerRadius CornerRadius
+        {
+            get => (CornerRadius)GetValue(CornerRadiusProperty);
+            set => SetValue(CornerRadiusProperty, value);
+        }
+
+        public static readonly DependencyProperty CornerRadiusProperty =
+            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(QuanRippleLine), new FrameworkPropertyMetadata(new CornerRadius(0), FrameworkPropertyMetadataOptions.AffectsRender));
+
+        #endregion
 
         #endregion
 
@@ -36,5 +60,22 @@ namespace Quan.ControlLibrary
 
         #endregion
 
+        #region Overrides
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            GotoVisualState(false);
+        }
+
+        #endregion
+
+        #region Methods
+
+        private void GotoVisualState(bool useTransitions) =>
+            VisualStateManager.GoToState(this, IsActive ? ActiveStateName : InactiveStateName, useTransitions);
+
+        #endregion
     }
 }

@@ -15,10 +15,7 @@
   <Geometry x:Key="WindowMinGeometry" o:Freeze="True">M0,4 L10,4 L10,5 L0,5 z</Geometry>
   <Geometry x:Key="WindowRestoreGeometry" o:Freeze="True">M1,3 L1,9 L7,9 L7,3 z M3,1 L3,2 L8,2 L8,7 L9,7 L9,1 z M2,0 L10,0 L10,8 L8,8 L8,10 L0,10 L0,2 L2,2 z</Geometry>
   <Geometry x:Key="WindowMaxGeometry" o:Freeze="True">M1,1 L1,9 L9,9 L9,1 z M0,0 L10,0 L10,10 L0,10 z</Geometry>
-  <Storyboard x:Key="Quan.Storyboard.GotFocus" o:Freeze="True">
-    <DoubleAnimation Storyboard.TargetName="PART_GuideMessage" />
-  </Storyboard>
-  <CircleEase x:Key="CircleEasingFuction" EasingMode="EaseInOut" />
+  <CircleEase x:Key="CircleEasingFunction" EasingMode="EaseOut" />
   <Style x:Key="Quan.Styles.ContentControl.Default" TargetType="{x:Type ContentControl}">
     <Setter Property="Template">
       <Setter.Value>
@@ -142,13 +139,13 @@
   </Style>
   <ControlTemplate x:Key="Quan.Templates.Button.FontIcon" TargetType="{x:Type Button}">
     <Grid Background="{TemplateBinding Background}">
-      <ContentPresenter x:Name="PART_ContentPresenter" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Opacity="0.75" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+      <ContentPresenter x:Name="PART_ContentPresenter" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
     </Grid>
     <ControlTemplate.Triggers>
       <Trigger Property="IsMouseOver" Value="True">
-        <Setter TargetName="PART_ContentPresenter" Property="Opacity" Value="1" />
+        <Setter TargetName="PART_ContentPresenter" Property="Opacity" Value=".75" />
       </Trigger>
-      <Trigger Property="IsMouseOver" Value="False">
+      <Trigger Property="IsPressed" Value="True">
         <Setter TargetName="PART_ContentPresenter" Property="Opacity" Value=".5" />
       </Trigger>
       <Trigger Property="IsEnabled" Value="False">
@@ -160,7 +157,7 @@
     <Setter Property="FontFamily" Value="{StaticResource Quan.Fonts.FontAwesome}" />
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Large}" />
-    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+    <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.Border}" />
     <Setter Property="HorizontalContentAlignment" Value="Center" />
     <Setter Property="Padding" Value="0" />
     <Setter Property="Template" Value="{StaticResource Quan.Templates.Button.FontIcon}" />
@@ -171,10 +168,10 @@
     <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Regular}" />
     <Setter Property="Padding" Value="10" />
     <Setter Property="Margin" Value="0,5" />
-    <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.BorderBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Border}" />
     <Setter Property="BorderThickness" Value="0,0,0,1" />
     <Setter Property="local:MonitorPasswordProperty.Value" Value="True" />
-    <Setter Property="Background" Value="{DynamicResource Quan.Brushes.BackgroundBrush}" />
+    <Setter Property="Background" Value="{DynamicResource Quan.Brushes.Background}" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type PasswordBox}">
@@ -195,6 +192,51 @@
               <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.FocusColorBrush}" />
             </Trigger>
           </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style TargetType="{x:Type local:QuanRippleLine}">
+    <Setter Property="Background" Value="{Binding Path=(local:RippleHelper.Background), RelativeSource={RelativeSource Self}}" />
+    <Setter Property="SnapsToDevicePixels" Value="True" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="VerticalAlignment" Value="Bottom" />
+    <Setter Property="Height" Value="2" />
+    <Setter Property="IsTabStop" Value="False" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type local:QuanRippleLine}">
+          <Border x:Name="PART_RippleLine" Height="{TemplateBinding Height}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+            <Border.RenderTransform>
+              <ScaleTransform ScaleX="0" ScaleY="1" />
+            </Border.RenderTransform>
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="ActivationStates">
+                <VisualStateGroup.Transitions>
+                  <VisualTransition From="Inactive" To="Active">
+                    <Storyboard>
+                      <DoubleAnimation EasingFunction="{StaticResource CircleEasingFunction}" Storyboard.TargetName="PART_RippleLine" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" To="1" Duration="0:0:0.3" />
+                    </Storyboard>
+                  </VisualTransition>
+                  <VisualTransition From="Active" To="Inactive">
+                    <Storyboard>
+                      <DoubleAnimation EasingFunction="{StaticResource CircleEasingFunction}" Storyboard.TargetName="PART_RippleLine" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" To="0" Duration="0:0:0.3" />
+                    </Storyboard>
+                  </VisualTransition>
+                </VisualStateGroup.Transitions>
+                <VisualState x:Name="Active">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="PART_RippleLine" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" To="1" Duration="0" />
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Inactive">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="PART_RippleLine" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" To="0" Duration="0" />
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+          </Border>
         </ControlTemplate>
       </Setter.Value>
     </Setter>
@@ -221,12 +263,12 @@
                   </VisualTransition>
                   <VisualTransition To="FocusedPosition">
                     <Storyboard>
-                      <DoubleAnimation EasingFunction="{StaticResource CircleEasingFuction}" Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" To="0.2" Duration="0:0:0.3" />
+                      <DoubleAnimation EasingFunction="{StaticResource CircleEasingFunction}" Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" To="0.2" Duration="0:0:0.3" />
                     </Storyboard>
                   </VisualTransition>
                   <VisualTransition To="OriginalPosition">
                     <Storyboard>
-                      <DoubleAnimation EasingFunction="{StaticResource CircleEasingFuction}" Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" Duration="0:0:0.3" />
+                      <DoubleAnimation EasingFunction="{StaticResource CircleEasingFunction}" Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" Duration="0:0:0.3" />
                     </Storyboard>
                   </VisualTransition>
                 </VisualStateGroup.Transitions>
@@ -272,14 +314,14 @@
                     <VisualStateGroup.Transitions>
                       <VisualTransition To="FloatingPosition">
                         <Storyboard>
-                          <DoubleAnimation EasingFunction="{StaticResource CircleEasingFuction}" Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" To="{TemplateBinding FloatingOpacity}" Duration="0:0:0.3" />
+                          <DoubleAnimation EasingFunction="{StaticResource CircleEasingFunction}" Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" To="{TemplateBinding FloatingOpacity}" Duration="0:0:0.3" />
                           <DoubleAnimation Storyboard.TargetName="ScaleHost" Storyboard.TargetProperty="Scale" To="1" Duration="0:0:0.3" />
                         </Storyboard>
                       </VisualTransition>
                       <VisualTransition To="OriginalPosition">
                         <Storyboard>
-                          <DoubleAnimation EasingFunction="{StaticResource CircleEasingFuction}" Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" Duration="0:0:0.3" />
-                          <DoubleAnimation EasingFunction="{StaticResource CircleEasingFuction}" Storyboard.TargetName="ScaleHost" Storyboard.TargetProperty="Scale" Duration="0:0:0.3" />
+                          <DoubleAnimation EasingFunction="{StaticResource CircleEasingFunction}" Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" Duration="0:0:0.3" />
+                          <DoubleAnimation EasingFunction="{StaticResource CircleEasingFunction}" Storyboard.TargetName="ScaleHost" Storyboard.TargetProperty="Scale" Duration="0:0:0.3" />
                         </Storyboard>
                       </VisualTransition>
                     </VisualStateGroup.Transitions>
@@ -325,17 +367,18 @@
   </ControlTemplate>
   <ControlTemplate x:Key="Quan.Templates.QuanTextBox.Default" TargetType="{x:Type local:QuanTextBox}">
     <Grid SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-      <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding local:BorderHelper.CornerRadius}" />
-      <Grid Margin="{TemplateBinding BorderThickness}">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="Auto" />
-          <!--<ColumnDefinition Width="Auto" />-->
-        </Grid.ColumnDefinitions>
-        <ScrollViewer x:Name="PART_ContentHost" Margin="0" Padding="{TemplateBinding Padding}" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
-        <TextBlock x:Name="PART_GuideMessage" Grid.Column="0" Margin="5,0,0,0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" FontFamily="{TemplateBinding FontFamily}" IsHitTestVisible="False" Opacity="{TemplateBinding local:TextBoxHelper.GuideTextOpacity}" Text="{TemplateBinding local:TextBoxHelper.GuideText}" Visibility="{Binding Path=(local:TextBoxHelper.HasText), RelativeSource={RelativeSource TemplatedParent}, Converter={local:BooleanToCollapsedConverter}, ConverterParameter=True}" />
-        <Button x:Name="PART_ClearTextButton" Grid.Column="1" Width="26" local:TextBoxHelper.IsUseClearButton="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" Content="{StaticResource Quan.FontIcons.Close}" Focusable="False" IsTabStop="False" Style="{StaticResource Quan.Styles.Button.FontIcon}" Visibility="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={local:BooleanToCollapsedConverter}}" />
-        <!--<Line
+      <AdornerDecorator>
+        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding local:BorderHelper.CornerRadius}">
+          <Grid Margin="{TemplateBinding BorderThickness}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="Auto" />
+              <!--<ColumnDefinition Width="Auto" />-->
+            </Grid.ColumnDefinitions>
+            <ScrollViewer x:Name="PART_ContentHost" Margin="0" Padding="{TemplateBinding Padding}" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
+            <TextBlock x:Name="PART_GuideMessage" Grid.Column="0" Margin="5,0,0,0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" FontFamily="{TemplateBinding FontFamily}" IsHitTestVisible="False" Opacity="{TemplateBinding local:TextBoxHelper.GuideTextOpacity}" Text="{TemplateBinding local:TextBoxHelper.GuideText}" Visibility="{Binding Path=(local:TextBoxHelper.HasText), RelativeSource={RelativeSource TemplatedParent}, Converter={local:BooleanToCollapsedConverter}, ConverterParameter=True}" />
+            <Button x:Name="PART_ClearTextButton" Grid.Column="1" Width="26" local:TextBoxHelper.IsUseClearButton="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" Content="{StaticResource Quan.FontIcons.Close}" Focusable="False" Foreground="{TemplateBinding BorderBrush}" IsTabStop="False" Style="{StaticResource Quan.Styles.Button.FontIcon}" Visibility="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={local:BooleanToCollapsedConverter}}" />
+            <!--<Line
                     Grid.Row="1"
                     Grid.Column="2"
                     Stroke="{DynamicResource Quan.Brushes.BorderBrush}"
@@ -355,31 +398,25 @@
                     BorderThickness="1,0"
                     Focusable="False"
                     Style="{StaticResource Quan.Styles.Button.Icon}" />-->
-      </Grid>
+          </Grid>
+        </Border>
+      </AdornerDecorator>
     </Grid>
     <ControlTemplate.Triggers>
       <Trigger Property="IsEnabled" Value="False">
-        <Setter TargetName="border" Property="Opacity" Value="0.56" />
+        <Setter Property="Opacity" Value="0.56" />
       </Trigger>
       <Trigger Property="IsMouseOver" Value="True">
-        <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.LightPrimary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.LightPrimary}" />
       </Trigger>
       <Trigger Property="IsKeyboardFocused" Value="True">
-        <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Primary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Primary}" />
       </Trigger>
       <Trigger Property="IsReadOnly" Value="True">
         <Setter TargetName="PART_ClearTextButton" Property="IsEnabled" Value="False" />
       </Trigger>
       <Trigger Property="Validation.HasError" Value="true">
         <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Error}" />
-      </Trigger>
-      <Trigger SourceName="PART_ClearTextButton" Property="IsMouseOver" Value="True">
-        <Setter TargetName="PART_ClearTextButton" Property="Background" Value="{DynamicResource Quan.Brushes.Gray8}" />
-        <Setter TargetName="PART_ClearTextButton" Property="Foreground" Value="{DynamicResource Quan.Brushes.LightPrimary}" />
-      </Trigger>
-      <Trigger SourceName="PART_ClearTextButton" Property="IsPressed" Value="True">
-        <Setter TargetName="PART_ClearTextButton" Property="Background" Value="{DynamicResource Quan.Brushes.Foreground}" />
-        <Setter TargetName="PART_ClearTextButton" Property="Foreground" Value="{DynamicResource Quan.Brushes.Background}" />
       </Trigger>
       <MultiTrigger>
         <MultiTrigger.Conditions>
@@ -397,17 +434,18 @@
   </ControlTemplate>
   <ControlTemplate x:Key="Quan.Templates.QuanTextBox.Floating" TargetType="{x:Type local:QuanTextBox}">
     <Grid SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-      <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding local:BorderHelper.CornerRadius}" />
-      <Grid Margin="{TemplateBinding BorderThickness}">
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*" />
-          <ColumnDefinition Width="Auto" />
-          <!--<ColumnDefinition Width="Auto" />-->
-        </Grid.ColumnDefinitions>
-        <ScrollViewer x:Name="PART_ContentHost" Margin="0" Padding="{TemplateBinding Padding}" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
-        <local:QuanFloatingText x:Name="PART_GuideMessage" Grid.Column="0" Margin="5,0,0,0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" FloatingOffset="{TemplateBinding local:FloatingTextHelper.FloatingOffset}" FloatingOpacity="{TemplateBinding local:FloatingTextHelper.FloatingOpacity}" FloatingProxy="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static local:FloatingProxyFabricConverter.Instance}}" FloatingScale="{TemplateBinding local:FloatingTextHelper.FloatingScale}" FloatingText="{TemplateBinding local:TextBoxHelper.GuideText}" FontFamily="{TemplateBinding FontFamily}" IsUseFloating="{TemplateBinding local:FloatingTextHelper.IsUseFloating}" />
-        <Button x:Name="PART_ClearTextButton" Grid.Column="1" Width="26" local:TextBoxHelper.IsUseClearButton="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" Content="{StaticResource Quan.FontIcons.Close}" Focusable="False" IsTabStop="False" Style="{StaticResource Quan.Styles.Button.FontIcon}" Visibility="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={local:BooleanToCollapsedConverter}}" />
-        <!--<Line
+      <AdornerDecorator>
+        <Border x:Name="PART_Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding local:BorderHelper.CornerRadius}">
+          <Grid Margin="{TemplateBinding BorderThickness}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="Auto" />
+              <!--<ColumnDefinition Width="Auto" />-->
+            </Grid.ColumnDefinitions>
+            <ScrollViewer x:Name="PART_ContentHost" Margin="0" Padding="{TemplateBinding Padding}" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
+            <local:QuanFloatingText x:Name="PART_GuideMessage" Grid.Column="0" Margin="5,0,0,0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" FloatingOffset="{TemplateBinding local:FloatingTextHelper.FloatingOffset}" FloatingOpacity="{TemplateBinding local:FloatingTextHelper.FloatingOpacity}" FloatingProxy="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static local:FloatingProxyFabricConverter.Instance}}" FloatingScale="{TemplateBinding local:FloatingTextHelper.FloatingScale}" FloatingText="{TemplateBinding local:TextBoxHelper.GuideText}" FontFamily="{TemplateBinding FontFamily}" IsUseFloating="{TemplateBinding local:FloatingTextHelper.IsUseFloating}" />
+            <Button x:Name="PART_ClearTextButton" Grid.Column="1" Width="26" local:TextBoxHelper.IsUseClearButton="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" Content="{StaticResource Quan.FontIcons.Close}" Focusable="False" Foreground="{TemplateBinding BorderBrush}" IsTabStop="False" Style="{StaticResource Quan.Styles.Button.FontIcon}" Visibility="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={local:BooleanToCollapsedConverter}}" />
+            <!--<Line
                     Grid.Row="1"
                     Grid.Column="2"
                     Stroke="{DynamicResource Quan.Brushes.BorderBrush}"
@@ -427,34 +465,38 @@
                     BorderThickness="1,0"
                     Focusable="False"
                     Style="{StaticResource Quan.Styles.Button.Icon}" />-->
-      </Grid>
+          </Grid>
+        </Border>
+      </AdornerDecorator>
+      <!--  Ripple underline  -->
+      <local:QuanRippleLine x:Name="PART_RippleLine" Background="{TemplateBinding local:RippleHelper.Background}" CornerRadius="{TemplateBinding local:BorderHelper.CornerRadius}" />
     </Grid>
     <ControlTemplate.Triggers>
       <Trigger Property="IsEnabled" Value="False">
-        <Setter TargetName="border" Property="Opacity" Value="0.56" />
+        <Setter Property="Opacity" Value="0.56" />
       </Trigger>
       <Trigger Property="IsMouseOver" Value="True">
-        <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.LightPrimary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.LightPrimary}" />
       </Trigger>
       <Trigger Property="IsKeyboardFocused" Value="True">
-        <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Primary}" />
-        <Setter TargetName="PART_GuideMessage" Property="Foreground" Value="{Binding Path=(local:FloatingTextHelper.Foreground), RelativeSource={RelativeSource TemplatedParent}}" />
-        <Setter TargetName="PART_GuideMessage" Property="FloatingOpacity" Value="1" />
+        <Setter TargetName="PART_RippleLine" Property="IsActive" Value="True" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Primary}" />
       </Trigger>
       <Trigger Property="IsReadOnly" Value="True">
         <Setter TargetName="PART_ClearTextButton" Property="IsEnabled" Value="False" />
       </Trigger>
       <Trigger Property="Validation.HasError" Value="true">
-        <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Error}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Error}" />
+        <Setter TargetName="PART_RippleLine" Property="Background" Value="{DynamicResource Quan.Brushes.Error}" />
       </Trigger>
-      <Trigger SourceName="PART_ClearTextButton" Property="IsMouseOver" Value="True">
-        <Setter TargetName="PART_ClearTextButton" Property="Background" Value="{DynamicResource Quan.Brushes.Gray8}" />
-        <Setter TargetName="PART_ClearTextButton" Property="Foreground" Value="{DynamicResource Quan.Brushes.LightPrimary}" />
-      </Trigger>
-      <Trigger SourceName="PART_ClearTextButton" Property="IsPressed" Value="True">
-        <Setter TargetName="PART_ClearTextButton" Property="Background" Value="{DynamicResource Quan.Brushes.Foreground}" />
-        <Setter TargetName="PART_ClearTextButton" Property="Foreground" Value="{DynamicResource Quan.Brushes.Background}" />
-      </Trigger>
+      <MultiTrigger>
+        <MultiTrigger.Conditions>
+          <Condition Property="local:FloatingTextHelper.IsUseFloating" Value="True" />
+          <Condition Property="IsKeyboardFocused" Value="True" />
+        </MultiTrigger.Conditions>
+        <Setter TargetName="PART_GuideMessage" Property="Foreground" Value="{Binding Path=(local:FloatingTextHelper.Foreground), RelativeSource={RelativeSource TemplatedParent}}" />
+        <Setter TargetName="PART_GuideMessage" Property="FloatingOpacity" Value="1" />
+      </MultiTrigger>
     </ControlTemplate.Triggers>
   </ControlTemplate>
   <Style x:Key="Quan.Styles.QuanTextBox.Default" TargetType="{x:Type local:QuanTextBox}">
@@ -466,6 +508,7 @@
     <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="SnapsToDevicePixels" Value="True" />
     <Setter Property="Padding" Value="3,0" />
+    <Setter Property="CaretBrush" Value="{DynamicResource Quan.Brushes.Primary}" />
     <Setter Property="MinHeight" Value="26" />
     <Setter Property="Template" Value="{StaticResource Quan.Templates.QuanTextBox.Default}" />
     <Setter Property="Validation.ErrorTemplate" Value="{StaticResource QuanTextBox.ValidationTemplate}" />
@@ -475,7 +518,9 @@
       <Trigger Property="DisplayMode" Value="Floating">
         <Setter Property="Template" Value="{StaticResource Quan.Templates.QuanTextBox.Floating}" />
         <Setter Property="local:FloatingTextHelper.Foreground" Value="{DynamicResource Quan.Brushes.Primary}" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
         <Setter Property="local:FloatingTextHelper.IsUseFloating" Value="True" />
+        <Setter Property="local:RippleHelper.Background" Value="{DynamicResource Quan.Brushes.Primary}" />
       </Trigger>
     </Style.Triggers>
   </Style>

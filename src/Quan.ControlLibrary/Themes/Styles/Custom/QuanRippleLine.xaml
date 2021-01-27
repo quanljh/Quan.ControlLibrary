@@ -5,10 +5,10 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type local:QuanRippleLine}">
-        <Setter Property="Background" Value="{Binding Path=(local:RippleHelper.BorderBrush), RelativeSource={RelativeSource Self}}" />
+        <Setter Property="Background" Value="{Binding Path=(local:RippleHelper.Background), RelativeSource={RelativeSource Self}}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
-        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="VerticalAlignment" Value="Bottom" />
         <Setter Property="Height" Value="2" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Template">
@@ -21,6 +21,7 @@
                         VerticalAlignment="{TemplateBinding VerticalAlignment}"
                         Background="{TemplateBinding Background}"
                         CornerRadius="{TemplateBinding CornerRadius}"
+                        IsHitTestVisible="False"
                         RenderTransformOrigin="0.5,0.5"
                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                         <Border.RenderTransform>
@@ -32,7 +33,7 @@
                                     <VisualTransition From="Inactive" To="Active">
                                         <Storyboard>
                                             <DoubleAnimation
-                                                EasingFunction="{StaticResource CircleEasingFuction}"
+                                                EasingFunction="{StaticResource CircleEasingFunction}"
                                                 Storyboard.TargetName="PART_RippleLine"
                                                 Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
                                                 To="1"
@@ -42,7 +43,7 @@
                                     <VisualTransition From="Active" To="Inactive">
                                         <Storyboard>
                                             <DoubleAnimation
-                                                EasingFunction="{StaticResource CircleEasingFuction}"
+                                                EasingFunction="{StaticResource CircleEasingFunction}"
                                                 Storyboard.TargetName="PART_RippleLine"
                                                 Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
                                                 To="0"

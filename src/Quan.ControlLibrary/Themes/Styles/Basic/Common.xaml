@@ -32,7 +32,7 @@
 
     <!--#region Animation-->
 
-    <CircleEase x:Key="CircleEasingFuction" EasingMode="EaseInOut" />
+    <CircleEase x:Key="CircleEasingFunction" EasingMode="EaseOut" />
 
     <!--#endregion-->
 </ResourceDictionary>
