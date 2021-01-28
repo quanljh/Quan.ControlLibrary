@@ -64,7 +64,8 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
-                            <!--<ColumnDefinition Width="Auto" />-->
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
                         <ScrollViewer
@@ -92,34 +93,32 @@
                             x:Name="PART_ClearTextButton"
                             Grid.Column="1"
                             Width="26"
-                            local:TextBoxHelper.IsUseClearButton="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                            local:TextBoxHelper.IsUseClearButton="{TemplateBinding local:TextBoxHelper.IsShowClearButton}"
                             Content="{StaticResource Quan.FontIcons.Close}"
-                            Focusable="False"
                             Foreground="{TemplateBinding BorderBrush}"
                             IsTabStop="False"
                             Style="{StaticResource Quan.Styles.Button.FontIcon}"
-                            Visibility="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={local:BooleanToCollapsedConverter}}" />
+                            Visibility="Collapsed" />
 
-                        <!--<Line
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Stroke="{DynamicResource Quan.Brushes.BorderBrush}"
-                    X1="0"
-                    X2="0"
-                    Y1="3"
-                    Y2="23" />
+                        <Border
+                            x:Name="PART_DividingLine"
+                            Grid.Column="2"
+                            Width="1"
+                            Margin="0,3"
+                            Background="{TemplateBinding BorderBrush}"
+                            Visibility="Collapsed" />
 
-                <Button
-                    x:Name="PART_FunctionButton"
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Width="26"
-                    local:IconHelper.Geometry="{TemplateBinding local:TextBoxHelper.ButtonContent}"
-                    local:IconHelper.Height="10"
-                    local:IconHelper.Width="10"
-                    BorderThickness="1,0"
-                    Focusable="False"
-                    Style="{StaticResource Quan.Styles.Button.Icon}" />-->
+                        <Button
+                            x:Name="PART_FunctionButton"
+                            Grid.Column="3"
+                            Width="26"
+                            local:TextBoxHelper.IsUseFunctionButton="{TemplateBinding local:TextBoxHelper.IsShowFunctionButton}"
+                            Content="{TemplateBinding local:TextBoxHelper.FunctionButtonContent}"
+                            Foreground="{TemplateBinding BorderBrush}"
+                            IsTabStop="False"
+                            Style="{StaticResource Quan.Styles.Button.FontIcon}"
+                            Visibility="{TemplateBinding local:TextBoxHelper.IsShowFunctionButton,
+                                                         Converter={local:BooleanToCollapsedConverter}}" />
                     </Grid>
                 </Border>
             </AdornerDecorator>
@@ -153,6 +152,23 @@
                 <MultiTrigger.ExitActions>
                     <BeginStoryboard Storyboard="{StaticResource Quan.Storyboards.TextBox.LostFocus}" />
                 </MultiTrigger.ExitActions>
+            </MultiTrigger>
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="local:TextBoxHelper.HasText" Value="True" />
+                    <Condition Property="local:TextBoxHelper.IsShowClearButton" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="PART_ClearTextButton" Property="Visibility" Value="Visible" />
+            </MultiTrigger>
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="local:TextBoxHelper.IsShowClearButton" Value="True" />
+                    <Condition Property="local:TextBoxHelper.IsShowFunctionButton" Value="True" />
+                    <Condition Property="local:TextBoxHelper.HasText" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="PART_DividingLine" Property="Visibility" Value="Visible" />
             </MultiTrigger>
 
         </ControlTemplate.Triggers>
@@ -201,13 +217,13 @@
                             x:Name="PART_ClearTextButton"
                             Grid.Column="1"
                             Width="26"
-                            local:TextBoxHelper.IsUseClearButton="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}"
+                            local:TextBoxHelper.IsUseClearButton="{TemplateBinding local:TextBoxHelper.IsShowClearButton}"
                             Content="{StaticResource Quan.FontIcons.Close}"
                             Focusable="False"
                             Foreground="{TemplateBinding BorderBrush}"
                             IsTabStop="False"
                             Style="{StaticResource Quan.Styles.Button.FontIcon}"
-                            Visibility="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={local:BooleanToCollapsedConverter}}" />
+                            Visibility="Collapsed" />
 
                         <!--<Line
                     Grid.Row="1"
@@ -215,8 +231,8 @@
                     Stroke="{DynamicResource Quan.Brushes.BorderBrush}"
                     X1="0"
                     X2="0"
-                    Y1="3"
-                    Y2="23" />
+                    Y1="0"
+                    Y2="" />
 
                 <Button
                     x:Name="PART_FunctionButton"
@@ -261,6 +277,13 @@
                 </MultiTrigger.Conditions>
                 <Setter TargetName="PART_GuideMessage" Property="Foreground" Value="{Binding Path=(local:FloatingTextHelper.Foreground), RelativeSource={RelativeSource TemplatedParent}}" />
                 <Setter TargetName="PART_GuideMessage" Property="FloatingOpacity" Value="1" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="local:TextBoxHelper.HasText" Value="True" />
+                    <Condition Property="local:TextBoxHelper.IsShowClearButton" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter TargetName="PART_ClearTextButton" Property="Visibility" Value="Visible" />
             </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

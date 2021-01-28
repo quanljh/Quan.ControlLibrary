@@ -11,6 +11,7 @@
   <system:Double x:Key="Quan.FontSize.XLarge">24</system:Double>
   <system:Double x:Key="Quan.FontSize.XXLarge">30</system:Double>
   <system:String x:Key="Quan.FontIcons.Close"></system:String>
+  <system:String x:Key="Quan.FontIcons.Search"></system:String>
   <Geometry x:Key="CloseGeometry" o:Freeze="True">M0.7,0 L5,4.3 L9.3,0 L10,0.7 L5.7,5 L10,9.3 L9.3,10 L5,5.7 L0.7,10 L0,9.3 L4.3,5 L0,0.7 z</Geometry>
   <Geometry x:Key="WindowMinGeometry" o:Freeze="True">M0,4 L10,4 L10,5 L0,5 z</Geometry>
   <Geometry x:Key="WindowRestoreGeometry" o:Freeze="True">M1,3 L1,9 L7,9 L7,3 z M3,1 L3,2 L8,2 L8,7 L9,7 L9,1 z M2,0 L10,0 L10,8 L8,8 L8,10 L0,10 L0,2 L2,2 z</Geometry>
@@ -373,31 +374,14 @@
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="*" />
               <ColumnDefinition Width="Auto" />
-              <!--<ColumnDefinition Width="Auto" />-->
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <ScrollViewer x:Name="PART_ContentHost" Margin="0" Padding="{TemplateBinding Padding}" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
             <TextBlock x:Name="PART_GuideMessage" Grid.Column="0" Margin="5,0,0,0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" FontFamily="{TemplateBinding FontFamily}" IsHitTestVisible="False" Opacity="{TemplateBinding local:TextBoxHelper.GuideTextOpacity}" Text="{TemplateBinding local:TextBoxHelper.GuideText}" Visibility="{Binding Path=(local:TextBoxHelper.HasText), RelativeSource={RelativeSource TemplatedParent}, Converter={local:BooleanToCollapsedConverter}, ConverterParameter=True}" />
-            <Button x:Name="PART_ClearTextButton" Grid.Column="1" Width="26" local:TextBoxHelper.IsUseClearButton="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" Content="{StaticResource Quan.FontIcons.Close}" Focusable="False" Foreground="{TemplateBinding BorderBrush}" IsTabStop="False" Style="{StaticResource Quan.Styles.Button.FontIcon}" Visibility="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={local:BooleanToCollapsedConverter}}" />
-            <!--<Line
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Stroke="{DynamicResource Quan.Brushes.BorderBrush}"
-                    X1="0"
-                    X2="0"
-                    Y1="3"
-                    Y2="23" />
-
-                <Button
-                    x:Name="PART_FunctionButton"
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Width="26"
-                    local:IconHelper.Geometry="{TemplateBinding local:TextBoxHelper.ButtonContent}"
-                    local:IconHelper.Height="10"
-                    local:IconHelper.Width="10"
-                    BorderThickness="1,0"
-                    Focusable="False"
-                    Style="{StaticResource Quan.Styles.Button.Icon}" />-->
+            <Button x:Name="PART_ClearTextButton" Grid.Column="1" Width="26" local:TextBoxHelper.IsUseClearButton="{TemplateBinding local:TextBoxHelper.IsShowClearButton}" Content="{StaticResource Quan.FontIcons.Close}" Foreground="{TemplateBinding BorderBrush}" IsTabStop="False" Style="{StaticResource Quan.Styles.Button.FontIcon}" Visibility="Collapsed" />
+            <Border x:Name="PART_DividingLine" Grid.Column="2" Width="1" Margin="0,3" Background="{TemplateBinding BorderBrush}" Visibility="Collapsed" />
+            <Button x:Name="PART_FunctionButton" Grid.Column="3" Width="26" local:TextBoxHelper.IsUseFunctionButton="{TemplateBinding local:TextBoxHelper.IsShowFunctionButton}" Content="{TemplateBinding local:TextBoxHelper.FunctionButtonContent}" Foreground="{TemplateBinding BorderBrush}" IsTabStop="False" Style="{StaticResource Quan.Styles.Button.FontIcon}" Visibility="{TemplateBinding local:TextBoxHelper.IsShowFunctionButton,&#xD;&#xA;                                                         Converter={local:BooleanToCollapsedConverter}}" />
           </Grid>
         </Border>
       </AdornerDecorator>
@@ -430,6 +414,21 @@
           <BeginStoryboard Storyboard="{StaticResource Quan.Storyboards.TextBox.LostFocus}" />
         </MultiTrigger.ExitActions>
       </MultiTrigger>
+      <MultiTrigger>
+        <MultiTrigger.Conditions>
+          <Condition Property="local:TextBoxHelper.HasText" Value="True" />
+          <Condition Property="local:TextBoxHelper.IsShowClearButton" Value="True" />
+        </MultiTrigger.Conditions>
+        <Setter TargetName="PART_ClearTextButton" Property="Visibility" Value="Visible" />
+      </MultiTrigger>
+      <MultiTrigger>
+        <MultiTrigger.Conditions>
+          <Condition Property="local:TextBoxHelper.IsShowClearButton" Value="True" />
+          <Condition Property="local:TextBoxHelper.IsShowFunctionButton" Value="True" />
+          <Condition Property="local:TextBoxHelper.HasText" Value="True" />
+        </MultiTrigger.Conditions>
+        <Setter TargetName="PART_DividingLine" Property="Visibility" Value="Visible" />
+      </MultiTrigger>
     </ControlTemplate.Triggers>
   </ControlTemplate>
   <ControlTemplate x:Key="Quan.Templates.QuanTextBox.Floating" TargetType="{x:Type local:QuanTextBox}">
@@ -444,15 +443,15 @@
             </Grid.ColumnDefinitions>
             <ScrollViewer x:Name="PART_ContentHost" Margin="0" Padding="{TemplateBinding Padding}" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
             <local:QuanFloatingText x:Name="PART_GuideMessage" Grid.Column="0" Margin="5,0,0,0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" FloatingOffset="{TemplateBinding local:FloatingTextHelper.FloatingOffset}" FloatingOpacity="{TemplateBinding local:FloatingTextHelper.FloatingOpacity}" FloatingProxy="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static local:FloatingProxyFabricConverter.Instance}}" FloatingScale="{TemplateBinding local:FloatingTextHelper.FloatingScale}" FloatingText="{TemplateBinding local:TextBoxHelper.GuideText}" FontFamily="{TemplateBinding FontFamily}" IsUseFloating="{TemplateBinding local:FloatingTextHelper.IsUseFloating}" />
-            <Button x:Name="PART_ClearTextButton" Grid.Column="1" Width="26" local:TextBoxHelper.IsUseClearButton="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" Content="{StaticResource Quan.FontIcons.Close}" Focusable="False" Foreground="{TemplateBinding BorderBrush}" IsTabStop="False" Style="{StaticResource Quan.Styles.Button.FontIcon}" Visibility="{Binding Path=(local:TextBoxHelper.IsShowClearButton), RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay, Converter={local:BooleanToCollapsedConverter}}" />
+            <Button x:Name="PART_ClearTextButton" Grid.Column="1" Width="26" local:TextBoxHelper.IsUseClearButton="{TemplateBinding local:TextBoxHelper.IsShowClearButton}" Content="{StaticResource Quan.FontIcons.Close}" Focusable="False" Foreground="{TemplateBinding BorderBrush}" IsTabStop="False" Style="{StaticResource Quan.Styles.Button.FontIcon}" Visibility="Collapsed" />
             <!--<Line
                     Grid.Row="1"
                     Grid.Column="2"
                     Stroke="{DynamicResource Quan.Brushes.BorderBrush}"
                     X1="0"
                     X2="0"
-                    Y1="3"
-                    Y2="23" />
+                    Y1="0"
+                    Y2="" />
 
                 <Button
                     x:Name="PART_FunctionButton"
@@ -496,6 +495,13 @@
         </MultiTrigger.Conditions>
         <Setter TargetName="PART_GuideMessage" Property="Foreground" Value="{Binding Path=(local:FloatingTextHelper.Foreground), RelativeSource={RelativeSource TemplatedParent}}" />
         <Setter TargetName="PART_GuideMessage" Property="FloatingOpacity" Value="1" />
+      </MultiTrigger>
+      <MultiTrigger>
+        <MultiTrigger.Conditions>
+          <Condition Property="local:TextBoxHelper.HasText" Value="True" />
+          <Condition Property="local:TextBoxHelper.IsShowClearButton" Value="True" />
+        </MultiTrigger.Conditions>
+        <Setter TargetName="PART_ClearTextButton" Property="Visibility" Value="Visible" />
       </MultiTrigger>
     </ControlTemplate.Triggers>
   </ControlTemplate>

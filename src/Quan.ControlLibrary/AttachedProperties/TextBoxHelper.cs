@@ -246,14 +246,14 @@ namespace Quan.ControlLibrary
 
         #endregion
 
-        #region ButtonContent
+        #region IsShowFunctionButton
 
         /// <summary>
         /// Uses to display a helper button in the text box, such as clear button, guide button etc...
         /// </summary>
-        public static readonly DependencyProperty ButtonContentProperty =
-            DependencyProperty.RegisterAttached("ButtonContent",
-                typeof(Geometry),
+        public static readonly DependencyProperty IsShowFunctionButtonProperty =
+            DependencyProperty.RegisterAttached("IsShowFunctionButton",
+                typeof(bool),
                 typeof(TextBoxHelper),
                 new PropertyMetadata());
 
@@ -261,9 +261,120 @@ namespace Quan.ControlLibrary
         [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
         [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
         [AttachedPropertyBrowsableForType(typeof(ComboBox))]
-        public static Geometry GetButtonContent(DependencyObject element) => (Geometry)element.GetValue(ButtonContentProperty);
+        public static bool GetIsShowFunctionButton(DependencyObject element) => (bool)element.GetValue(IsShowFunctionButtonProperty);
 
-        public static void SetButtonContent(DependencyObject element, Geometry value) => element.SetValue(ButtonContentProperty, value);
+        public static void SetIsShowFunctionButton(DependencyObject element, bool value) => element.SetValue(IsShowFunctionButtonProperty, value);
+
+        #endregion
+
+        #region IsUseFunctionButton
+
+        public static readonly DependencyProperty IsUseFunctionButtonProperty =
+            DependencyProperty.RegisterAttached(
+                "IsUseFunctionButton",
+                typeof(bool),
+                typeof(TextBoxHelper),
+                new FrameworkPropertyMetadata(false, IsUseFunctionButton_OnChanged));
+
+        [Category(Constants.QUAN_APP)]
+        [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
+        [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
+        [AttachedPropertyBrowsableForType(typeof(ComboBox))]
+        public static bool GetIsUseFunctionButton(DependencyObject element) => (bool)element.GetValue(IsUseFunctionButtonProperty);
+
+        public static void SetIsUseFunctionButton(DependencyObject element, bool value) => element.SetValue(IsUseFunctionButtonProperty, value);
+
+        private static void IsUseFunctionButton_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (!(d is Button button))
+                return;
+
+            if (e.OldValue != e.NewValue)
+            {
+                button.Click -= FunctionButton_OnClick;
+                if ((bool)e.NewValue)
+                    button.Click += FunctionButton_OnClick;
+            }
+        }
+
+        private static void FunctionButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (!(sender is Button button))
+                return;
+
+            var parent = button.GetVisualParents()
+                .FirstOrDefault(o => o is RichTextBox || o is TextBox || o is PasswordBox || o is ComboBox);
+
+            if (parent == null)
+                return;
+
+            var functionCommand = GetFunctionButtonCommand(parent);
+            var functionButtonCommandParameter = GetFunctionButtonCommandParameter(parent) ?? parent;
+            if (functionCommand != null && functionCommand.CanExecute(functionButtonCommandParameter))
+            {
+                if (parent is TextBox textBox)
+                    textBox.GetBindingExpression(TextBox.TextProperty)?.UpdateSource();
+
+                functionCommand.Execute(functionButtonCommandParameter);
+            }
+        }
+
+        #endregion
+
+        #region FunctionButtonContent
+
+        /// <summary>
+        /// Uses to display a helper button in the text box, such as clear button, guide button etc...
+        /// </summary>
+        public static readonly DependencyProperty FunctionButtonContentProperty =
+            DependencyProperty.RegisterAttached("FunctionButtonContent",
+                typeof(object),
+                typeof(TextBoxHelper),
+                new PropertyMetadata());
+
+        [Category(Constants.QUAN_APP)]
+        [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
+        [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
+        [AttachedPropertyBrowsableForType(typeof(ComboBox))]
+        public static object GetFunctionButtonContent(DependencyObject element) => (object)element.GetValue(FunctionButtonContentProperty);
+
+        public static void SetFunctionButtonContent(DependencyObject element, object value) => element.SetValue(FunctionButtonContentProperty, value);
+
+        #endregion
+
+        #region FunctionButtonCommand
+
+        public static readonly DependencyProperty FunctionButtonCommandProperty =
+            DependencyProperty.RegisterAttached("FunctionButtonCommand",
+                typeof(ICommand),
+                typeof(TextBoxHelper),
+                new FrameworkPropertyMetadata(null));
+
+        [Category(Constants.QUAN_APP)]
+        [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
+        [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
+        [AttachedPropertyBrowsableForType(typeof(ComboBox))]
+        public static ICommand GetFunctionButtonCommand(DependencyObject element) => (ICommand)element.GetValue(FunctionButtonCommandProperty);
+
+        public static void SetFunctionButtonCommand(DependencyObject element, ICommand value) => element.SetValue(FunctionButtonCommandProperty, value);
+
+        #endregion
+
+        #region FunctionButtonCommandParameter
+
+        public static readonly DependencyProperty FunctionButtonCommandParameterProperty =
+            DependencyProperty.RegisterAttached("FunctionButtonCommandParameter",
+                typeof(object),
+                typeof(TextBoxHelper),
+                new FrameworkPropertyMetadata(null));
+
+        [Category(Constants.QUAN_APP)]
+        [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
+        [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
+        [AttachedPropertyBrowsableForType(typeof(ComboBox))]
+        public static object GetFunctionButtonCommandParameter(DependencyObject element) => (object)element.GetValue(FunctionButtonCommandParameterProperty);
+
+        public static void SetFunctionButtonCommandParameter(DependencyObject element, object value) => element.SetValue(FunctionButtonCommandParameterProperty, value);
 
         #endregion
 

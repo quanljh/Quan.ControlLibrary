@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Quan.ControlLibrary.Demo
 {
-    public interface ICusomerStore
+    public interface IControlDemo
     {
-        List<string> GetAll();
+        List<Demo> GetControlDemos();
     }
 }

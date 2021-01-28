@@ -2,100 +2,26 @@
     x:Class="Quan.ControlLibrary.Demo.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Quan.ControlLibrary.Demo"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
     xmlns:q="http://quan.app.com/winfx/xaml/controls"
     Title="MainWindow"
     Width="800"
     Height="450"
     Icon="/Quan.ControlLibrary;Component/Resources/Images/Logo/quan.ico"
+    ShowActivated="True"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
-    <StackPanel q:PanelHelper.ChildMarginProperty="0 5">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ListBox DisplayMemberPath="Name" ItemsSource="{Binding ControlDemoCollection}" SelectedItem="{Binding SelectedControlDemo.Value}" />
+        <ContentControl Grid.Column="1" prism:RegionManager.RegionName="{x:Static local:ViewNameConstants.MainWindowContent}" />
+    </Grid>
 
-        <ListView BorderThickness="0" ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}" />
-        <Button
-            x:Name="Button"
-            Width="80"
-            Height="40"
-            VerticalAlignment="Bottom"
-            Command="{Binding LoadCommand}"
-            Content="LOAD">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <TranslateTransform x:Name="ButtonTransform" X="0" Y="0" />
-                    <ScaleTransform x:Name="ScaleTransform" CenterX="0" CenterY="0" />
-                </TransformGroup>
-                <!--<RotateTransform x:Name="RotateTransform" Angle="0" CenterX="40" CenterY="20" />-->
-            </Button.RenderTransform>
-            <Button.RenderTransformOrigin>
-                <Point X="0" Y="0" />
-            </Button.RenderTransformOrigin>
-            <Button.Triggers>
-                <EventTrigger RoutedEvent="Button.Click">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation
-                                Storyboard.TargetName="ButtonTransform"
-                                Storyboard.TargetProperty="Y"
-                                From="0"
-                                To="-10"
-                                Duration="00:00:0.3">
-                                <!--<DoubleAnimation.EasingFunction>
-                                    <BounceEase Bounces="1" Bounciness="1.5" EasingMode="EaseOut" />
-                                </DoubleAnimation.EasingFunction>-->
-                            </DoubleAnimation>
-                        </Storyboard>
-                    </BeginStoryboard>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation
-                                Storyboard.TargetName="ScaleTransform"
-                                Storyboard.TargetProperty="ScaleX"
-                                From="1"
-                                To="0.8"
-                                Duration="00:00:0.3">
-                                <!--<DoubleAnimation.EasingFunction>
-                                    <BounceEase Bounces="1" Bounciness="1.5" EasingMode="EaseOut" />
-                                </DoubleAnimation.EasingFunction>-->
-                            </DoubleAnimation>
-                            <DoubleAnimation
-                                Storyboard.TargetName="ScaleTransform"
-                                Storyboard.TargetProperty="ScaleY"
-                                From="1"
-                                To="0.8"
-                                Duration="00:00:0.3" />
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-            </Button.Triggers>
-        </Button>
-
-        <q:QuanTextBox
-            Width="200"
-            Margin="0,100,0,0"
-            q:TextBoxHelper.GuideText="Email or username"
-            q:TextBoxHelper.IsShowClearButton="True"
-            DisplayMode="Floating"
-            Text="{Binding UserName.Value}" />
-
-        <q:QuanTextBox Width="200" q:TextBoxHelper.GuideText="Email or username" q:TextBoxHelper.IsShowClearButton="True" />
-
-        <q:QuanTextBox Width="200">
-            <q:QuanTextBox.Style>
-                <Style BasedOn="{StaticResource Quan.Styles.QuanTextBox.Default}" TargetType="{x:Type q:QuanTextBox}">
-                    <Setter Property="q:TextBoxHelper.IsShowClearButton" Value="True" />
-                    <Style.Triggers>
-                        <Trigger Property="q:TextBoxHelper.HasText" Value="False">
-                            <Setter Property="q:TextBoxHelper.IsShowClearButton" Value="False" />
-                            <Setter Property="q:TextBoxHelper.GuideText" Value="Enter some text..." />
-                        </Trigger>
-                        <Trigger Property="q:TextBoxHelper.HasText" Value="True">
-                            <Setter Property="q:TextBoxHelper.IsShowClearButton" Value="True" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </q:QuanTextBox.Style>
-        </q:QuanTextBox>
-    </StackPanel>
 </q:QuanWindow>

@@ -1,7 +1,11 @@
-﻿using Prism.Ioc;
+﻿using System.Reactive.Concurrency;
+using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Unity;
 using System.Windows;
+using Prism.Regions;
+using Reactive.Bindings;
+using Unity;
 
 namespace Quan.ControlLibrary.Demo
 {
@@ -13,7 +17,18 @@ namespace Quan.ControlLibrary.Demo
         /// <inheritdoc />
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.Register<ICusomerStore, DbCustomerStore>();
+            #region Navigation
+
+            containerRegistry.RegisterForNavigation<QuanTextBoxView>();
+            containerRegistry.RegisterForNavigation<QuanButtonView>();
+
+            #endregion
+
+            #region Services
+
+            containerRegistry.Register<IControlDemo, ControlDemoService>();
+
+            #endregion
         }
 
         /// <inheritdoc />
@@ -22,6 +37,8 @@ namespace Quan.ControlLibrary.Demo
             base.ConfigureViewModelLocator();
 
             ViewModelLocationProvider.Register<MainWindow, MainWindowViewModel>();
+            ViewModelLocationProvider.Register<QuanTextBoxView, QuanTextBoxViewModel>();
+            ViewModelLocationProvider.Register<QuanButtonView, QuanButtonViewModel>();
         }
 
         /// <inheritdoc />
@@ -29,6 +46,21 @@ namespace Quan.ControlLibrary.Demo
         {
             var mainWin = Container.Resolve<MainWindow>();
             return mainWin;
+        }
+
+        /// <inheritdoc />
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            var regionManager = Container.Resolve<IRegionManager>();
+            regionManager.RequestNavigate(ViewNameConstants.MainWindowContent, ViewNameConstants.QuanTextBoxView);
+        }
+
+        /// <inheritdoc />
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            ReactivePropertyScheduler.SetDefault(ImmediateScheduler.Instance);
         }
     }
 }
