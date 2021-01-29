@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Reactive.Concurrency;
-using System.Reactive.Linq;
-using Prism.Commands;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 using Prism.Regions;
 using Reactive.Bindings;
+using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Reactive.Linq;
 
 namespace Quan.ControlLibrary.Demo
 {
@@ -41,11 +37,11 @@ namespace Quan.ControlLibrary.Demo
             _regionManager = regionManager;
             _controlDemo = controlDemo;
 
-            SelectedControlDemo = new ReactiveProperty<Demo>();
+            SelectedControlDemo = new ReactiveProperty<Demo>(default, ReactivePropertyMode.DistinctUntilChanged);
 
             Load();
 
-            SelectedControlDemo.Skip(1).Subscribe(OnSelectedControlDemoChanged);
+            SelectedControlDemo.Subscribe(OnSelectedControlDemoChanged);
         }
 
         #endregion
