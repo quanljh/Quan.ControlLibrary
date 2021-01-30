@@ -13,9 +13,9 @@ namespace Quan.ControlLibrary
                 typeof(PanelHelper),
                 new FrameworkPropertyMetadata(default(Thickness), ChildMargin_OnChanged));
 
-        public static Thickness GetChildMarginProperty(DependencyObject element) => (Thickness)element.GetValue(ChildMarginProperty);
+        public static Thickness GetChildMargin(DependencyObject element) => (Thickness)element.GetValue(ChildMarginProperty);
 
-        public static void SetChildMarginProperty(DependencyObject element, Thickness value) => element.SetValue(ChildMarginProperty, value);
+        public static void SetChildMargin(DependencyObject element, Thickness value) => element.SetValue(ChildMarginProperty, value);
 
         private static void ChildMargin_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -48,7 +48,7 @@ namespace Quan.ControlLibrary
             if (!(sender is Panel panel))
                 return;
 
-            var margin = GetChildMarginProperty(panel);
+            var margin = GetChildMargin(panel);
             foreach (var child in panel.Children)
             {
                 if (child is FrameworkElement chidElement)

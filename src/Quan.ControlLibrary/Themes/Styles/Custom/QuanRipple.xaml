@@ -17,8 +17,8 @@
                                 x:Name="PART_Ellipse"
                                 Canvas.Left="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RippleX}"
                                 Canvas.Top="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RippleY}"
-                                Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Radius}"
-                                Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Radius}"
+                                Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Diameter}"
+                                Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Diameter}"
                                 Fill="{TemplateBinding Fill}"
                                 Opacity="0"
                                 RenderTransformOrigin="0.5,0.5">

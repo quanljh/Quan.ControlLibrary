@@ -35,4 +35,28 @@
     <CircleEase x:Key="CircleEasingFunction" EasingMode="EaseOut" />
 
     <!--#endregion-->
+
+    <!--#region Shadows-->
+
+    <DropShadowEffect
+        x:Key="Quan.ShadowEffects.Effect1"
+        o:Freeze="True"
+        BlurRadius="10"
+        Opacity="1"
+        RenderingBias="Performance"
+        ShadowDepth="0"
+        Color="{DynamicResource Quan.Colors.Shadow}" />
+
+    <DropShadowEffect
+        x:Key="Quan.ShadowEffects.Effect2"
+        o:Freeze="True"
+        BlurRadius="10"
+        Direction="270"
+        Opacity=".7"
+        RenderingBias="Performance"
+        ShadowDepth="4"
+        Color="{DynamicResource Quan.Colors.Shadow}" />
+
+    <!--#endregion-->
+
 </ResourceDictionary>

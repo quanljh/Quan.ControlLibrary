@@ -59,16 +59,16 @@ namespace Quan.ControlLibrary
 
         #endregion
 
-        #region Radius
+        #region Diameter
 
-        public double Radius
+        public double Diameter
         {
-            get => (double)GetValue(RadiusProperty);
-            set => SetValue(RadiusProperty, value);
+            get => (double)GetValue(DiameterProperty);
+            set => SetValue(DiameterProperty, value);
         }
 
-        public static readonly DependencyProperty RadiusProperty =
-            DependencyProperty.Register(nameof(Radius), typeof(double), typeof(QuanRipple), new PropertyMetadata(default(double)));
+        public static readonly DependencyProperty DiameterProperty =
+            DependencyProperty.Register(nameof(Diameter), typeof(double), typeof(QuanRipple), new PropertyMetadata(default(double)));
 
         #endregion
 
@@ -106,9 +106,11 @@ namespace Quan.ControlLibrary
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(QuanRipple), new FrameworkPropertyMetadata(typeof(QuanRipple)));
 
-            EventManager.RegisterClassHandler(typeof(ContentControl), Mouse.PreviewMouseUpEvent, new MouseButtonEventHandler(MouseButtonEventHandler), true);
+            // Button control already handled Left button up event, so we register event handle handles the event which had been marked handled event.
+            // See https://stackoverflow.com/questions/12496258/mouseleftbuttonup-does-not-fire
+            EventManager.RegisterClassHandler(typeof(ContentControl), Mouse.PreviewMouseUpEvent, new MouseButtonEventHandler(PreviewMouseButtonUpEventHandler), true);
             EventManager.RegisterClassHandler(typeof(ContentControl), Mouse.MouseMoveEvent, new MouseEventHandler(MouseMoveEventHandler), true);
-            EventManager.RegisterClassHandler(typeof(Popup), Mouse.PreviewMouseUpEvent, new MouseButtonEventHandler(MouseButtonEventHandler), true);
+            EventManager.RegisterClassHandler(typeof(Popup), Mouse.PreviewMouseUpEvent, new MouseButtonEventHandler(PreviewMouseButtonUpEventHandler), true);
             EventManager.RegisterClassHandler(typeof(Popup), Mouse.MouseMoveEvent, new MouseEventHandler(MouseMoveEventHandler), true);
         }
 
@@ -137,28 +139,31 @@ namespace Quan.ControlLibrary
                     var position = innerContent.TransformToAncestor(this).Transform(new Point(0, 0));
 
                     if (FlowDirection == FlowDirection.RightToLeft)
-                        RippleX = position.X - innerContent.ActualWidth / 2 - Radius / 2;
+                        RippleX = position.X - innerContent.ActualWidth / 2 - Diameter / 2;
                     else
-                        RippleX = position.X + innerContent.ActualWidth / 2 - Radius / 2;
-                    RippleY = position.Y + innerContent.ActualHeight / 2 - Radius / 2;
+                        RippleX = position.X + innerContent.ActualWidth / 2 - Diameter / 2;
+                    RippleY = position.Y + innerContent.ActualHeight / 2 - Diameter / 2;
                 }
                 else
                 {
-                    RippleX = ActualWidth / 2 - Radius / 2;
-                    RippleY = ActualHeight / 2 - Radius / 2;
+                    RippleX = ActualWidth / 2 - Diameter / 2;
+                    RippleY = ActualHeight / 2 - Diameter / 2;
                 }
             }
             else
             {
                 var point = e.GetPosition(this);
-                RippleX = point.X - Radius / 2;
-                RippleY = point.Y - Radius / 2;
+                // The eclipse's center is in the lower right corner.
+                // The left offset plus point x equals eclipse's radius
+                RippleX = point.X - Diameter / 2;
+                // The top offset plus point y equals eclipse's radius
+                RippleY = point.Y - Diameter / 2;
             }
 
             if (!RippleHelper.GetIsDisabled(this))
             {
                 VisualStateManager.GoToState(this, NormalStateName, false);
-                VisualStateManager.GoToState(this, MouseDownStateName, false);
+                VisualStateManager.GoToState(this, MouseDownStateName, true);
                 PressedInstances.Add(this);
             }
 
@@ -169,8 +174,11 @@ namespace Quan.ControlLibrary
 
         #region Methods
 
-        private static void MouseButtonEventHandler(object sender, MouseButtonEventArgs e)
+        private static void PreviewMouseButtonUpEventHandler(object sender, MouseButtonEventArgs e)
         {
+            if (e.ChangedButton != MouseButton.Left)
+                return;
+
             foreach (var quanRipple in PressedInstances)
             {
                 // Adjust the transition scale time according to the current animated scale
@@ -228,7 +236,7 @@ namespace Quan.ControlLibrary
 
             var radius = Math.Sqrt(Math.Pow(width, 2) + Math.Pow(height, 2));
 
-            Radius = 2 * radius * RippleHelper.GetRadiusMultiplier(this);
+            Diameter = 2 * radius * RippleHelper.GetRadiusMultiplier(this);
         }
 
         #endregion

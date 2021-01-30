@@ -39,7 +39,7 @@
         <ControlTemplate TargetType="{x:Type local:QuanRipple}">
           <Grid Background="Transparent">
             <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsHitTestVisible="False">
-              <Ellipse x:Name="PART_Ellipse" Canvas.Left="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RippleX}" Canvas.Top="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RippleY}" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Radius}" Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Radius}" Fill="{TemplateBinding Fill}" Opacity="0" RenderTransformOrigin="0.5,0.5">
+              <Ellipse x:Name="PART_Ellipse" Canvas.Left="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RippleX}" Canvas.Top="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=RippleY}" Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Diameter}" Height="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Diameter}" Fill="{TemplateBinding Fill}" Opacity="0" RenderTransformOrigin="0.5,0.5">
                 <Ellipse.RenderTransform>
                   <TransformGroup>
                     <ScaleTransform x:Name="ScaleTransform" ScaleX="0" ScaleY="0" />
@@ -192,6 +192,7 @@
   <SolidColorBrush x:Key="Quan.Brushes.Gray8" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray8}" />
   <SolidColorBrush x:Key="Quan.Brushes.Gray9" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray9}" />
   <SolidColorBrush x:Key="Quan.Brushes.Gray10" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray10}" />
+  <SolidColorBrush x:Key="Quan.Brushes.Shadow" o:Freeze="True" Color="{DynamicResource Quan.Colors.Shadow}" />
   <SolidColorBrush x:Key="Quan.Brushes.WindowBorder" o:Freeze="True" Color="{DynamicResource Quan.Colors.WindowBorder}" />
   <Style x:Key="Quan.Styles.Common.FocusVisual">
     <Setter Property="Control.Template">
@@ -208,6 +209,8 @@
     <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Regular}" />
     <Setter Property="FocusVisualStyle" Value="{StaticResource Quan.Styles.Common.FocusVisual}" />
   </Style>
+  <DropShadowEffect x:Key="Quan.ShadowEffects.Effect1" o:Freeze="True" BlurRadius="10" Opacity="1" RenderingBias="Performance" ShadowDepth="0" Color="{DynamicResource Quan.Colors.Shadow}" />
+  <DropShadowEffect x:Key="Quan.ShadowEffects.Effect2" o:Freeze="True" BlurRadius="10" Direction="270" Opacity=".8" RenderingBias="Performance" ShadowDepth="4" Color="{DynamicResource Quan.Colors.Shadow}" />
   <Style x:Key="Quan.Styles.Button.BaseBase" BasedOn="{StaticResource Quan.Styles.Common.BaseStyle}" TargetType="{x:Type ButtonBase}">
     <Setter Property="Height" Value="30" />
     <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Border}" />
@@ -494,11 +497,23 @@
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type local:QuanButton}">
-          <Border x:Name="PART_Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{Binding Path=(local:BorderHelper.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}">
-            <local:QuanRipple Padding="{TemplateBinding Padding}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-          </Border>
+          <Grid>
+            <AdornerDecorator>
+              <Border x:Name="PART_Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Effect="{StaticResource Quan.ShadowEffects.Effect1}" />
+            </AdornerDecorator>
+            <local:QuanRipple Padding="{TemplateBinding Padding}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+              <local:QuanRipple.Clip>
+                <MultiBinding Converter="{local:BorderClipConverter}">
+                  <Binding ElementName="PART_Border" Path="ActualHeight" />
+                  <Binding ElementName="PART_Border" Path="ActualWidth" />
+                  <Binding ElementName="PART_Border" Path="CornerRadius" />
+                  <Binding ElementName="PART_Border" Path="BorderThickness" />
+                </MultiBinding>
+              </local:QuanRipple.Clip>
+            </local:QuanRipple>
+          </Grid>
           <ControlTemplate.Triggers>
-            <Trigger Property="IsEnabled" Value="false">
+            <Trigger Property="IsEnabled" Value="False">
               <Setter Property="Opacity" Value="0.23" />
             </Trigger>
           </ControlTemplate.Triggers>

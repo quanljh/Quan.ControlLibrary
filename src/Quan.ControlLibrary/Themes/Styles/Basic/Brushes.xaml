@@ -36,6 +36,8 @@
     <SolidColorBrush x:Key="Quan.Brushes.Gray9" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray9}" />
     <SolidColorBrush x:Key="Quan.Brushes.Gray10" o:Freeze="True" Color="{DynamicResource Quan.Colors.Gray10}" />
 
+    <SolidColorBrush x:Key="Quan.Brushes.Shadow" o:Freeze="True" Color="{DynamicResource Quan.Colors.Shadow}" />
+
     <!--  Window  -->
     <SolidColorBrush x:Key="Quan.Brushes.WindowBorder" o:Freeze="True" Color="{DynamicResource Quan.Colors.WindowBorder}" />
 

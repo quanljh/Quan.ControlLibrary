@@ -32,6 +32,9 @@
     <Color x:Key="Quan.Colors.Gray9">#5EC9C9C9</Color>
     <Color x:Key="Quan.Colors.Gray10">#FFF7F7F7</Color>
 
+
+    <Color x:Key="Quan.Colors.Shadow">#AA000000</Color>
+
     <!--  Window  -->
     <Color x:Key="Quan.Colors.WindowBorder">#707070</Color>
 
