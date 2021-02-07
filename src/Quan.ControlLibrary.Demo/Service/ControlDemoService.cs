@@ -18,6 +18,11 @@ namespace Quan.ControlLibrary.Demo
                 {
                     Name =  ViewNameConstants.QuanButtonView.Substring(0, ViewNameConstants.QuanButtonView.Length - 4),
                     ViewName = ViewNameConstants.QuanButtonView,
+                },
+                new Demo()
+                {
+                    Name =  ViewNameConstants.QuanExpanderView.Substring(0, ViewNameConstants.QuanExpanderView.Length - 4),
+                    ViewName = ViewNameConstants.QuanExpanderView,
                 }
             };
         }

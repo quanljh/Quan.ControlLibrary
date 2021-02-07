@@ -12,6 +12,7 @@ namespace Quan.ControlLibrary.Demo
 
         public const string QuanTextBoxView = "QuanTextBoxView";
         public const string QuanButtonView = "QuanButtonView";
+        public const string QuanExpanderView = "QuanExpanderView";
 
         #endregion
     }

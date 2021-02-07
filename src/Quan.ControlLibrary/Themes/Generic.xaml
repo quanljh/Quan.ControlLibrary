@@ -12,11 +12,14 @@
   <system:Double x:Key="Quan.FontSize.XXLarge">30</system:Double>
   <system:String x:Key="Quan.FontIcons.Close"></system:String>
   <system:String x:Key="Quan.FontIcons.Search"></system:String>
+  <system:String x:Key="Quan.FontIcons.Chevron-Down"></system:String>
   <Geometry x:Key="CloseGeometry" o:Freeze="True">M0.7,0 L5,4.3 L9.3,0 L10,0.7 L5.7,5 L10,9.3 L9.3,10 L5,5.7 L0.7,10 L0,9.3 L4.3,5 L0,0.7 z</Geometry>
   <Geometry x:Key="WindowMinGeometry" o:Freeze="True">M0,4 L10,4 L10,5 L0,5 z</Geometry>
   <Geometry x:Key="WindowRestoreGeometry" o:Freeze="True">M1,3 L1,9 L7,9 L7,3 z M3,1 L3,2 L8,2 L8,7 L9,7 L9,1 z M2,0 L10,0 L10,8 L8,8 L8,10 L0,10 L0,2 L2,2 z</Geometry>
   <Geometry x:Key="WindowMaxGeometry" o:Freeze="True">M1,1 L1,9 L9,9 L9,1 z M0,0 L10,0 L10,10 L0,10 z</Geometry>
-  <CircleEase x:Key="CircleEasingFunction" EasingMode="EaseOut" />
+  <CircleEase x:Key="Quan.EasingFuns.CircleOut" EasingMode="EaseOut" />
+  <CircleEase x:Key="Quan.EasingFuns.CircleInOut" EasingMode="EaseInOut" />
+  <CubicEase x:Key="Quan.EasingFuns.CubicInOut" EasingMode="EaseInOut" />
   <Style x:Key="Quan.Styles.ContentControl.Default" TargetType="{x:Type ContentControl}">
     <Setter Property="Template">
       <Setter.Value>
@@ -210,7 +213,7 @@
     <Setter Property="FocusVisualStyle" Value="{StaticResource Quan.Styles.Common.FocusVisual}" />
   </Style>
   <DropShadowEffect x:Key="Quan.ShadowEffects.Effect1" o:Freeze="True" BlurRadius="10" Opacity="1" RenderingBias="Performance" ShadowDepth="0" Color="{DynamicResource Quan.Colors.Shadow}" />
-  <DropShadowEffect x:Key="Quan.ShadowEffects.Effect2" o:Freeze="True" BlurRadius="10" Direction="270" Opacity=".8" RenderingBias="Performance" ShadowDepth="4" Color="{DynamicResource Quan.Colors.Shadow}" />
+  <DropShadowEffect x:Key="Quan.ShadowEffects.Effect2" o:Freeze="True" BlurRadius="10" Direction="270" Opacity=".7" RenderingBias="Performance" ShadowDepth="4" Color="{DynamicResource Quan.Colors.Shadow}" />
   <Style x:Key="Quan.Styles.Button.BaseBase" BasedOn="{StaticResource Quan.Styles.Common.BaseStyle}" TargetType="{x:Type ButtonBase}">
     <Setter Property="Height" Value="30" />
     <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Border}" />
@@ -351,12 +354,12 @@
                 <VisualStateGroup.Transitions>
                   <VisualTransition From="Inactive" To="Active">
                     <Storyboard>
-                      <DoubleAnimation EasingFunction="{StaticResource CircleEasingFunction}" Storyboard.TargetName="PART_RippleLine" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" To="1" Duration="0:0:0.3" />
+                      <DoubleAnimation EasingFunction="{StaticResource Quan.EasingFuns.CircleOut}" Storyboard.TargetName="PART_RippleLine" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" To="1" Duration="0:0:0.3" />
                     </Storyboard>
                   </VisualTransition>
                   <VisualTransition From="Active" To="Inactive">
                     <Storyboard>
-                      <DoubleAnimation EasingFunction="{StaticResource CircleEasingFunction}" Storyboard.TargetName="PART_RippleLine" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" To="0" Duration="0:0:0.3" />
+                      <DoubleAnimation EasingFunction="{StaticResource Quan.EasingFuns.CircleOut}" Storyboard.TargetName="PART_RippleLine" Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)" To="0" Duration="0:0:0.3" />
                     </Storyboard>
                   </VisualTransition>
                 </VisualStateGroup.Transitions>
@@ -399,12 +402,12 @@
                   </VisualTransition>
                   <VisualTransition To="FocusedPosition">
                     <Storyboard>
-                      <DoubleAnimation EasingFunction="{StaticResource CircleEasingFunction}" Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" To="0.2" Duration="0:0:0.3" />
+                      <DoubleAnimation EasingFunction="{StaticResource Quan.EasingFuns.CircleOut}" Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" To="0.2" Duration="0:0:0.3" />
                     </Storyboard>
                   </VisualTransition>
                   <VisualTransition To="OriginalPosition">
                     <Storyboard>
-                      <DoubleAnimation EasingFunction="{StaticResource CircleEasingFunction}" Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" Duration="0:0:0.3" />
+                      <DoubleAnimation EasingFunction="{StaticResource Quan.EasingFuns.CircleOut}" Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" Duration="0:0:0.3" />
                     </Storyboard>
                   </VisualTransition>
                 </VisualStateGroup.Transitions>
@@ -450,14 +453,14 @@
                     <VisualStateGroup.Transitions>
                       <VisualTransition To="FloatingPosition">
                         <Storyboard>
-                          <DoubleAnimation EasingFunction="{StaticResource CircleEasingFunction}" Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" To="{TemplateBinding FloatingOpacity}" Duration="0:0:0.3" />
+                          <DoubleAnimation EasingFunction="{StaticResource Quan.EasingFuns.CircleOut}" Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" To="{TemplateBinding FloatingOpacity}" Duration="0:0:0.3" />
                           <DoubleAnimation Storyboard.TargetName="ScaleHost" Storyboard.TargetProperty="Scale" To="1" Duration="0:0:0.3" />
                         </Storyboard>
                       </VisualTransition>
                       <VisualTransition To="OriginalPosition">
                         <Storyboard>
-                          <DoubleAnimation EasingFunction="{StaticResource CircleEasingFunction}" Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" Duration="0:0:0.3" />
-                          <DoubleAnimation EasingFunction="{StaticResource CircleEasingFunction}" Storyboard.TargetName="ScaleHost" Storyboard.TargetProperty="Scale" Duration="0:0:0.3" />
+                          <DoubleAnimation EasingFunction="{StaticResource Quan.EasingFuns.CircleOut}" Storyboard.TargetName="FloatingContent" Storyboard.TargetProperty="Opacity" Duration="0:0:0.3" />
+                          <DoubleAnimation EasingFunction="{StaticResource Quan.EasingFuns.CircleOut}" Storyboard.TargetName="ScaleHost" Storyboard.TargetProperty="Scale" Duration="0:0:0.3" />
                         </Storyboard>
                       </VisualTransition>
                     </VisualStateGroup.Transitions>
@@ -705,6 +708,206 @@
     </Style.Triggers>
   </Style>
   <Style BasedOn="{StaticResource Quan.Styles.QuanTextBox.Default}" TargetType="{x:Type local:QuanTextBox}" />
+  <Style x:Key="Quan.Styles.ToggleButton.ExpanderIcon" TargetType="{x:Type ToggleButton}">
+    <Setter Property="FontFamily" Value="{StaticResource Quan.Fonts.FontAwesome}" />
+    <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Bigger}" />
+    <Setter Property="Height" Value="24" />
+    <Setter Property="Width" Value="24" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ToggleButton}">
+          <Border Background="Transparent">
+            <TextBlock x:Name="ExpandIcon" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5 0.5" Text="{StaticResource Quan.FontIcons.Chevron-Down}">
+              <TextBlock.LayoutTransform>
+                <RotateTransform x:Name="ExpandIconRotateTransform" />
+              </TextBlock.LayoutTransform>
+            </TextBlock>
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="CheckStates">
+                <VisualState x:Name="Checked">
+                  <Storyboard>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ExpandIconRotateTransform" Storyboard.TargetProperty="Angle">
+                      <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="180" />
+                    </DoubleAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Unchecked">
+                  <Storyboard>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ExpandIconRotateTransform" Storyboard.TargetProperty="Angle">
+                      <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
+                    </DoubleAnimationUsingKeyFrames>
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="ExpandIcon" Property="Foreground" Value="{DynamicResource Quan.Brushes.Primary}" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+              <Setter TargetName="ExpandIcon" Property="Opacity" Value=".5" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="Quan.Styles.ToggleButton.ExpanderHeader.Horizontal" TargetType="{x:Type ToggleButton}">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ToggleButton}">
+          <Border Padding="{Binding Path=(local:ExpanderHelper.HorizontalHeaderPadding), RelativeSource={RelativeSource AncestorType=Expander, AncestorLevel=1}}" Background="{TemplateBinding Background}">
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="Auto" />
+              </Grid.ColumnDefinitions>
+              <ContentPresenter Grid.Column="0" VerticalAlignment="Center" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" />
+              <ToggleButton x:Name="ExpanderButton" Grid.Column="2" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" IsChecked="{Binding Path=IsChecked, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" RenderTransformOrigin="0.5 0.5">
+                <ToggleButton.Style>
+                  <Style BasedOn="{StaticResource Quan.Styles.ToggleButton.ExpanderIcon}" TargetType="{x:Type ToggleButton}">
+                    <Style.Triggers>
+                      <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource AncestorType=Expander, AncestorLevel=1}}" Value="Up">
+                        <Setter Property="RenderTransform">
+                          <Setter.Value>
+                            <RotateTransform Angle="180" />
+                          </Setter.Value>
+                        </Setter>
+                      </DataTrigger>
+                    </Style.Triggers>
+                  </Style>
+                </ToggleButton.Style>
+              </ToggleButton>
+            </Grid>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="Quan.Styles.ToggleButton.ExpanderHeader.Vertical" TargetType="{x:Type ToggleButton}">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ToggleButton}">
+          <Border Padding="{Binding Path=(local:ExpanderHelper.HorizontalHeaderPadding), RelativeSource={RelativeSource AncestorType=Expander, AncestorLevel=1}}" Background="{TemplateBinding Background}">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="16" />
+                <RowDefinition Height="*" />
+              </Grid.RowDefinitions>
+              <ToggleButton x:Name="ExpanderButton" Grid.Row="0" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" IsChecked="{Binding Path=IsChecked, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" RenderTransformOrigin="0.5 0.5">
+                <ToggleButton.Style>
+                  <Style BasedOn="{StaticResource Quan.Styles.ToggleButton.ExpanderIcon}" TargetType="{x:Type ToggleButton}">
+                    <Style.Triggers>
+                      <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource AncestorType=Expander, AncestorLevel=1}}" Value="Left">
+                        <Setter Property="RenderTransform">
+                          <Setter.Value>
+                            <RotateTransform Angle="90" />
+                          </Setter.Value>
+                        </Setter>
+                      </DataTrigger>
+                      <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource AncestorType=Expander, AncestorLevel=1}}" Value="Right">
+                        <Setter Property="RenderTransform">
+                          <Setter.Value>
+                            <RotateTransform Angle="-90" />
+                          </Setter.Value>
+                        </Setter>
+                      </DataTrigger>
+                    </Style.Triggers>
+                  </Style>
+                </ToggleButton.Style>
+              </ToggleButton>
+              <ContentPresenter Grid.Row="2" VerticalAlignment="Center" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" />
+            </Grid>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style TargetType="{x:Type local:QuanExpander}">
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.ForegroundLight}" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="VerticalContentAlignment" Value="Top" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type local:QuanExpander}">
+          <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+            <DockPanel>
+              <ToggleButton Name="PART_HeaderSite" Background="{TemplateBinding local:ExpanderHelper.HeaderBackground}" BorderThickness="0" Content="{TemplateBinding Header}" ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentTemplate="{TemplateBinding HeaderTemplate}" ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}" Cursor="Hand" DockPanel.Dock="Top" Focusable="False" Foreground="{TemplateBinding Foreground}" IsChecked="{Binding Path=IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" IsTabStop="False" Style="{StaticResource Quan.Styles.ToggleButton.ExpanderHeader.Horizontal}" TextElement.FontSize="{TemplateBinding local:ExpanderHelper.HeaderFontSize}" />
+              <Border Name="PART_ContentSite">
+                <Border.LayoutTransform>
+                  <TransformGroup>
+                    <ScaleTransform x:Name="ContentSiteScaleTransform" />
+                    <RotateTransform Angle="{Binding Path=ExpandDirection, RelativeSource={RelativeSource AncestorType=Expander}, Converter={local:ExpanderRotateAngleConverter}}" />
+                  </TransformGroup>
+                </Border.LayoutTransform>
+                <Grid Name="PART_ContentPanel" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                  <Grid.LayoutTransform>
+                    <RotateTransform Angle="{Binding Path=ExpandDirection, RelativeSource={RelativeSource AncestorType=Expander}, Converter={local:ExpanderRotateAngleConverter}, ConverterParameter=-1}" />
+                  </Grid.LayoutTransform>
+                  <ContentPresenter Name="PART_Content" ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" Focusable="False" />
+                </Grid>
+              </Border>
+            </DockPanel>
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="ExpansionStates">
+                <VisualStateGroup.Transitions>
+                  <VisualTransition To="Expanded">
+                    <Storyboard>
+                      <DoubleAnimation Storyboard.TargetName="PART_ContentPanel" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.25" />
+                      <DoubleAnimation EasingFunction="{StaticResource Quan.EasingFuns.CubicInOut}" Storyboard.TargetName="ContentSiteScaleTransform" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="0" To="1" Duration="0:0:0.25" />
+                    </Storyboard>
+                  </VisualTransition>
+                  <VisualTransition To="Collapsed">
+                    <Storyboard>
+                      <DoubleAnimation Storyboard.TargetName="PART_ContentPanel" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.20" />
+                      <DoubleAnimation EasingFunction="{StaticResource Quan.EasingFuns.CubicInOut}" Storyboard.TargetName="ContentSiteScaleTransform" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="1" To="0" Duration="0:0:0.20" />
+                    </Storyboard>
+                  </VisualTransition>
+                </VisualStateGroup.Transitions>
+                <VisualState x:Name="Expanded">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="PART_ContentPanel" Storyboard.TargetProperty="Opacity" To="1" Duration="0" />
+                    <DoubleAnimation Storyboard.TargetName="ContentSiteScaleTransform" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" To="1" Duration="0" />
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Collapsed">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="PART_ContentPanel" Storyboard.TargetProperty="Opacity" To="0" Duration="0" />
+                    <DoubleAnimation Storyboard.TargetName="ContentSiteScaleTransform" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" To="0" Duration="0" />
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="ExpandDirection" Value="Right">
+              <Setter TargetName="PART_HeaderSite" Property="DockPanel.Dock" Value="Left" />
+              <Setter TargetName="PART_HeaderSite" Property="Style" Value="{StaticResource Quan.Styles.ToggleButton.ExpanderHeader.Vertical}" />
+            </Trigger>
+            <Trigger Property="ExpandDirection" Value="Left">
+              <Setter TargetName="PART_HeaderSite" Property="DockPanel.Dock" Value="Right" />
+              <Setter TargetName="PART_HeaderSite" Property="Style" Value="{StaticResource Quan.Styles.ToggleButton.ExpanderHeader.Vertical}" />
+            </Trigger>
+            <Trigger Property="ExpandDirection" Value="Up">
+              <Setter TargetName="PART_HeaderSite" Property="DockPanel.Dock" Value="Bottom" />
+              <Setter TargetName="PART_HeaderSite" Property="Style" Value="{StaticResource Quan.Styles.ToggleButton.ExpanderHeader.Horizontal}" />
+            </Trigger>
+            <Trigger Property="ExpandDirection" Value="Down">
+              <Setter TargetName="PART_HeaderSite" Property="DockPanel.Dock" Value="Top" />
+              <Setter TargetName="PART_HeaderSite" Property="Style" Value="{StaticResource Quan.Styles.ToggleButton.ExpanderHeader.Horizontal}" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
   <WindowChrome x:Key="DefaultWindowChrome" CaptionHeight="{StaticResource TitleBarHeight}" CornerRadius="0" GlassFrameThickness="0,1,0,0" UseAeroCaptionButtons="False" />
   <ControlTemplate x:Key="Quan.Templates.QuanWindow.Default" TargetType="{x:Type local:QuanWindow}">
     <!--  Window border  -->

@@ -32,7 +32,9 @@
 
     <!--#region Animation-->
 
-    <CircleEase x:Key="CircleEasingFunction" EasingMode="EaseOut" />
+    <CircleEase x:Key="Quan.EasingFuns.CircleOut" EasingMode="EaseOut" />
+    <CircleEase x:Key="Quan.EasingFuns.CircleInOut" EasingMode="EaseInOut" />
+    <CubicEase x:Key="Quan.EasingFuns.CubicInOut" EasingMode="EaseInOut" />
 
     <!--#endregion-->
 

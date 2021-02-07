@@ -33,7 +33,7 @@
                                     <VisualTransition From="Inactive" To="Active">
                                         <Storyboard>
                                             <DoubleAnimation
-                                                EasingFunction="{StaticResource CircleEasingFunction}"
+                                                EasingFunction="{StaticResource Quan.EasingFuns.CircleOut}"
                                                 Storyboard.TargetName="PART_RippleLine"
                                                 Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
                                                 To="1"
@@ -43,7 +43,7 @@
                                     <VisualTransition From="Active" To="Inactive">
                                         <Storyboard>
                                             <DoubleAnimation
-                                                EasingFunction="{StaticResource CircleEasingFunction}"
+                                                EasingFunction="{StaticResource Quan.EasingFuns.CircleOut}"
                                                 Storyboard.TargetName="PART_RippleLine"
                                                 Storyboard.TargetProperty="(RenderTransform).(ScaleTransform.ScaleX)"
                                                 To="0"

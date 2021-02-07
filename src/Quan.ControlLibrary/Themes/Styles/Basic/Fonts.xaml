@@ -16,5 +16,6 @@
 
     <system:String x:Key="Quan.FontIcons.Close">&#xf00d;</system:String>
     <system:String x:Key="Quan.FontIcons.Search">&#xf002;</system:String>
+    <system:String x:Key="Quan.FontIcons.Chevron-Down">&#xf078;</system:String>
 
 </ResourceDictionary>

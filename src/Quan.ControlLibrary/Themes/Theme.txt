@@ -15,4 +15,5 @@ Styles\Custom\QuanRippleLine.xaml
 Styles\Custom\QuanFloatingText.xaml
 Styles\Custom\QuanButton.xaml
 Styles\Custom\QuanTextBox.xaml
+Styles\Custom\QuanExpander.xaml
 Styles\Custom\QuanWindow.xaml

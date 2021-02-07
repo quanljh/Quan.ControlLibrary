@@ -21,6 +21,7 @@ namespace Quan.ControlLibrary.Demo
 
             containerRegistry.RegisterForNavigation<QuanTextBoxView>();
             containerRegistry.RegisterForNavigation<QuanButtonView>();
+            containerRegistry.RegisterForNavigation<QuanExpanderView>();
 
             #endregion
 
@@ -39,6 +40,7 @@ namespace Quan.ControlLibrary.Demo
             ViewModelLocationProvider.Register<MainWindow, MainWindowViewModel>();
             ViewModelLocationProvider.Register<QuanTextBoxView, QuanTextBoxViewModel>();
             ViewModelLocationProvider.Register<QuanButtonView, QuanButtonViewModel>();
+            ViewModelLocationProvider.Register<QuanExpanderView, QuanExpanderViewModel>();
         }
 
         /// <inheritdoc />

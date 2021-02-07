@@ -44,7 +44,7 @@
                                     <VisualTransition To="FocusedPosition">
                                         <Storyboard>
                                             <DoubleAnimation
-                                                EasingFunction="{StaticResource CircleEasingFunction}"
+                                                EasingFunction="{StaticResource Quan.EasingFuns.CircleOut}"
                                                 Storyboard.TargetName="FloatingContent"
                                                 Storyboard.TargetProperty="Opacity"
                                                 To="0.2"
@@ -54,7 +54,7 @@
                                     <VisualTransition To="OriginalPosition">
                                         <Storyboard>
                                             <DoubleAnimation
-                                                EasingFunction="{StaticResource CircleEasingFunction}"
+                                                EasingFunction="{StaticResource Quan.EasingFuns.CircleOut}"
                                                 Storyboard.TargetName="FloatingContent"
                                                 Storyboard.TargetProperty="Opacity"
                                                 Duration="0:0:0.3" />
@@ -124,7 +124,7 @@
                                             <VisualTransition To="FloatingPosition">
                                                 <Storyboard>
                                                     <DoubleAnimation
-                                                        EasingFunction="{StaticResource CircleEasingFunction}"
+                                                        EasingFunction="{StaticResource Quan.EasingFuns.CircleOut}"
                                                         Storyboard.TargetName="FloatingContent"
                                                         Storyboard.TargetProperty="Opacity"
                                                         To="{TemplateBinding FloatingOpacity}"
@@ -139,12 +139,12 @@
                                             <VisualTransition To="OriginalPosition">
                                                 <Storyboard>
                                                     <DoubleAnimation
-                                                        EasingFunction="{StaticResource CircleEasingFunction}"
+                                                        EasingFunction="{StaticResource Quan.EasingFuns.CircleOut}"
                                                         Storyboard.TargetName="FloatingContent"
                                                         Storyboard.TargetProperty="Opacity"
                                                         Duration="0:0:0.3" />
                                                     <DoubleAnimation
-                                                        EasingFunction="{StaticResource CircleEasingFunction}"
+                                                        EasingFunction="{StaticResource Quan.EasingFuns.CircleOut}"
                                                         Storyboard.TargetName="ScaleHost"
                                                         Storyboard.TargetProperty="Scale"
                                                         Duration="0:0:0.3" />
