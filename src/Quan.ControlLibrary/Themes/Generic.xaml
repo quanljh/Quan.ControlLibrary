@@ -161,6 +161,56 @@
       </Setter.Value>
     </Setter>
   </Style>
+  <ControlTemplate x:Key="Quan.Templates.QuanButton.Default" TargetType="{x:Type local:QuanButton}">
+    <Grid>
+      <AdornerDecorator>
+        <Border x:Name="PART_Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(local:ShadowHelper.ShadowEffect), Converter={local:ShadowConverter}}" />
+      </AdornerDecorator>
+      <local:QuanRipple Padding="{TemplateBinding Padding}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+        <local:QuanRipple.Clip>
+          <MultiBinding Converter="{local:BorderClipConverter}">
+            <Binding ElementName="PART_Border" Path="ActualHeight" />
+            <Binding ElementName="PART_Border" Path="ActualWidth" />
+            <Binding ElementName="PART_Border" Path="CornerRadius" />
+            <Binding ElementName="PART_Border" Path="BorderThickness" />
+          </MultiBinding>
+        </local:QuanRipple.Clip>
+      </local:QuanRipple>
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter Property="Opacity" Value="0.23" />
+      </Trigger>
+      <Trigger Property="IsMouseOver" Value="True">
+        <Setter TargetName="PART_Border" Property="local:ShadowHelper.Darken" Value="True" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
+  <ControlTemplate x:Key="Quan.Templates.QuanButton.Flat" TargetType="{x:Type local:QuanButton}">
+    <Grid>
+      <AdornerDecorator>
+        <Border x:Name="PART_Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" />
+      </AdornerDecorator>
+      <local:QuanRipple Padding="{TemplateBinding Padding}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+        <local:QuanRipple.Clip>
+          <MultiBinding Converter="{local:BorderClipConverter}">
+            <Binding ElementName="PART_Border" Path="ActualHeight" />
+            <Binding ElementName="PART_Border" Path="ActualWidth" />
+            <Binding ElementName="PART_Border" Path="CornerRadius" />
+            <Binding ElementName="PART_Border" Path="BorderThickness" />
+          </MultiBinding>
+        </local:QuanRipple.Clip>
+      </local:QuanRipple>
+    </Grid>
+    <ControlTemplate.Triggers>
+      <Trigger Property="IsEnabled" Value="False">
+        <Setter Property="Opacity" Value="0.23" />
+      </Trigger>
+      <Trigger Property="IsMouseOver" Value="True">
+        <Setter TargetName="PART_Border" Property="Background" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={local:BrushOpacityConverter}, ConverterParameter=0.16}" />
+      </Trigger>
+    </ControlTemplate.Triggers>
+  </ControlTemplate>
   <Storyboard x:Key="Quan.Storyboards.TextBox.GotFocus" o:Freeze="True">
     <DoubleAnimation Storyboard.TargetName="PART_GuideMessage" Storyboard.TargetProperty="Opacity" To="0.2" Duration="0:0:0.2" />
   </Storyboard>
@@ -212,8 +262,12 @@
     <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Regular}" />
     <Setter Property="FocusVisualStyle" Value="{StaticResource Quan.Styles.Common.FocusVisual}" />
   </Style>
-  <DropShadowEffect x:Key="Quan.ShadowEffects.Effect1" o:Freeze="True" BlurRadius="10" Opacity="1" RenderingBias="Performance" ShadowDepth="0" Color="{DynamicResource Quan.Colors.Shadow}" />
-  <DropShadowEffect x:Key="Quan.ShadowEffects.Effect2" o:Freeze="True" BlurRadius="10" Direction="270" Opacity=".7" RenderingBias="Performance" ShadowDepth="4" Color="{DynamicResource Quan.Colors.Shadow}" />
+  <DropShadowEffect x:Key="Quan.ShadowEffects.Effect0" o:Freeze="True" BlurRadius="10" Opacity="1" RenderingBias="Performance" ShadowDepth="0" Color="{DynamicResource Quan.Colors.Shadow}" />
+  <DropShadowEffect x:Key="Quan.ShadowEffects.Effect1" o:Freeze="True" BlurRadius="5" Direction="270" Opacity=".42" RenderingBias="Performance" ShadowDepth="1" Color="{DynamicResource Quan.Colors.Shadow}" />
+  <DropShadowEffect x:Key="Quan.ShadowEffects.Effect2" o:Freeze="True" BlurRadius="8" Direction="270" Opacity=".42" RenderingBias="Performance" ShadowDepth="1.5" Color="{DynamicResource Quan.Colors.Shadow}" />
+  <DropShadowEffect x:Key="Quan.ShadowEffects.Effect3" o:Freeze="True" BlurRadius="14" Direction="270" Opacity=".42" RenderingBias="Performance" ShadowDepth="4.5" Color="{DynamicResource Quan.Colors.Shadow}" />
+  <DropShadowEffect x:Key="Quan.ShadowEffects.Effect4" o:Freeze="True" BlurRadius="25" Direction="270" Opacity=".42" RenderingBias="Performance" ShadowDepth="8" Color="{DynamicResource Quan.Colors.Shadow}" />
+  <DropShadowEffect x:Key="Quan.ShadowEffects.Effect5" o:Freeze="True" BlurRadius="35" Direction="270" Opacity=".42" RenderingBias="Performance" ShadowDepth="13" Color="{DynamicResource Quan.Colors.Shadow}" />
   <Style x:Key="Quan.Styles.Button.BaseBase" BasedOn="{StaticResource Quan.Styles.Common.BaseStyle}" TargetType="{x:Type ButtonBase}">
     <Setter Property="Height" Value="30" />
     <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Border}" />
@@ -486,43 +540,28 @@
     </Style.Triggers>
   </Style>
   <Style TargetType="{x:Type local:QuanButton}">
-    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Background" Value="{DynamicResource Quan.Brushes.LightPrimary}" />
     <Setter Property="BorderBrush" Value="Transparent" />
     <Setter Property="Cursor" Value="Hand" />
-    <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.Background}" />
+    <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.ForegroundHighLight}" />
     <Setter Property="local:RippleHelper.Background" Value="{DynamicResource Quan.Brushes.Background}" />
     <Setter Property="TextBlock.FontWeight" Value="Medium" />
     <Setter Property="TextBlock.FontSize" Value="14" />
+    <Setter Property="CornerRadius" Value="2" />
     <Setter Property="BorderThickness" Value="0" />
     <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="local:ShadowHelper.ShadowEffect" Value="Effect2" />
     <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="Height" Value="32" />
-    <Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="{x:Type local:QuanButton}">
-          <Grid>
-            <AdornerDecorator>
-              <Border x:Name="PART_Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}" Effect="{StaticResource Quan.ShadowEffects.Effect1}" />
-            </AdornerDecorator>
-            <local:QuanRipple Padding="{TemplateBinding Padding}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" Focusable="False" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-              <local:QuanRipple.Clip>
-                <MultiBinding Converter="{local:BorderClipConverter}">
-                  <Binding ElementName="PART_Border" Path="ActualHeight" />
-                  <Binding ElementName="PART_Border" Path="ActualWidth" />
-                  <Binding ElementName="PART_Border" Path="CornerRadius" />
-                  <Binding ElementName="PART_Border" Path="BorderThickness" />
-                </MultiBinding>
-              </local:QuanRipple.Clip>
-            </local:QuanRipple>
-          </Grid>
-          <ControlTemplate.Triggers>
-            <Trigger Property="IsEnabled" Value="False">
-              <Setter Property="Opacity" Value="0.23" />
-            </Trigger>
-          </ControlTemplate.Triggers>
-        </ControlTemplate>
-      </Setter.Value>
-    </Setter>
+    <Setter Property="Template" Value="{StaticResource Quan.Templates.QuanButton.Default}" />
+    <Style.Triggers>
+      <Trigger Property="DisplayMode" Value="Flat">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.LightPrimary}" />
+        <Setter Property="local:RippleHelper.Background" Value="{DynamicResource Quan.Brushes.LightPrimary}" />
+        <Setter Property="Template" Value="{StaticResource Quan.Templates.QuanButton.Flat}" />
+      </Trigger>
+    </Style.Triggers>
   </Style>
   <ControlTemplate x:Key="QuanTextBox.ValidationTemplate">
     <Grid>
@@ -556,9 +595,9 @@
             </Grid.ColumnDefinitions>
             <ScrollViewer x:Name="PART_ContentHost" Margin="0" Padding="{TemplateBinding Padding}" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
             <TextBlock x:Name="PART_GuideMessage" Grid.Column="0" Margin="5,0,0,0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" FontFamily="{TemplateBinding FontFamily}" IsHitTestVisible="False" Opacity="{TemplateBinding local:TextBoxHelper.GuideTextOpacity}" Text="{TemplateBinding local:TextBoxHelper.GuideText}" Visibility="{Binding Path=(local:TextBoxHelper.HasText), RelativeSource={RelativeSource TemplatedParent}, Converter={local:BooleanToCollapsedConverter}, ConverterParameter=True}" />
-            <Button x:Name="PART_ClearTextButton" Grid.Column="1" Width="26" local:TextBoxHelper.IsUseClearButton="{TemplateBinding local:TextBoxHelper.IsShowClearButton}" Content="{StaticResource Quan.FontIcons.Close}" Foreground="{TemplateBinding BorderBrush}" IsTabStop="False" Style="{StaticResource Quan.Styles.Button.FontIcon}" Visibility="Collapsed" />
+            <Button x:Name="PART_ClearTextButton" Grid.Column="1" Width="26" local:TextBoxHelper.IsUseClearButton="{TemplateBinding local:TextBoxHelper.IsShowClearButton}" Content="{StaticResource Quan.FontIcons.Close}" Focusable="False" Foreground="{TemplateBinding BorderBrush}" IsTabStop="False" Style="{StaticResource Quan.Styles.Button.FontIcon}" Visibility="Collapsed" />
             <Border x:Name="PART_DividingLine" Grid.Column="2" Width="1" Margin="0,3" Background="{TemplateBinding BorderBrush}" Visibility="Collapsed" />
-            <Button x:Name="PART_FunctionButton" Grid.Column="3" Width="26" local:TextBoxHelper.IsUseFunctionButton="{TemplateBinding local:TextBoxHelper.IsShowFunctionButton}" Content="{TemplateBinding local:TextBoxHelper.FunctionButtonContent}" Foreground="{TemplateBinding BorderBrush}" IsTabStop="False" Style="{StaticResource Quan.Styles.Button.FontIcon}" Visibility="{TemplateBinding local:TextBoxHelper.IsShowFunctionButton,&#xD;&#xA;                                                         Converter={local:BooleanToCollapsedConverter}}" />
+            <Button x:Name="PART_FunctionButton" Grid.Column="3" Width="26" local:TextBoxHelper.IsUseFunctionButton="{TemplateBinding local:TextBoxHelper.IsShowFunctionButton}" Content="{TemplateBinding local:TextBoxHelper.FunctionButtonContent}" Focusable="False" Foreground="{TemplateBinding BorderBrush}" IsTabStop="False" Style="{StaticResource Quan.Styles.Button.FontIcon}" Visibility="{TemplateBinding local:TextBoxHelper.IsShowFunctionButton,&#xD;&#xA;                                                         Converter={local:BooleanToCollapsedConverter}}" />
           </Grid>
         </Border>
       </AdornerDecorator>
@@ -621,26 +660,6 @@
             <ScrollViewer x:Name="PART_ContentHost" Margin="0" Padding="{TemplateBinding Padding}" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
             <local:QuanFloatingText x:Name="PART_GuideMessage" Grid.Column="0" Margin="5,0,0,0" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" FloatingOffset="{TemplateBinding local:FloatingTextHelper.FloatingOffset}" FloatingOpacity="{TemplateBinding local:FloatingTextHelper.FloatingOpacity}" FloatingProxy="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static local:FloatingProxyFabricConverter.Instance}}" FloatingScale="{TemplateBinding local:FloatingTextHelper.FloatingScale}" FloatingText="{TemplateBinding local:TextBoxHelper.GuideText}" FontFamily="{TemplateBinding FontFamily}" IsUseFloating="{TemplateBinding local:FloatingTextHelper.IsUseFloating}" />
             <Button x:Name="PART_ClearTextButton" Grid.Column="1" Width="26" local:TextBoxHelper.IsUseClearButton="{TemplateBinding local:TextBoxHelper.IsShowClearButton}" Content="{StaticResource Quan.FontIcons.Close}" Focusable="False" Foreground="{TemplateBinding BorderBrush}" IsTabStop="False" Style="{StaticResource Quan.Styles.Button.FontIcon}" Visibility="Collapsed" />
-            <!--<Line
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Stroke="{DynamicResource Quan.Brushes.BorderBrush}"
-                    X1="0"
-                    X2="0"
-                    Y1="0"
-                    Y2="" />
-
-                <Button
-                    x:Name="PART_FunctionButton"
-                    Grid.Row="1"
-                    Grid.Column="2"
-                    Width="26"
-                    local:IconHelper.Geometry="{TemplateBinding local:TextBoxHelper.ButtonContent}"
-                    local:IconHelper.Height="10"
-                    local:IconHelper.Width="10"
-                    BorderThickness="1,0"
-                    Focusable="False"
-                    Style="{StaticResource Quan.Styles.Button.Icon}" />-->
           </Grid>
         </Border>
       </AdornerDecorator>
@@ -711,6 +730,7 @@
   <Style x:Key="Quan.Styles.ToggleButton.ExpanderIcon" TargetType="{x:Type ToggleButton}">
     <Setter Property="FontFamily" Value="{StaticResource Quan.Fonts.FontAwesome}" />
     <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Bigger}" />
+    <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.Border}" />
     <Setter Property="Height" Value="24" />
     <Setter Property="Width" Value="24" />
     <Setter Property="Template">
@@ -766,7 +786,7 @@
                 <ColumnDefinition Width="Auto" />
               </Grid.ColumnDefinitions>
               <ContentPresenter Grid.Column="0" VerticalAlignment="Center" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" />
-              <ToggleButton x:Name="ExpanderButton" Grid.Column="2" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" IsChecked="{Binding Path=IsChecked, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" RenderTransformOrigin="0.5 0.5">
+              <ToggleButton x:Name="ExpanderButton" Grid.Column="2" VerticalAlignment="Center" IsChecked="{Binding Path=IsChecked, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" RenderTransformOrigin="0.5 0.5">
                 <ToggleButton.Style>
                   <Style BasedOn="{StaticResource Quan.Styles.ToggleButton.ExpanderIcon}" TargetType="{x:Type ToggleButton}">
                     <Style.Triggers>
@@ -799,7 +819,7 @@
                 <RowDefinition Height="16" />
                 <RowDefinition Height="*" />
               </Grid.RowDefinitions>
-              <ToggleButton x:Name="ExpanderButton" Grid.Row="0" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" IsChecked="{Binding Path=IsChecked, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" RenderTransformOrigin="0.5 0.5">
+              <ToggleButton x:Name="ExpanderButton" Grid.Row="0" VerticalAlignment="Center" IsChecked="{Binding Path=IsChecked, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" RenderTransformOrigin="0.5 0.5">
                 <ToggleButton.Style>
                   <Style BasedOn="{StaticResource Quan.Styles.ToggleButton.ExpanderIcon}" TargetType="{x:Type ToggleButton}">
                     <Style.Triggers>
@@ -831,6 +851,7 @@
   <Style TargetType="{x:Type local:QuanExpander}">
     <Setter Property="BorderThickness" Value="0" />
     <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Border}" />
     <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.ForegroundLight}" />
     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
     <Setter Property="VerticalContentAlignment" Value="Top" />

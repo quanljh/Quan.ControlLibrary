@@ -5,58 +5,109 @@
         <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Basic/Common.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <ControlTemplate x:Key="Quan.Templates.QuanButton.Default" TargetType="{x:Type local:QuanButton}">
+        <Grid>
+            <AdornerDecorator>
+                <Border
+                    x:Name="PART_Border"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}"
+                    Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(local:ShadowHelper.ShadowEffect), Converter={local:ShadowConverter}}" />
+            </AdornerDecorator>
+            <local:QuanRipple
+                Padding="{TemplateBinding Padding}"
+                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                Content="{TemplateBinding Content}"
+                ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                ContentTemplate="{TemplateBinding ContentTemplate}"
+                Focusable="False"
+                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                <local:QuanRipple.Clip>
+                    <MultiBinding Converter="{local:BorderClipConverter}">
+                        <Binding ElementName="PART_Border" Path="ActualHeight" />
+                        <Binding ElementName="PART_Border" Path="ActualWidth" />
+                        <Binding ElementName="PART_Border" Path="CornerRadius" />
+                        <Binding ElementName="PART_Border" Path="BorderThickness" />
+                    </MultiBinding>
+                </local:QuanRipple.Clip>
+            </local:QuanRipple>
+        </Grid>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.23" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="PART_Border" Property="local:ShadowHelper.Darken" Value="True" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="Quan.Templates.QuanButton.Flat" TargetType="{x:Type local:QuanButton}">
+        <Grid>
+            <AdornerDecorator>
+                <Border
+                    x:Name="PART_Border"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{TemplateBinding CornerRadius}" />
+            </AdornerDecorator>
+            <local:QuanRipple
+                Padding="{TemplateBinding Padding}"
+                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                Content="{TemplateBinding Content}"
+                ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                ContentTemplate="{TemplateBinding ContentTemplate}"
+                Focusable="False"
+                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                <local:QuanRipple.Clip>
+                    <MultiBinding Converter="{local:BorderClipConverter}">
+                        <Binding ElementName="PART_Border" Path="ActualHeight" />
+                        <Binding ElementName="PART_Border" Path="ActualWidth" />
+                        <Binding ElementName="PART_Border" Path="CornerRadius" />
+                        <Binding ElementName="PART_Border" Path="BorderThickness" />
+                    </MultiBinding>
+                </local:QuanRipple.Clip>
+            </local:QuanRipple>
+        </Grid>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.23" />
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="PART_Border" Property="Background" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={local:BrushOpacityConverter}, ConverterParameter=0.16}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
     <Style TargetType="{x:Type local:QuanButton}">
-        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Background" Value="{DynamicResource Quan.Brushes.LightPrimary}" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.Background}" />
+        <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.ForegroundHighLight}" />
         <Setter Property="local:RippleHelper.Background" Value="{DynamicResource Quan.Brushes.Background}" />
         <Setter Property="TextBlock.FontWeight" Value="Medium" />
         <Setter Property="TextBlock.FontSize" Value="14" />
+        <Setter Property="CornerRadius" Value="2" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="local:ShadowHelper.ShadowEffect" Value="Effect2" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Height" Value="32" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:QuanButton}">
-                    <Grid>
-                        <AdornerDecorator>
-                            <Border
-                                x:Name="PART_Border"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{TemplateBinding CornerRadius}"
-                                Effect="{StaticResource Quan.ShadowEffects.Effect1}" />
-                        </AdornerDecorator>
-                        <local:QuanRipple
-                            Padding="{TemplateBinding Padding}"
-                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                            Content="{TemplateBinding Content}"
-                            ContentStringFormat="{TemplateBinding ContentStringFormat}"
-                            ContentTemplate="{TemplateBinding ContentTemplate}"
-                            Focusable="False"
-                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                            <local:QuanRipple.Clip>
-                                <MultiBinding Converter="{local:BorderClipConverter}">
-                                    <Binding ElementName="PART_Border" Path="ActualHeight" />
-                                    <Binding ElementName="PART_Border" Path="ActualWidth" />
-                                    <Binding ElementName="PART_Border" Path="CornerRadius" />
-                                    <Binding ElementName="PART_Border" Path="BorderThickness" />
-                                </MultiBinding>
-                            </local:QuanRipple.Clip>
-                        </local:QuanRipple>
-                    </Grid>
-
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="0.23" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="Template" Value="{StaticResource Quan.Templates.QuanButton.Default}" />
+        <Style.Triggers>
+            <Trigger Property="DisplayMode" Value="Flat">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.LightPrimary}" />
+                <Setter Property="local:RippleHelper.Background" Value="{DynamicResource Quan.Brushes.LightPrimary}" />
+                <Setter Property="Template" Value="{StaticResource Quan.Templates.QuanButton.Flat}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

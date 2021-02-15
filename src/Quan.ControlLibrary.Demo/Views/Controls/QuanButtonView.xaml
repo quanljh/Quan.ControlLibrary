@@ -13,15 +13,21 @@
         <q:QuanButton
             Width="100"
             Height="30"
-            Background="BlueViolet"
             Click="ButtonBase_OnClick"
-            Content="121"
-            CornerRadius="5" />
+            Content="121" />
 
         <q:QuanButton
             Width="100"
             Height="30"
-            Background="BlueViolet"
-            Content="333" />
+            Content="333"
+            DisplayMode="Flat" />
+
+        <q:QuanButton
+            Width="100"
+            Height="30"
+            BorderBrush="{DynamicResource Quan.Brushes.LightPrimary}"
+            BorderThickness="1"
+            Content="333"
+            DisplayMode="Flat" />
     </StackPanel>
 </UserControl>

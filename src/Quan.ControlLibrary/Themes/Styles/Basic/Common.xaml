@@ -41,7 +41,7 @@
     <!--#region Shadows-->
 
     <DropShadowEffect
-        x:Key="Quan.ShadowEffects.Effect1"
+        x:Key="Quan.ShadowEffects.Effect0"
         o:Freeze="True"
         BlurRadius="10"
         Opacity="1"
@@ -50,13 +50,49 @@
         Color="{DynamicResource Quan.Colors.Shadow}" />
 
     <DropShadowEffect
+        x:Key="Quan.ShadowEffects.Effect1"
+        o:Freeze="True"
+        BlurRadius="5"
+        Direction="270"
+        Opacity=".42"
+        RenderingBias="Performance"
+        ShadowDepth="1"
+        Color="{DynamicResource Quan.Colors.Shadow}" />
+    <DropShadowEffect
         x:Key="Quan.ShadowEffects.Effect2"
         o:Freeze="True"
-        BlurRadius="10"
+        BlurRadius="8"
         Direction="270"
-        Opacity=".7"
+        Opacity=".42"
         RenderingBias="Performance"
-        ShadowDepth="4"
+        ShadowDepth="1.5"
+        Color="{DynamicResource Quan.Colors.Shadow}" />
+    <DropShadowEffect
+        x:Key="Quan.ShadowEffects.Effect3"
+        o:Freeze="True"
+        BlurRadius="14"
+        Direction="270"
+        Opacity=".42"
+        RenderingBias="Performance"
+        ShadowDepth="4.5"
+        Color="{DynamicResource Quan.Colors.Shadow}" />
+    <DropShadowEffect
+        x:Key="Quan.ShadowEffects.Effect4"
+        o:Freeze="True"
+        BlurRadius="25"
+        Direction="270"
+        Opacity=".42"
+        RenderingBias="Performance"
+        ShadowDepth="8"
+        Color="{DynamicResource Quan.Colors.Shadow}" />
+    <DropShadowEffect
+        x:Key="Quan.ShadowEffects.Effect5"
+        o:Freeze="True"
+        BlurRadius="35"
+        Direction="270"
+        Opacity=".42"
+        RenderingBias="Performance"
+        ShadowDepth="13"
         Color="{DynamicResource Quan.Colors.Shadow}" />
 
     <!--#endregion-->

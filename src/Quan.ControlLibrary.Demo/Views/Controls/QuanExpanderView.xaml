@@ -15,7 +15,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel>
-            <q:QuanExpander HorizontalAlignment="Stretch" Header="ExpandDirection: Down">
+            <q:QuanExpander HorizontalAlignment="Stretch" BorderThickness="0,1" Header="ExpandDirection: Down">
                 <StackPanel Margin="24,8,24,16" Orientation="Vertical">
                     <TextBlock Text="Your Content" />
                     <TextBlock Text="Custome Area...&#x0a;Place your infomation at here." />

@@ -7,6 +7,7 @@
     <Style x:Key="Quan.Styles.ToggleButton.ExpanderIcon" TargetType="{x:Type ToggleButton}">
         <Setter Property="FontFamily" Value="{StaticResource Quan.Fonts.FontAwesome}" />
         <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Bigger}" />
+        <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.Border}" />
         <Setter Property="Height" Value="24" />
         <Setter Property="Width" Value="24" />
         <Setter Property="Template">
@@ -81,7 +82,6 @@
                                 x:Name="ExpanderButton"
                                 Grid.Column="2"
                                 VerticalAlignment="Center"
-                                Foreground="{TemplateBinding Foreground}"
                                 IsChecked="{Binding Path=IsChecked, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                 RenderTransformOrigin="0.5 0.5">
                                 <ToggleButton.Style>
@@ -124,7 +124,6 @@
                                 x:Name="ExpanderButton"
                                 Grid.Row="0"
                                 VerticalAlignment="Center"
-                                Foreground="{TemplateBinding Foreground}"
                                 IsChecked="{Binding Path=IsChecked, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                 RenderTransformOrigin="0.5 0.5">
                                 <ToggleButton.Style>
@@ -167,6 +166,7 @@
     <Style TargetType="{x:Type local:QuanExpander}">
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Border}" />
         <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.ForegroundLight}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Top" />
