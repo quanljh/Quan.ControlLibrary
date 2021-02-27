@@ -103,17 +103,17 @@ namespace Quan.ControlLibrary
                 return;
             }
 
-            var foundRange = FindTextInRange(textRange, searchText);
+            var foundRange = FindTextInRange(textRange, searchText!);
 
             if (foundRange == null)
                 return;
 
             foundRange.ApplyPropertyValue(TextElement.FontFamilyProperty, new FontFamily(new Uri("pack://application:,,,/"), "./Fonts/#Lato Bold"));
 
-            foundRange.ApplyPropertyValue(TextElement.ForegroundProperty, (SolidColorBrush)Application.Current.FindResource("WordOrangeBrush") ?? new SolidColorBrush(Colors.Orange));
+            foundRange.ApplyPropertyValue(TextElement.ForegroundProperty, (SolidColorBrush?)Application.Current.FindResource("WordOrangeBrush") ?? new SolidColorBrush(Colors.Orange));
         }
 
-        public TextRange FindTextInRange(TextRange searchRange, string searchText)
+        public TextRange? FindTextInRange(TextRange searchRange, string searchText)
         {
             int offset = searchRange.Text.IndexOf(searchText, StringComparison.OrdinalIgnoreCase);
             if (offset < 0)
@@ -125,7 +125,7 @@ namespace Quan.ControlLibrary
             return result;
         }
 
-        public TextPointer GetTextPositionAtOffset(TextPointer position, int characterCount)
+        public TextPointer? GetTextPositionAtOffset(TextPointer? position, int characterCount)
         {
             while (position != null)
             {
@@ -140,7 +140,7 @@ namespace Quan.ControlLibrary
                     characterCount -= count;
                 }
 
-                TextPointer nextContextPosition = position.GetNextContextPosition(LogicalDirection.Forward);
+                TextPointer? nextContextPosition = position.GetNextContextPosition(LogicalDirection.Forward);
                 if (nextContextPosition == null)
                     return position;
 
@@ -181,7 +181,7 @@ namespace Quan.ControlLibrary
     {
         private static IEnumerable<TextElement> GetRunsAndParagraphs(FlowDocument doc)
         {
-            for (TextPointer position = doc.ContentStart;
+            for (TextPointer? position = doc.ContentStart;
               position != null && position.CompareTo(doc.ContentEnd) <= 0;
               position = position.GetNextContextPosition(LogicalDirection.Forward))
             {
@@ -231,9 +231,7 @@ namespace Quan.ControlLibrary
 
             foreach (TextElement el in GetRunsAndParagraphs(doc))
             {
-                Run run = el as Run;
-
-                if (run != null)
+                if (el is Run run)
                 {
                     int count = run.Text.Length;
 
@@ -262,7 +260,7 @@ namespace Quan.ControlLibrary
 
             foreach (TextElement el in GetRunsAndParagraphs(doc))
             {
-                Run run = el as Run;
+                Run? run = el as Run;
                 sb.Append(run == null ? Environment.NewLine : run.Text);
             }
             return sb.ToString();

@@ -29,26 +29,6 @@ namespace Quan.ControlLibrary
         }
 
         /// <summary>
-        /// Find the first parent element within specific type from source element's visual tree
-        /// </summary>
-        /// <typeparam name="T">The type of parent element</typeparam>
-        /// <param name="obj">The source element</param>
-        /// <returns></returns>
-        public static T GetVisualParent<T>(this DependencyObject obj) where T : class
-        {
-            var parent = VisualTreeHelper.GetParent(obj.GetVisualTreeRoot());
-            while (parent != null)
-            {
-                if (parent is T element)
-                    return element;
-
-                parent = VisualTreeHelper.GetParent(parent);
-            }
-
-            return null;
-        }
-
-        /// <summary>
         /// Gets all visual parents of a given element on it's visual tree
         /// </summary>
         /// <param name="dp">The source element</param>
@@ -70,7 +50,7 @@ namespace Quan.ControlLibrary
         /// <param name="obj">The source element</param>
         /// <param name="name">The name of parent element</param>
         /// <returns></returns>
-        public static T FindVisualParentByName<T>(this DependencyObject obj, string name = null) where T : FrameworkElement
+        public static T? FindVisualParent<T>(this DependencyObject obj, string? name = null) where T : FrameworkElement
         {
             var parent = VisualTreeHelper.GetParent(obj.GetVisualTreeRoot());
             while (parent != null)
@@ -94,8 +74,8 @@ namespace Quan.ControlLibrary
         /// <param name="itemsControl">The items Control</param>
         /// <param name="itemContainerSearchType">The ItemContainer type of the ItemsControl</param>
         /// <returns>Return Null if we not found</returns>
-        public static DependencyObject FindVisualParent(this DependencyObject d, Type itemSearchType,
-             ItemsControl itemsControl, Type itemContainerSearchType)
+        public static DependencyObject? FindVisualParent(this DependencyObject d, Type? itemSearchType,
+             ItemsControl? itemsControl, Type? itemContainerSearchType)
         {
             if (itemsControl == null) throw new ArgumentNullException(nameof(itemsControl));
             if (itemContainerSearchType == null) throw new ArgumentNullException(nameof(itemContainerSearchType));
@@ -126,13 +106,13 @@ namespace Quan.ControlLibrary
         /// <summary>
         /// Find the visual ancestor by type and go through the visual tree until the given itemsControl will be found
         /// </summary>
-        public static DependencyObject FindVisualParent(this DependencyObject d, Type itemSearchType, ItemsControl itemsControl)
+        public static DependencyObject? FindVisualParent(this DependencyObject d, Type? itemSearchType, ItemsControl? itemsControl)
         {
             if (itemsControl == null) throw new ArgumentNullException(nameof(itemsControl));
 
             var visualTreeRoot = d.GetVisualTreeRoot();
             var currentVisual = VisualTreeHelper.GetParent(visualTreeRoot);
-            DependencyObject lastFoundItemByType = null;
+            DependencyObject? lastFoundItemByType = null;
 
             while (currentVisual != null && itemSearchType != null)
             {
@@ -159,7 +139,7 @@ namespace Quan.ControlLibrary
         /// <typeparam name="T">The child element's type</typeparam>
         /// <param name="obj">The source element</param>
         /// <returns>The first Child element</returns>
-        public static T FindVisualChild<T>(this DependencyObject obj) where T : DependencyObject
+        public static T? FindVisualChild<T>(this DependencyObject obj) where T : DependencyObject
         {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
             {
@@ -168,7 +148,7 @@ namespace Quan.ControlLibrary
                 if (child is T item)
                     return item;
 
-                T childOfChild = FindVisualChild<T>(child);
+                T? childOfChild = FindVisualChild<T>(child);
 
                 if (childOfChild != null) return childOfChild;
             }

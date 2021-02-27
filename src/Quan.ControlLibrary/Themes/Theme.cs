@@ -25,9 +25,9 @@ namespace Quan.ControlLibrary
             }
         }
 
-        private Uri _source;
+        private Uri? _source;
 
-        public new Uri Source
+        public new Uri? Source
         {
             get => DesignerHelper.IsInDesignMode ? null : _source;
             set => _source = value;
@@ -47,7 +47,7 @@ namespace Quan.ControlLibrary
             }
         }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         public virtual ResourceDictionary GetSkin(SkinType skinType) => ResourceHelper.GetSkin(skinType);
 

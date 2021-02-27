@@ -67,7 +67,7 @@ namespace Quan.ControlLibrary
         /// <summary>
         /// The window to handle the resizing for
         /// </summary>
-        private Window _window;
+        private Window? _window;
 
         /// <summary>
         /// The maximized window border
@@ -75,7 +75,7 @@ namespace Quan.ControlLibrary
         private Thickness? _maximizedWindowBorder;
 
 
-        private HwndSource _hwndSource;
+        private HwndSource? _hwndSource;
 
         private IntPtr _hwnd;
 
@@ -137,7 +137,7 @@ namespace Quan.ControlLibrary
         private static extern uint SHAppBarMessage(ABMsg dwMessage, ref APPBARDATA pData);
 
         [DllImport("user32", CharSet = CharSet.Auto)]
-        private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+        private static extern IntPtr FindWindow(string? lpClassName, string? lpWindowName);
 
         #endregion
 
@@ -232,7 +232,7 @@ namespace Quan.ControlLibrary
             UnsubscribeWindowEvents();
         }
 
-        private void Window_Closed(object sender, EventArgs e)
+        private void Window_Closed(object? sender, EventArgs e)
         {
             UnsetWindow();
         }
@@ -262,7 +262,7 @@ namespace Quan.ControlLibrary
             _isWindowPosAdjusted = false;
         }
 
-        private void WindowSourceInitialized(object sender, EventArgs e)
+        private void WindowSourceInitialized(object? sender, EventArgs? e)
         {
             _hwnd = new WindowInteropHelper(_window).Handle;
             _hwndSource = HwndSource.FromHwnd(_hwnd);
@@ -273,7 +273,7 @@ namespace Quan.ControlLibrary
 
         private void UpdateWindowPadding()
         {
-            if (_hwndSource == null || _hwndSource.IsDisposed || _hwndSource.CompositionTarget == null)
+            if (_window == null || _hwndSource == null || _hwndSource.IsDisposed || _hwndSource.CompositionTarget == null)
             {
                 return;
             }
@@ -306,6 +306,9 @@ namespace Quan.ControlLibrary
             dpiScaleX = dpi.DpiScaleX;
             dpiScaleY = dpi.DpiScaleY;
 #else
+            if (_hwndSource?.CompositionTarget == null)
+                return new Thickness();
+
             Matrix transformToDevice = _hwndSource.CompositionTarget.TransformToDevice;
             dpiScaleX = transformToDevice.M11;
             dpiScaleY = transformToDevice.M22;
@@ -320,7 +323,7 @@ namespace Quan.ControlLibrary
             return new Thickness(borderSizeInDips.Width, borderSizeInDips.Height, borderSizeInDips.Width, borderSizeInDips.Height);
         }
 
-        private static bool GetTaskbarAutoHide(out ABEdge edge)
+        private static bool GetTaskBarAutoHide(out ABEdge edge)
         {
             IntPtr trayWnd = FindWindow("Shell_TrayWnd", null);
             if (trayWnd != IntPtr.Zero)
@@ -393,7 +396,7 @@ namespace Quan.ControlLibrary
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Window_StateChanged(object sender, EventArgs e)
+        private void Window_StateChanged(object? sender, EventArgs e)
         {
             UpdateWindowPadding();
         }
@@ -423,7 +426,7 @@ namespace Quan.ControlLibrary
                 WINDOWPLACEMENT placement = NativeMethods.GetWindowPlacement(winPos.hwnd);
                 if (placement.showCmd == SW.MAXIMIZE)
                 {
-                    if (GetTaskbarAutoHide(out ABEdge edge))
+                    if (GetTaskBarAutoHide(out ABEdge edge))
                     {
                         var rect = new MS.Win32.NativeMethods.RECT(winPos.x, winPos.y, winPos.x + winPos.cx, winPos.y + winPos.cy);
                         IntPtr monitor = SafeNativeMethods.MonitorFromRect(ref rect, MONITOR_DEFAULTTONEAREST);

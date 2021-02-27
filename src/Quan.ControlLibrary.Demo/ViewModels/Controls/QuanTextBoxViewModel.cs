@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Prism.Mvvm;
-using Prism.Regions;
+﻿using Prism.Regions;
 using Reactive.Bindings;
 
 namespace Quan.ControlLibrary.Demo
 {
-    public class QuanTextBoxViewModel : BindableBase, INavigationAware
+    public class QuanTextBoxViewModel : ViewModelBase, INavigationAware
     {
-        #region Public Properties
+        #region Properties
 
-        public ReactiveProperty<string> UserName { get; }
+        private ReactiveProperty<string>? _text1;
+        public ReactiveProperty<string> Text1
+            => _text1 ??= new ReactiveProperty<string>(mode: ReactivePropertyMode.Default | ReactivePropertyMode.IgnoreInitialValidationError)
+                .SetValidateNotifyError(x => string.IsNullOrEmpty(x) ? "Email or Username is empty!" : null);
+
+        private ReactiveProperty<string>? _text2;
+        public ReactiveProperty<string> Text2
+            => _text2 ??= new ReactiveProperty<string>()
+                .SetValidateNotifyError(x => x == null || x.Length < 8 ? "At least 8 characters" : null);
 
         #endregion
 
@@ -20,10 +24,8 @@ namespace Quan.ControlLibrary.Demo
         public QuanTextBoxViewModel()
         {
 
-            //UserName = new ReactiveProperty<string>(mode: ReactivePropertyMode.Default | ReactivePropertyMode.IgnoreInitialValidationError)
-            //    .SetValidateNotifyError(x => string.IsNullOrEmpty(x) ? "Email or Username is empty!" : null);
-
-            UserName = new ReactiveProperty<string>();
+            //UserName = new ReactiveProperty<string>()
+            //    ;
         }
 
         #endregion

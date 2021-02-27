@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace Quan.ControlLibrary
@@ -385,7 +381,7 @@ namespace Quan.ControlLibrary
             SetTextLength(sender as TextBox, textBox => textBox.Text.Length);
         }
 
-        private static void SetTextLength<TDependencyObject>(TDependencyObject sender, Func<TDependencyObject, int> funcTextLength)
+        private static void SetTextLength<TDependencyObject>(TDependencyObject? sender, Func<TDependencyObject, int> funcTextLength)
             where TDependencyObject : DependencyObject
         {
             if (sender != null)
@@ -400,7 +396,7 @@ namespace Quan.ControlLibrary
             ControlGotFocus(sender as TextBoxBase, textBox => textBox.SelectAll());
         }
 
-        private static void ControlGotFocus<TDependencyObject>(TDependencyObject sender, Action<TDependencyObject> action)
+        private static void ControlGotFocus<TDependencyObject>(TDependencyObject? sender, Action<TDependencyObject> action)
             where TDependencyObject : DependencyObject
         {
             if (sender != null && GetSelectAllOnFocus(sender))

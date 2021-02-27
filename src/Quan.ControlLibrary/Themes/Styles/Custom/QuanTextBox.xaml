@@ -21,36 +21,6 @@
         <DoubleAnimation Storyboard.TargetName="PART_GuideMessage" Storyboard.TargetProperty="Opacity" Duration="0:0:0.2" />
     </Storyboard>
 
-    <ControlTemplate x:Key="QuanTextBox.ValidationTemplate">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <AdornedElementPlaceholder x:Name="Placeholder" />
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Border
-                    Grid.Row="1"
-                    Margin="0,-1,0,0"
-                    Padding="5"
-                    Background="{DynamicResource Quan.Brushes.Error}"
-                    CornerRadius="5">
-                    <TextBlock Foreground="{DynamicResource Quan.Brushes.ForegroundHighLight}" Text="{Binding ElementName=Placeholder, Path=AdornedElement.(Validation.Errors)/ErrorContent}" />
-                </Border>
-                <Path
-                    Grid.Row="0"
-                    HorizontalAlignment="Center"
-                    Data="M 0 10 L 5 0 10 10 "
-                    Fill="{DynamicResource Quan.Brushes.Error}"
-                    StrokeThickness="1" />
-            </Grid>
-        </Grid>
-    </ControlTemplate>
-
     <ControlTemplate x:Key="Quan.Templates.QuanTextBox.Default" TargetType="{x:Type local:QuanTextBox}">
         <Grid SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
             <AdornerDecorator>
@@ -282,15 +252,22 @@
         <Setter Property="CaretBrush" Value="{DynamicResource Quan.Brushes.Primary}" />
         <Setter Property="MinHeight" Value="26" />
         <Setter Property="Template" Value="{StaticResource Quan.Templates.QuanTextBox.Default}" />
-        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource QuanTextBox.ValidationTemplate}" />
+        <Setter Property="Validation.ErrorTemplate" Value="{DynamicResource Quan.Templates.ValidationError}" />
         <Setter Property="local:TextBoxHelper.IsMonitoring" Value="True" />
+        <Setter Property="local:ValidationHelper.DisplayMode" Value="Popup" />
+        <Setter Property="local:ValidationHelper.Background" Value="{DynamicResource Quan.Brushes.Error}" />
+        <Setter Property="local:ValidationHelper.FontSize" Value="{Binding RelativeSource={RelativeSource Self}, Path=FontSize}" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Style.Triggers>
             <Trigger Property="DisplayMode" Value="Floating">
                 <Setter Property="Template" Value="{StaticResource Quan.Templates.QuanTextBox.Floating}" />
-                <Setter Property="local:FloatingTextHelper.Foreground" Value="{DynamicResource Quan.Brushes.Primary}" />
                 <Setter Property="BorderThickness" Value="0,0,0,1" />
+                <Setter Property="local:FloatingTextHelper.Foreground" Value="{DynamicResource Quan.Brushes.Primary}" />
                 <Setter Property="local:FloatingTextHelper.IsUseFloating" Value="True" />
+                <Setter Property="local:ValidationHelper.Background" Value="Transparent" />
+                <Setter Property="local:ValidationHelper.DisplayMode" Value="Text" />
+                <Setter Property="local:ValidationHelper.FontSize" Value="10.0" />
+                <Setter Property="Validation.ErrorTemplate" Value="{DynamicResource Quan.Templates.ValidationError}" />
                 <Setter Property="local:RippleHelper.Background" Value="{DynamicResource Quan.Brushes.Primary}" />
             </Trigger>
         </Style.Triggers>

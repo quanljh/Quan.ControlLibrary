@@ -10,7 +10,7 @@ namespace Quan.ControlLibrary.Demo
 {
     public class MainWindowViewModel : BindableBase
     {
-        #region Private Members
+        #region Fields
 
         private readonly IRegionManager _regionManager;
 
@@ -18,11 +18,11 @@ namespace Quan.ControlLibrary.Demo
 
         #endregion
 
-        #region Public Properties
+        #region Properties
 
         public ObservableCollection<Demo> ControlDemoCollection { get; private set; } = new ObservableCollection<Demo>();
 
-        public ReactiveProperty<Demo> SelectedControlDemo { get; }
+        public ReactiveProperty<Demo?> SelectedControlDemo { get; }
 
         #endregion
 
@@ -37,7 +37,7 @@ namespace Quan.ControlLibrary.Demo
             _regionManager = regionManager;
             _controlDemo = controlDemo;
 
-            SelectedControlDemo = new ReactiveProperty<Demo>(default, ReactivePropertyMode.DistinctUntilChanged);
+            SelectedControlDemo = new ReactiveProperty<Demo?>(default, ReactivePropertyMode.DistinctUntilChanged);
 
             Load();
 
@@ -57,8 +57,10 @@ namespace Quan.ControlLibrary.Demo
             SelectedControlDemo.Value = ControlDemoCollection.FirstOrDefault();
         }
 
-        private void OnSelectedControlDemoChanged(Demo demo)
+        private void OnSelectedControlDemoChanged(Demo? demo)
         {
+            if (demo == null)
+                return;
             _regionManager.RequestNavigate(ViewNameConstants.MainWindowContent, demo.ViewName);
         }
 

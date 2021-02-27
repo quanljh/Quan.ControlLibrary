@@ -5,7 +5,7 @@ namespace Quan.ControlLibrary
 {
     public class ShadowConverter : BaseValueConverter<ShadowEffect, DropShadowEffect>
     {
-        public override DropShadowEffect Convert(ShadowEffect value, object parameter, CultureInfo culture)
+        public override DropShadowEffect? Convert(ShadowEffect value, object? parameter, CultureInfo? culture)
         {
             switch (value)
             {
@@ -24,12 +24,12 @@ namespace Quan.ControlLibrary
             }
         }
 
-        public override ShadowEffect ConvertBack(DropShadowEffect value, object parameter, CultureInfo culture)
+        public override ShadowEffect ConvertBack(DropShadowEffect value, object? parameter, CultureInfo? culture)
         {
             throw new System.NotImplementedException();
         }
 
-        private static DropShadowEffect Clone(DropShadowEffect dropShadowEffect)
+        private static DropShadowEffect? Clone(DropShadowEffect? dropShadowEffect)
         {
             if (dropShadowEffect is null) return null;
             return new DropShadowEffect()

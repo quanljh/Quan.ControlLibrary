@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Quan.ControlLibrary
 {
-    public class SharedResourceDictionary: ResourceDictionary
+    public class SharedResourceDictionary : ResourceDictionary
     {
-        public static Dictionary<Uri, ResourceDictionary> SharedDictionaries = new Dictionary<Uri, ResourceDictionary>();
+        public static Dictionary<Uri, ResourceDictionary> SharedDictionaries = new();
 
-        private Uri _sourceUri;
+        private Uri? _sourceUri;
 
-        public new Uri Source
+        public new Uri? Source
         {
             get => DesignerHelper.IsInDesignMode ? base.Source : _sourceUri;
             set

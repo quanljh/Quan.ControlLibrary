@@ -7,9 +7,9 @@ namespace Quan.ControlLibrary
 {
     public class BorderClipConverter : BaseMultiValueConverter<object>
     {
-        public override object Convert(object[] values, object parameter, CultureInfo culture)
+        public override object Convert(object?[]? values, object? parameter, CultureInfo culture)
         {
-            if (values.Length > 1 && values[0] is double height && values[1] is double width)
+            if (values != null && values.Length > 1 && values[0] is double height && values[1] is double width)
             {
                 if (height < 1.0 || width < 1.0)
                 {
@@ -36,7 +36,7 @@ namespace Quan.ControlLibrary
             return DependencyProperty.UnsetValue;
         }
 
-        public override object[] ConvertBack(object value, object parameter, CultureInfo culture)
+        public override object[] ConvertBack(object? value, object? parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

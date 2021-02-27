@@ -20,7 +20,11 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <ListBox DisplayMemberPath="Name" ItemsSource="{Binding ControlDemoCollection}" SelectedItem="{Binding SelectedControlDemo.Value}" />
+        <ListBox
+            BorderThickness="0,1,1,0"
+            DisplayMemberPath="Name"
+            ItemsSource="{Binding ControlDemoCollection}"
+            SelectedItem="{Binding SelectedControlDemo.Value}" />
         <ContentControl Grid.Column="1" prism:RegionManager.RegionName="{x:Static local:ViewNameConstants.MainWindowContent}" />
     </Grid>
 

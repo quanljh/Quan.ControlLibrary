@@ -25,7 +25,7 @@ namespace Quan.ControlLibrary
             if (!(sender is ToggleButton toggle))
                 return;
 
-            var dataGridRow = toggle.GetVisualParent<DataGridRow>();
+            var dataGridRow = toggle.FindVisualParent<DataGridRow>();
 
             if (dataGridRow == null) return;
 

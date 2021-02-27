@@ -6,7 +6,7 @@ namespace Quan.ControlLibrary
     public class ExpanderRotateAngleConverter : BaseValueConverter<ExpandDirection, double>
     {
         /// <inheritdoc />
-        public override double Convert(ExpandDirection value, object parameter, CultureInfo culture)
+        public override double Convert(ExpandDirection value, object? parameter, CultureInfo culture)
         {
             double factor = 1.0;
             if (parameter != null)
@@ -29,7 +29,7 @@ namespace Quan.ControlLibrary
         }
 
         /// <inheritdoc />
-        public override ExpandDirection ConvertBack(double value, object parameter, CultureInfo culture)
+        public override ExpandDirection ConvertBack(double value, object? parameter, CultureInfo culture)
         {
             throw new System.NotImplementedException();
         }

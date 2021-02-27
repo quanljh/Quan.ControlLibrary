@@ -10,28 +10,66 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <Grid>
-        <StackPanel q:PanelHelper.ChildMargin="0 0 0 15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
 
-            <q:QuanTextBox
-                Width="160"
-                Margin="0,20,0,0"
-                q:TextBoxHelper.GuideText="Email or username"
-                q:TextBoxHelper.IsShowClearButton="True"
-                DisplayMode="Floating"
-                Text="{Binding UserName.Value}" />
+        <q:QuanTextBox
+            Width="160"
+            Margin="15"
+            HorizontalAlignment="Left"
+            q:TextBoxHelper.GuideText="Email or username"
+            q:TextBoxHelper.IsShowClearButton="True"
+            DisplayMode="Floating"
+            Text="{Binding Text1.Value, UpdateSourceTrigger=PropertyChanged}" />
 
-            <q:QuanTextBox Width="160" q:TextBoxHelper.GuideText="Not show clear button" DisplayMode="Floating" />
+        <q:QuanTextBox
+            Grid.Row="1"
+            Width="160"
+            Margin="15"
+            HorizontalAlignment="Left"
+            q:TextBoxHelper.GuideText="Not show clear button"
+            DisplayMode="Floating" />
 
-            <q:QuanTextBox Width="160" q:TextBoxHelper.GuideText="Email or username" q:TextBoxHelper.IsShowClearButton="True" />
+        <q:QuanTextBox
+            Grid.Row="2"
+            Width="160"
+            Margin="15"
+            HorizontalAlignment="Left"
+            q:TextBoxHelper.GuideText="Email or username"
+            q:TextBoxHelper.IsShowClearButton="True" />
 
-            <q:QuanTextBox Width="160" q:TextBoxHelper.FunctionButtonContent="{StaticResource Quan.FontIcons.Search}" q:TextBoxHelper.IsShowFunctionButton="True" />
+        <q:QuanTextBox
+            Grid.Row="3"
+            Width="160"
+            Margin="15"
+            HorizontalAlignment="Left"
+            q:TextBoxHelper.GuideText="Email or username"
+            q:TextBoxHelper.IsShowClearButton="True"
+            Text="{Binding Text2.Value, UpdateSourceTrigger=PropertyChanged}" />
 
-            <q:QuanTextBox
-                Width="200"
-                q:TextBoxHelper.FunctionButtonContent="{StaticResource Quan.FontIcons.Search}"
-                q:TextBoxHelper.IsShowClearButton="True"
-                q:TextBoxHelper.IsShowFunctionButton="True" />
-        </StackPanel>
+        <q:QuanTextBox
+            Grid.Row="4"
+            Width="160"
+            Margin="15"
+            HorizontalAlignment="Left"
+            q:TextBoxHelper.FunctionButtonContent="{StaticResource Quan.FontIcons.Search}"
+            q:TextBoxHelper.IsShowFunctionButton="True" />
+
+        <q:QuanTextBox
+            Grid.Row="5"
+            Width="250"
+            Margin="15"
+            HorizontalAlignment="Left"
+            q:TextBoxHelper.FunctionButtonContent="{StaticResource Quan.FontIcons.Search}"
+            q:TextBoxHelper.GuideText="With Search and Clear Button"
+            q:TextBoxHelper.IsShowClearButton="True"
+            q:TextBoxHelper.IsShowFunctionButton="True" />
     </Grid>
 </UserControl>

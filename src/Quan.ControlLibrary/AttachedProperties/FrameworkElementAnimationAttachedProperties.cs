@@ -61,7 +61,7 @@ namespace Quan.ControlLibrary
 
                 //Create a single self-unhookable event
                 //for the elements Loaded event
-                RoutedEventHandler onLoaded = null;
+                RoutedEventHandler? onLoaded = null;
                 onLoaded = async (ss, ee) =>
                 {
                     //Unhook ourselves
@@ -127,9 +127,11 @@ namespace Quan.ControlLibrary
                 image.TargetUpdated -= Image_TargetUpdated;
         }
 
-        private async void Image_TargetUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
+        private async void Image_TargetUpdated(object? sender, System.Windows.Data.DataTransferEventArgs e)
         {
-            await (sender as Image).FadeIn(false);
+            if (!(sender is Image image))
+                return;
+            await image.FadeIn(false);
         }
     }
 

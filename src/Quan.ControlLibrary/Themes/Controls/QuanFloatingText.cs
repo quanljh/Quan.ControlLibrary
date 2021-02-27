@@ -22,11 +22,11 @@ namespace Quan.ControlLibrary
 
         #region Dependency Properties
 
-        #region HintProxy
+        #region FloatingProxy
 
-        public IFloatingProxy FloatingProxy
+        public IFloatingProxy? FloatingProxy
         {
-            get => (IFloatingProxy)GetValue(FloatingProxyProperty);
+            get => (IFloatingProxy?)GetValue(FloatingProxyProperty);
             set => SetValue(FloatingProxyProperty, value);
         }
 
@@ -155,10 +155,10 @@ namespace Quan.ControlLibrary
 
         #region Methods
 
-        protected virtual void OnFloatingProxyIsVisibleChanged(object sender, EventArgs e)
+        protected virtual void OnFloatingProxyIsVisibleChanged(object? sender, EventArgs e)
             => RefreshState(false);
 
-        protected virtual void OnFloatingProxyContentChanged(object sender, EventArgs e)
+        protected virtual void OnFloatingProxyContentChanged(object? sender, EventArgs e)
         {
             if (FloatingProxy == null)
                 return;
@@ -166,20 +166,20 @@ namespace Quan.ControlLibrary
             if (FloatingProxy.IsLoaded)
                 RefreshState(true);
             else
-                FloatingProxy.Loaded += HintProxy_OnLoaded;
+                FloatingProxy.Loaded += FloatingProxy_OnLoaded;
         }
 
-        private void HintProxy_OnLoaded(object sender, EventArgs e)
+        private void FloatingProxy_OnLoaded(object? sender, EventArgs e)
         {
             if (FloatingProxy == null)
                 return;
 
             RefreshState(false);
 
-            FloatingProxy.Loaded -= HintProxy_OnLoaded;
+            FloatingProxy.Loaded -= FloatingProxy_OnLoaded;
         }
 
-        protected virtual void OnFloatingProxyFocusedChanged(object sender, EventArgs e)
+        protected virtual void OnFloatingProxyFocusedChanged(object? sender, EventArgs e)
         {
             if (FloatingProxy == null)
                 return;
@@ -187,17 +187,17 @@ namespace Quan.ControlLibrary
             if (FloatingProxy.IsLoaded)
                 RefreshState(true);
             else
-                FloatingProxy.Loaded += HintProxySetState_OnLoaded;
+                FloatingProxy.Loaded += FloatingProxySetState_OnLoaded;
         }
 
-        private void HintProxySetState_OnLoaded(object sender, EventArgs e)
+        private void FloatingProxySetState_OnLoaded(object? sender, EventArgs e)
         {
             if (FloatingProxy == null)
                 return;
 
             RefreshState(false);
 
-            FloatingProxy.Loaded -= HintProxySetState_OnLoaded;
+            FloatingProxy.Loaded -= FloatingProxySetState_OnLoaded;
         }
 
         private void RefreshState(bool useTransitions)

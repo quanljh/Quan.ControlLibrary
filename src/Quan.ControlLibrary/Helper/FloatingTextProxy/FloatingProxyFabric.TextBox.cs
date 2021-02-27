@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -26,16 +22,16 @@ namespace Quan.ControlLibrary
             public bool IsVisible => _textBox.IsVisible;
 
             /// <inheritdoc />
-            public event EventHandler ContentChanged;
+            public event EventHandler? ContentChanged;
 
             /// <inheritdoc />
-            public event EventHandler IsVisibleChanged;
+            public event EventHandler? IsVisibleChanged;
 
             /// <inheritdoc />
-            public event EventHandler Loaded;
+            public event EventHandler? Loaded;
 
             /// <inheritdoc />
-            public event EventHandler FocusedChanged;
+            public event EventHandler? FocusedChanged;
 
             public TextBoxFloatingProxy(TextBox textBox)
             {

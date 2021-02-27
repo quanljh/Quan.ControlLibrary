@@ -9,13 +9,13 @@ namespace Quan.ControlLibrary
     public class FloatingTextTransformConverter : BaseMultiValueConverter<Transform>
     {
         /// <inheritdoc />
-        public override Transform Convert(object[] values, object parameter, CultureInfo culture)
+        public override Transform? Convert(object?[]? values, object? parameter, CultureInfo? culture)
         {
             if (values == null
                 || values.Length != 3
                 || values.Any(o => o == null)
-                || !double.TryParse(values[0].ToString(), out double scale)
-                || !double.TryParse(values[1].ToString(), out double floatingScale)
+                || !double.TryParse(values[0]?.ToString(), out double scale)
+                || !double.TryParse(values[1]?.ToString(), out double floatingScale)
                 || !(values[2] is Point offset))
             {
                 return Transform.Identity;
@@ -39,7 +39,7 @@ namespace Quan.ControlLibrary
         }
 
         /// <inheritdoc />
-        public override object[] ConvertBack(Transform value, object parameter, CultureInfo culture)
+        public override object?[]? ConvertBack(Transform? value, object? parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

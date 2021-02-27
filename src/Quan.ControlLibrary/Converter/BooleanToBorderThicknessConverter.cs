@@ -10,15 +10,14 @@ namespace Quan.ControlLibrary
     /// </summary>
     public class BooleanToBorderThicknessConverter : BaseValueConverter<bool, Thickness>
     {
-        public override Thickness Convert(bool value, object parameter, CultureInfo culture)
+        public override Thickness Convert(bool value, object? parameter, CultureInfo? culture)
         {
             if (parameter == null)
                 return value ? new Thickness(2) : new Thickness(0);
-            else
-                return value ? new Thickness(0) : new Thickness(2);
+            return value ? new Thickness(0) : new Thickness(2);
         }
 
-        public override bool ConvertBack(Thickness value, object parameter, CultureInfo culture)
+        public override bool ConvertBack(Thickness value, object? parameter, CultureInfo? culture)
         {
             throw new NotImplementedException();
         }

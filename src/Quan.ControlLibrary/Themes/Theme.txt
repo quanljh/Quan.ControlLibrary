@@ -4,6 +4,7 @@ Styles\Basic\Geometries.xaml
 Styles\Basic\Brushes.xaml
 Styles\Basic\Common.xaml
 Styles\Basic\ContentControl.xaml
+Styles\Basic\ValidationErrorTemplate.xaml
 
 # Default Controls
 Styles\Default\Button.xaml

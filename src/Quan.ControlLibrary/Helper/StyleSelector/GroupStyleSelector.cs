@@ -7,13 +7,13 @@ namespace Quan.ControlLibrary
 
     public class DataGridGroupSelector : StyleSelector
     {
-        public Style GroupHeaderStyle { get; set; }
+        public Style? GroupHeaderStyle { get; set; }
 
-        public Style NoGroupHeaderStyle { get; set; }
+        public Style? NoGroupHeaderStyle { get; set; }
 
-        public override Style SelectStyle(object item, DependencyObject container)
+        public override Style? SelectStyle(object item, DependencyObject container)
         {
-            if (!(item is CollectionViewGroup group && group.Name != null))
+            if (!(item is CollectionViewGroup { Name: { } } group))
                 return NoGroupHeaderStyle;
             if (group.Name.ToString() == "")
                 return NoGroupHeaderStyle;

@@ -18,8 +18,8 @@ namespace Quan.ControlLibrary
 
         #region Private Members
 
-        private Image _icon;
-        private Border _mainContentBorder;
+        private Image? _icon;
+        private Border? _mainContentBorder;
 
         #endregion
 
@@ -117,6 +117,9 @@ namespace Quan.ControlLibrary
 
         private void Icon_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
+            if (_mainContentBorder == null)
+                return;
+
             if (e.ChangedButton == MouseButton.Left)
             {
                 if (e.ClickCount == 2)
@@ -134,6 +137,10 @@ namespace Quan.ControlLibrary
                     var dpiScaleY = dpi.DpiScaleY;
 #else
                     var source = PresentationSource.FromVisual(this);
+
+                    if (source?.CompositionTarget == null)
+                        return;
+
                     var dpiScaleX = source.CompositionTarget.TransformFromDevice.M11;
                     var dpiScaleY = source.CompositionTarget.TransformFromDevice.M22;
 #endif
