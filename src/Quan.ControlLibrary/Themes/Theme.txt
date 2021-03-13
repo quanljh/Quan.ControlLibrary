@@ -7,8 +7,10 @@ Styles\Basic\ContentControl.xaml
 Styles\Basic\ValidationErrorTemplate.xaml
 
 # Default Controls
+Styles\Default\Scroll.xaml
 Styles\Default\Button.xaml
 Styles\Default\PasswordBox.xaml
+Styles\Default\ListBox.xaml
 
 # Custom Controls
 Styles\Custom\QuanRipple.xaml

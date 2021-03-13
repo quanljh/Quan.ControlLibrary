@@ -21,6 +21,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <ListBox
+            Width="130"
             BorderThickness="0,1,1,0"
             DisplayMemberPath="Name"
             ItemsSource="{Binding ControlDemoCollection}"
