@@ -23,13 +23,23 @@ namespace Quan.ControlLibrary
 
         #endregion
 
-        #region Public Properties
+        #region Dependency Properties
+
+        #region ShowIconOnTitleBar
+
+        public static readonly DependencyProperty ShowIconOnTitleBarProperty = DependencyProperty.Register("ShowIconOnTitleBar", typeof(bool), typeof(QuanWindow), new PropertyMetadata(BooleanBoxes.TrueBox));
 
         public bool ShowIconOnTitleBar
         {
             get => (bool)GetValue(ShowIconOnTitleBarProperty);
-            set => SetValue(ShowIconOnTitleBarProperty, value);
+            set => SetValue(ShowIconOnTitleBarProperty, BooleanBoxes.Box(value));
         }
+
+        #endregion
+
+        #region TitleTemplate
+
+        public static readonly DependencyProperty TitleTemplateProperty = DependencyProperty.Register("TitleTemplate", typeof(DataTemplate), typeof(QuanWindow), new PropertyMetadata(null));
 
         public DataTemplate TitleTemplate
         {
@@ -37,37 +47,43 @@ namespace Quan.ControlLibrary
             set => SetValue(TitleTemplateProperty, value);
         }
 
+        #endregion
+
+        #region IsMaxButtonEnabled
+
+        public static readonly DependencyProperty IsMinButtonEnabledProperty = DependencyProperty.Register("IsMinButtonEnabled", typeof(bool), typeof(QuanWindow), new PropertyMetadata(BooleanBoxes.TrueBox));
+
         public bool IsMinButtonEnabled
         {
             get => (bool)GetValue(IsMinButtonEnabledProperty);
-            set => SetValue(IsMinButtonEnabledProperty, value);
-        }
-
-        public bool IsMaxButtonEnabled
-        {
-            get => (bool)GetValue(IsMaxButtonEnabledProperty);
-            set => SetValue(IsMaxButtonEnabledProperty, value);
-        }
-
-        public bool IsCloseButtonEnabled
-        {
-            get => (bool)GetValue(IsCloseButtonEnabledProperty);
-            set => SetValue(IsCloseButtonEnabledProperty, value);
+            set => SetValue(IsMinButtonEnabledProperty, BooleanBoxes.Box(value));
         }
 
         #endregion
 
-        #region Dependency Properties
+        #region IsMaxButtonEnabled
 
-        public static readonly DependencyProperty ShowIconOnTitleBarProperty = DependencyProperty.Register("ShowIconOnTitleBar", typeof(bool), typeof(QuanWindow), new PropertyMetadata(true));
+        public static readonly DependencyProperty IsMaxButtonEnabledProperty = DependencyProperty.Register("IsMaxButtonEnabled", typeof(bool), typeof(QuanWindow), new PropertyMetadata(BooleanBoxes.TrueBox));
 
-        public static readonly DependencyProperty TitleTemplateProperty = DependencyProperty.Register("TitleTemplate", typeof(DataTemplate), typeof(QuanWindow), new PropertyMetadata(null));
+        public bool IsMaxButtonEnabled
+        {
+            get => (bool)GetValue(IsMaxButtonEnabledProperty);
+            set => SetValue(IsMaxButtonEnabledProperty, BooleanBoxes.Box(value));
+        }
 
-        public static readonly DependencyProperty IsMinButtonEnabledProperty = DependencyProperty.Register("IsMinButtonEnabled", typeof(bool), typeof(QuanWindow), new PropertyMetadata(true));
+        #endregion
 
-        public static readonly DependencyProperty IsMaxButtonEnabledProperty = DependencyProperty.Register("IsMaxButtonEnabled", typeof(bool), typeof(QuanWindow), new PropertyMetadata(true));
+        #region IsCloseButtonEnabled
 
-        public static readonly DependencyProperty IsCloseButtonEnabledProperty = DependencyProperty.Register("IsCloseButtonEnabled", typeof(bool), typeof(QuanWindow), new PropertyMetadata(true));
+        public static readonly DependencyProperty IsCloseButtonEnabledProperty = DependencyProperty.Register("IsCloseButtonEnabled", typeof(bool), typeof(QuanWindow), new PropertyMetadata(BooleanBoxes.TrueBox));
+
+        public bool IsCloseButtonEnabled
+        {
+            get => (bool)GetValue(IsCloseButtonEnabledProperty);
+            set => SetValue(IsCloseButtonEnabledProperty, BooleanBoxes.Box(value));
+        }
+
+        #endregion
 
         #endregion
 

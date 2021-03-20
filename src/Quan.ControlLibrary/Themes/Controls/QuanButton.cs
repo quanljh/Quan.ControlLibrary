@@ -23,11 +23,11 @@ namespace Quan.ControlLibrary
         public DisplayType DisplayMode
         {
             get => (DisplayType)GetValue(DisplayModeProperty);
-            set => SetValue(DisplayModeProperty, value);
+            set => SetValue(DisplayModeProperty, QuanButtonDisplayTypeBoxes.Box(value));
         }
 
         public static readonly DependencyProperty DisplayModeProperty =
-            DependencyProperty.Register("DisplayMode", typeof(DisplayType), typeof(QuanButton), new PropertyMetadata(default(DisplayType)));
+            DependencyProperty.Register("DisplayMode", typeof(DisplayType), typeof(QuanButton), new PropertyMetadata(QuanButtonDisplayTypeBoxes.NormalBox));
 
         #endregion
 

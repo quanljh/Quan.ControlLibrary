@@ -57,10 +57,10 @@ namespace Quan.ControlLibrary
             DependencyProperty.RegisterAttached("CloseOnMouseLeftButtonDown",
                 typeof(bool),
                 typeof(ValidationHelper),
-                new PropertyMetadata(default(bool)));
+                new PropertyMetadata(BooleanBoxes.FalseBox));
 
         public static bool GetCloseOnMouseLeftButtonDown(DependencyObject element) => (bool)element.GetValue(CloseOnMouseLeftButtonDownProperty);
-        public static void SetCloseOnMouseLeftButtonDown(DependencyObject element, bool value) => element.SetValue(CloseOnMouseLeftButtonDownProperty, value);
+        public static void SetCloseOnMouseLeftButtonDown(DependencyObject element, bool value) => element.SetValue(CloseOnMouseLeftButtonDownProperty, BooleanBoxes.Box(value));
 
         #endregion
 
@@ -70,10 +70,10 @@ namespace Quan.ControlLibrary
             DependencyProperty.RegisterAttached("ShowValidationErrorOnMouseOver",
                 typeof(bool),
                 typeof(ValidationHelper),
-                new PropertyMetadata(default(bool)));
+                new PropertyMetadata(BooleanBoxes.FalseBox));
 
         public static bool GetShowValidationErrorOnMouseOver(DependencyObject element) => (bool)element.GetValue(ShowValidationErrorOnMouseOverProperty);
-        public static void SetShowValidationErrorOnMouseOver(DependencyObject element, bool value) => element.SetValue(ShowValidationErrorOnMouseOverProperty, value);
+        public static void SetShowValidationErrorOnMouseOver(DependencyObject element, bool value) => element.SetValue(ShowValidationErrorOnMouseOverProperty, BooleanBoxes.Box(value));
 
         #endregion
 
@@ -83,10 +83,10 @@ namespace Quan.ControlLibrary
             DependencyProperty.RegisterAttached("DisplayMode",
                 typeof(DisplayMode),
                 typeof(ValidationHelper),
-                new PropertyMetadata(default(DisplayMode)));
+                new PropertyMetadata(ValidationDisplayModeBoxes.TextBox));
 
         public static DisplayMode GetDisplayMode(DependencyObject element) => (DisplayMode)element.GetValue(DisplayModeProperty);
-        public static void SetDisplayMode(DependencyObject element, DisplayMode value) => element.SetValue(DisplayModeProperty, value);
+        public static void SetDisplayMode(DependencyObject element, DisplayMode value) => element.SetValue(DisplayModeProperty, ValidationDisplayModeBoxes.Box(value));
 
         #endregion
 

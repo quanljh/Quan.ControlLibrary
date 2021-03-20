@@ -38,11 +38,11 @@ namespace Quan.ControlLibrary
         public bool RecognizesAccessKey
         {
             get => (bool)GetValue(RecognizesAccessKeyProperty);
-            set => SetValue(RecognizesAccessKeyProperty, value);
+            set => SetValue(RecognizesAccessKeyProperty, BooleanBoxes.Box(value));
         }
 
         public static readonly DependencyProperty RecognizesAccessKeyProperty =
-            DependencyProperty.Register(nameof(RecognizesAccessKey), typeof(bool), typeof(QuanRipple), new PropertyMetadata(false));
+            DependencyProperty.Register(nameof(RecognizesAccessKey), typeof(bool), typeof(QuanRipple), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         #endregion
 

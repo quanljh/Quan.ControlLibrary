@@ -115,6 +115,15 @@
 
             <MultiTrigger>
                 <MultiTrigger.Conditions>
+                    <Condition Property="Validation.HasError" Value="True" />
+                    <Condition Property="IsVisible" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Validation.ErrorTemplate" Value="{DynamicResource Quan.Templates.ValidationError}" />
+            </MultiTrigger>
+
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
                     <Condition Property="local:TextBoxHelper.HasText" Value="False" />
                     <Condition Property="IsFocused" Value="True" />
                 </MultiTrigger.Conditions>
@@ -222,6 +231,16 @@
                 <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Error}" />
                 <Setter TargetName="PART_RippleLine" Property="Background" Value="{DynamicResource Quan.Brushes.Error}" />
             </Trigger>
+
+            <!--  Trigger the rendering of the AdornerLayer by reSetting the error template  -->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="Validation.HasError" Value="True" />
+                    <Condition Property="IsVisible" Value="True" />
+                </MultiTrigger.Conditions>
+                <Setter Property="Validation.ErrorTemplate" Value="{DynamicResource Quan.Templates.ValidationError}" />
+            </MultiTrigger>
+
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="local:FloatingTextHelper.IsUseFloating" Value="True" />
@@ -252,7 +271,7 @@
         <Setter Property="CaretBrush" Value="{DynamicResource Quan.Brushes.Primary}" />
         <Setter Property="MinHeight" Value="26" />
         <Setter Property="Template" Value="{StaticResource Quan.Templates.QuanTextBox.Default}" />
-        <Setter Property="Validation.ErrorTemplate" Value="{DynamicResource Quan.Templates.ValidationError}" />
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
         <Setter Property="local:TextBoxHelper.IsMonitoring" Value="True" />
         <Setter Property="local:ValidationHelper.DisplayMode" Value="Popup" />
         <Setter Property="local:ValidationHelper.Background" Value="{DynamicResource Quan.Brushes.Error}" />
@@ -267,7 +286,6 @@
                 <Setter Property="local:ValidationHelper.Background" Value="Transparent" />
                 <Setter Property="local:ValidationHelper.DisplayMode" Value="Text" />
                 <Setter Property="local:ValidationHelper.FontSize" Value="10.0" />
-                <Setter Property="Validation.ErrorTemplate" Value="{DynamicResource Quan.Templates.ValidationError}" />
                 <Setter Property="local:RippleHelper.Background" Value="{DynamicResource Quan.Brushes.Primary}" />
             </Trigger>
         </Style.Triggers>

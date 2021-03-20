@@ -25,11 +25,11 @@ namespace Quan.ControlLibrary
             DependencyProperty.RegisterAttached("ClipToBounds",
                 typeof(bool),
                 typeof(RippleHelper),
-                new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.Inherits));
+                new FrameworkPropertyMetadata(BooleanBoxes.TrueBox, FrameworkPropertyMetadataOptions.Inherits));
 
         public static bool GetClipToBounds(DependencyObject element) => (bool)element.GetValue(ClipToBoundsProperty);
 
-        public static void SetClipToBounds(DependencyObject element, bool value) => element.SetValue(ClipToBoundsProperty, value);
+        public static void SetClipToBounds(DependencyObject element, bool value) => element.SetValue(ClipToBoundsProperty, BooleanBoxes.Box(value));
 
         #endregion
 
@@ -39,11 +39,11 @@ namespace Quan.ControlLibrary
             DependencyProperty.RegisterAttached("ShowOnTop",
                 typeof(bool),
                 typeof(RippleHelper),
-                new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.Inherits | FrameworkPropertyMetadataOptions.AffectsRender));
+                new FrameworkPropertyMetadata(BooleanBoxes.FalseBox, FrameworkPropertyMetadataOptions.Inherits | FrameworkPropertyMetadataOptions.AffectsRender));
 
         public static bool GetShowOnTop(DependencyObject element) => (bool)element.GetValue(ShowOnTopProperty);
 
-        public static void SetShowOnTop(DependencyObject element, bool value) => element.SetValue(ShowOnTopProperty, value);
+        public static void SetShowOnTop(DependencyObject element, bool value) => element.SetValue(ShowOnTopProperty, BooleanBoxes.Box(value));
 
         #endregion
 
@@ -53,11 +53,11 @@ namespace Quan.ControlLibrary
             DependencyProperty.RegisterAttached("IsCentered",
                 typeof(bool),
                 typeof(RippleHelper),
-                new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.Inherits));
+                new FrameworkPropertyMetadata(BooleanBoxes.FalseBox, FrameworkPropertyMetadataOptions.Inherits));
 
         public static bool GetIsCentered(DependencyObject element) => (bool)element.GetValue(IsCenteredProperty);
 
-        public static void SetIsCentered(DependencyObject element, bool value) => element.SetValue(IsCenteredProperty, value);
+        public static void SetIsCentered(DependencyObject element, bool value) => element.SetValue(IsCenteredProperty, BooleanBoxes.Box(value));
 
         #endregion
 
@@ -81,11 +81,11 @@ namespace Quan.ControlLibrary
             DependencyProperty.RegisterAttached("IsDisabled",
                 typeof(bool),
                 typeof(RippleHelper),
-                new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.Inherits));
+                new FrameworkPropertyMetadata(BooleanBoxes.FalseBox, FrameworkPropertyMetadataOptions.Inherits));
 
         public static bool GetIsDisabled(DependencyObject element) => (bool)element.GetValue(IsDisabledProperty);
 
-        public static void SetIsDisabled(DependencyObject element, bool value) => element.SetValue(IsDisabledProperty, value);
+        public static void SetIsDisabled(DependencyObject element, bool value) => element.SetValue(IsDisabledProperty, BooleanBoxes.Box(value));
 
         #endregion
 

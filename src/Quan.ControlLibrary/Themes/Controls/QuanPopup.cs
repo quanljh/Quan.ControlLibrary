@@ -26,7 +26,7 @@ namespace Quan.ControlLibrary
         #region CloseOnMouseLeftButtonDown
 
         public static readonly DependencyProperty CloseOnMouseLeftButtonDownProperty
-            = DependencyProperty.Register(nameof(CloseOnMouseLeftButtonDown), typeof(bool), typeof(QuanPopup), new PropertyMetadata(true));
+            = DependencyProperty.Register(nameof(CloseOnMouseLeftButtonDown), typeof(bool), typeof(QuanPopup), new PropertyMetadata(BooleanBoxes.TrueBox));
 
         /// <summary>
         /// Gets or sets whether if the popup can be closed by left mouse button down.
@@ -34,7 +34,7 @@ namespace Quan.ControlLibrary
         public bool CloseOnMouseLeftButtonDown
         {
             get => (bool)GetValue(CloseOnMouseLeftButtonDownProperty);
-            set => SetValue(CloseOnMouseLeftButtonDownProperty, value);
+            set => SetValue(CloseOnMouseLeftButtonDownProperty, BooleanBoxes.Box(value));
         }
 
         #endregion
@@ -58,7 +58,7 @@ namespace Quan.ControlLibrary
         #region CanShow
 
         private static readonly DependencyPropertyKey CanShowPropertyKey
-            = DependencyProperty.RegisterReadOnly(nameof(CanShow), typeof(bool), typeof(QuanPopup), new PropertyMetadata(false));
+            = DependencyProperty.RegisterReadOnly(nameof(CanShow), typeof(bool), typeof(QuanPopup), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>Identifies the <see cref="CanShow"/> dependency property.</summary>
         public static readonly DependencyProperty CanShowProperty = CanShowPropertyKey.DependencyProperty;
@@ -69,7 +69,7 @@ namespace Quan.ControlLibrary
         public bool CanShow
         {
             get => (bool)GetValue(CanShowProperty);
-            protected set => SetValue(CanShowPropertyKey, value);
+            protected set => SetValue(CanShowPropertyKey, BooleanBoxes.Box(value));
         }
 
         #endregion

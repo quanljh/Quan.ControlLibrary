@@ -23,11 +23,11 @@ namespace Quan.ControlLibrary
         public bool IsActive
         {
             get => (bool)GetValue(IsActiveProperty);
-            set => SetValue(IsActiveProperty, value);
+            set => SetValue(IsActiveProperty, BooleanBoxes.Box(value));
         }
 
         public static readonly DependencyProperty IsActiveProperty =
-            DependencyProperty.Register("IsActive", typeof(bool), typeof(QuanRippleLine), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender, IsActive_OnPropertyChangedCallback));
+            DependencyProperty.Register("IsActive", typeof(bool), typeof(QuanRippleLine), new FrameworkPropertyMetadata(BooleanBoxes.FalseBox, FrameworkPropertyMetadataOptions.AffectsRender, IsActive_OnPropertyChangedCallback));
 
         private static void IsActive_OnPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

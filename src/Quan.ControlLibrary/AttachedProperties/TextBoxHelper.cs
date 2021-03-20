@@ -18,7 +18,7 @@ namespace Quan.ControlLibrary
                 "IsMonitoring",
                 typeof(bool),
                 typeof(TextBoxHelper),
-                new UIPropertyMetadata(false, OnIsMonitoringChanged));
+                new UIPropertyMetadata(BooleanBoxes.FalseBox, OnIsMonitoringChanged));
 
         [Category(Constants.QUAN_APP)]
         [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
@@ -26,7 +26,7 @@ namespace Quan.ControlLibrary
         [AttachedPropertyBrowsableForType(typeof(ComboBox))]
         public static bool GetIsMonitoring(DependencyObject element) => (bool)element.GetValue(IsMonitoringProperty);
 
-        public static void SetIsMonitoring(DependencyObject element, bool value) => element.SetValue(IsMonitoringProperty, value);
+        public static void SetIsMonitoring(DependencyObject element, bool value) => element.SetValue(IsMonitoringProperty, BooleanBoxes.Box(value));
 
         private static void OnIsMonitoringChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -55,7 +55,7 @@ namespace Quan.ControlLibrary
                 "HasText",
                 typeof(bool),
                 typeof(TextBoxHelper),
-                new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsRender));
+                new FrameworkPropertyMetadata(BooleanBoxes.FalseBox, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsRender));
 
         [Category(Constants.QUAN_APP)]
         [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
@@ -63,7 +63,7 @@ namespace Quan.ControlLibrary
         [AttachedPropertyBrowsableForType(typeof(ComboBox))]
         public static bool GetHasText(DependencyObject element) => (bool)element.GetValue(HasTextProperty);
 
-        public static void SetHasText(DependencyObject element, bool value) => element.SetValue(HasTextProperty, value);
+        public static void SetHasText(DependencyObject element, bool value) => element.SetValue(HasTextProperty, BooleanBoxes.Box(value));
 
         #endregion
 
@@ -73,7 +73,7 @@ namespace Quan.ControlLibrary
             "SelectAllOnFocus",
             typeof(bool),
             typeof(TextBoxHelper),
-            new FrameworkPropertyMetadata(false));
+            new FrameworkPropertyMetadata(BooleanBoxes.FalseBox));
 
         [Category(Constants.QUAN_APP)]
         [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
@@ -81,7 +81,7 @@ namespace Quan.ControlLibrary
         [AttachedPropertyBrowsableForType(typeof(ComboBox))]
         public static bool GetSelectAllOnFocus(DependencyObject element) => (bool)element.GetValue(SelectAllOnFocusProperty);
 
-        public static void SetSelectAllOnFocus(DependencyObject element, bool value) => element.SetValue(SelectAllOnFocusProperty, value);
+        public static void SetSelectAllOnFocus(DependencyObject element, bool value) => element.SetValue(SelectAllOnFocusProperty, BooleanBoxes.Box(value));
 
         #endregion
 
@@ -131,7 +131,7 @@ namespace Quan.ControlLibrary
                 "IsShowClearButton",
                 typeof(bool),
                 typeof(TextBoxHelper),
-                new FrameworkPropertyMetadata(false));
+                new FrameworkPropertyMetadata(BooleanBoxes.FalseBox));
 
         [Category(Constants.QUAN_APP)]
         [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
@@ -139,7 +139,7 @@ namespace Quan.ControlLibrary
         [AttachedPropertyBrowsableForType(typeof(ComboBox))]
         public static bool GetIsShowClearButton(DependencyObject element) => (bool)element.GetValue(IsShowClearButtonProperty);
 
-        public static void SetIsShowClearButton(DependencyObject element, bool value) => element.SetValue(IsShowClearButtonProperty, value);
+        public static void SetIsShowClearButton(DependencyObject element, bool value) => element.SetValue(IsShowClearButtonProperty, BooleanBoxes.Box(value));
 
         #endregion
 
@@ -251,7 +251,7 @@ namespace Quan.ControlLibrary
             DependencyProperty.RegisterAttached("IsShowFunctionButton",
                 typeof(bool),
                 typeof(TextBoxHelper),
-                new PropertyMetadata());
+                new PropertyMetadata(BooleanBoxes.FalseBox));
 
         [Category(Constants.QUAN_APP)]
         [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
@@ -259,7 +259,7 @@ namespace Quan.ControlLibrary
         [AttachedPropertyBrowsableForType(typeof(ComboBox))]
         public static bool GetIsShowFunctionButton(DependencyObject element) => (bool)element.GetValue(IsShowFunctionButtonProperty);
 
-        public static void SetIsShowFunctionButton(DependencyObject element, bool value) => element.SetValue(IsShowFunctionButtonProperty, value);
+        public static void SetIsShowFunctionButton(DependencyObject element, bool value) => element.SetValue(IsShowFunctionButtonProperty, BooleanBoxes.Box(value));
 
         #endregion
 
@@ -270,7 +270,7 @@ namespace Quan.ControlLibrary
                 "IsUseFunctionButton",
                 typeof(bool),
                 typeof(TextBoxHelper),
-                new FrameworkPropertyMetadata(false, IsUseFunctionButton_OnChanged));
+                new FrameworkPropertyMetadata(BooleanBoxes.FalseBox, IsUseFunctionButton_OnChanged));
 
         [Category(Constants.QUAN_APP)]
         [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
@@ -278,7 +278,7 @@ namespace Quan.ControlLibrary
         [AttachedPropertyBrowsableForType(typeof(ComboBox))]
         public static bool GetIsUseFunctionButton(DependencyObject element) => (bool)element.GetValue(IsUseFunctionButtonProperty);
 
-        public static void SetIsUseFunctionButton(DependencyObject element, bool value) => element.SetValue(IsUseFunctionButtonProperty, value);
+        public static void SetIsUseFunctionButton(DependencyObject element, bool value) => element.SetValue(IsUseFunctionButtonProperty, BooleanBoxes.Box(value));
 
         private static void IsUseFunctionButton_OnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

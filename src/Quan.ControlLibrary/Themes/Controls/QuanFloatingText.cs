@@ -64,11 +64,11 @@ namespace Quan.ControlLibrary
         public bool IsUseFloating
         {
             get => (bool)GetValue(IsUseFloatingProperty);
-            set => SetValue(IsUseFloatingProperty, value);
+            set => SetValue(IsUseFloatingProperty, BooleanBoxes.Box(value));
         }
 
         public static readonly DependencyProperty IsUseFloatingProperty =
-            DependencyProperty.Register("IsUseFloating", typeof(bool), typeof(QuanFloatingText), new PropertyMetadata(false));
+            DependencyProperty.Register("IsUseFloating", typeof(bool), typeof(QuanFloatingText), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         #endregion
 
@@ -129,11 +129,11 @@ namespace Quan.ControlLibrary
         public bool IsInFloatingPosition
         {
             get => (bool)GetValue(IsInFloatingPositionProperty);
-            set => SetValue(IsInFloatingPositionProperty, value);
+            set => SetValue(IsInFloatingPositionProperty, BooleanBoxes.Box(value));
         }
 
         public static readonly DependencyProperty IsInFloatingPositionProperty =
-            DependencyProperty.Register("IsInFloatingPosition", typeof(bool), typeof(QuanFloatingText), new PropertyMetadata(false));
+            DependencyProperty.Register("IsInFloatingPosition", typeof(bool), typeof(QuanFloatingText), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         #endregion
 

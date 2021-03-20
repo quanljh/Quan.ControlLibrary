@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
 
 namespace Quan.ControlLibrary
@@ -21,11 +16,11 @@ namespace Quan.ControlLibrary
                 "IsUseFloating",
                 typeof(bool),
                 typeof(FloatingTextHelper),
-                new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.Inherits));
+                new FrameworkPropertyMetadata(BooleanBoxes.FalseBox, FrameworkPropertyMetadataOptions.Inherits));
 
         public static bool GetIsUseFloating(DependencyObject element) => (bool)element.GetValue(IsUseFloatingProperty);
 
-        public static void SetIsUseFloating(DependencyObject element, bool value) => element.SetValue(IsUseFloatingProperty, value);
+        public static void SetIsUseFloating(DependencyObject element, bool value) => element.SetValue(IsUseFloatingProperty, BooleanBoxes.Box(value));
 
         #endregion
 

@@ -22,11 +22,11 @@ namespace Quan.ControlLibrary
         public DisplayType DisplayMode
         {
             get => (DisplayType)GetValue(DisplayModeProperty);
-            set => SetValue(DisplayModeProperty, value);
+            set => SetValue(DisplayModeProperty, QuanTextBoxDisplayTypeBoxes.Box(value));
         }
 
         public static readonly DependencyProperty DisplayModeProperty =
-            DependencyProperty.Register("DisplayMode", typeof(DisplayType), typeof(QuanTextBox), new PropertyMetadata(default(DisplayType)));
+            DependencyProperty.Register("DisplayMode", typeof(DisplayType), typeof(QuanTextBox), new PropertyMetadata(QuanTextBoxDisplayTypeBoxes.NormalBox));
 
         #endregion
 
@@ -41,10 +41,9 @@ namespace Quan.ControlLibrary
 
         #endregion
 
-        public string GuideText
-        {
-            get => (string)GetValue(TextBoxHelper.GuideTextProperty);
-            set => SetValue(TextBoxHelper.GuideTextProperty, value);
-        }
+        #region Override
+
+
+        #endregion
     }
 }
