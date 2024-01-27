@@ -1,33 +1,29 @@
-﻿namespace Quan.ControlLibrary
+﻿namespace Quan.ControlLibrary;
+
+/// <summary>
+/// Helps boxing <see cref="QuanTextBox.DisplayType"/> values to prevent boxing and unboxing.
+/// </summary>
+public static class QuanTextBoxDisplayTypeBoxes
+
 {
     /// <summary>
-    /// Helps boxing <see cref="QuanTextBox.DisplayType"/> values to prevent boxing and unboxing.
+    /// Gets a boxed representation for QuanTextBox DisplayType's "Normal" value.
     /// </summary>
-    public static class QuanTextBoxDisplayTypeBoxes
+    public static readonly object NormalBox = QuanTextBox.DisplayType.Normal;
 
+    /// <summary>
+    /// Gets a boxed representation for QuanTextBox DisplayType's "Flat" value.
+    /// </summary>
+    public static readonly object FloatingBox = QuanTextBox.DisplayType.Floating;
+
+
+    /// <summary>
+    /// Returns a boxed representation for the specified <see cref="QuanTextBox.DisplayType"/> value.
+    /// </summary>
+    /// <param name="value">The value to box.</param>
+    /// <returns></returns>
+    public static object Box(QuanTextBox.DisplayType value)
     {
-        /// <summary>
-        /// Gets a boxed representation for QuanTextBox DisplayType's "Normal" value.
-        /// </summary>
-        public static readonly object NormalBox = QuanTextBox.DisplayType.Normal;
-
-        /// <summary>
-        /// Gets a boxed representation for QuanTextBox DisplayType's "Flat" value.
-        /// </summary>
-        public static readonly object FloatingBox = QuanTextBox.DisplayType.Floating;
-
-
-        /// <summary>
-        /// Returns a boxed representation for the specified <see cref="QuanTextBox.DisplayType"/> value.
-        /// </summary>
-        /// <param name="value">The value to box.</param>
-        /// <returns></returns>
-        public static object Box(QuanTextBox.DisplayType value)
-        {
-            if (value == QuanTextBox.DisplayType.Normal)
-                return NormalBox;
-            else
-                return FloatingBox;
-        }
+        return value == QuanTextBox.DisplayType.Normal ? NormalBox : FloatingBox;
     }
 }

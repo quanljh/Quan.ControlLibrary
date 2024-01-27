@@ -1,23 +1,22 @@
 ﻿using Prism.Mvvm;
 
-namespace Quan.ControlLibrary.Demo
+namespace Quan.ControlLibrary.Demo;
+
+public class Demo : BindableBase
 {
-    public class Demo : BindableBase
+    private string _name;
+
+    public string Name
     {
-        private string? _name;
+        get => _name;
+        set => SetProperty(ref _name, value);
+    }
 
-        public string? Name
-        {
-            get => _name;
-            set => SetProperty(ref _name, value);
-        }
+    private string _viewName;
 
-        private string? _viewName;
-
-        public string? ViewName
-        {
-            get => _viewName;
-            set => SetProperty(ref _viewName, value);
-        }
+    public string ViewName
+    {
+        get => _viewName;
+        set => SetProperty(ref _viewName, value);
     }
 }

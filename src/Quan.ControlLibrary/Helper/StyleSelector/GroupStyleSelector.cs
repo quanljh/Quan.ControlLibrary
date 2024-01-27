@@ -2,22 +2,21 @@
 using System.Windows.Controls;
 using System.Windows.Data;
 
-namespace Quan.ControlLibrary
+namespace Quan.ControlLibrary;
+
+public class DataGridGroupSelector : StyleSelector
 {
+    public Style GroupHeaderStyle { get; set; }
 
-    public class DataGridGroupSelector : StyleSelector
+    public Style NoGroupHeaderStyle { get; set; }
+
+    public override Style SelectStyle(object item, DependencyObject container)
     {
-        public Style? GroupHeaderStyle { get; set; }
-
-        public Style? NoGroupHeaderStyle { get; set; }
-
-        public override Style? SelectStyle(object item, DependencyObject container)
+        if (item is not CollectionViewGroup { Name: not null } group)
         {
-            if (!(item is CollectionViewGroup { Name: { } } group))
-                return NoGroupHeaderStyle;
-            if (group.Name.ToString() == "")
-                return NoGroupHeaderStyle;
-            return GroupHeaderStyle;
+            return NoGroupHeaderStyle;
         }
+
+        return group.Name.ToString() == "" ? NoGroupHeaderStyle : GroupHeaderStyle;
     }
 }

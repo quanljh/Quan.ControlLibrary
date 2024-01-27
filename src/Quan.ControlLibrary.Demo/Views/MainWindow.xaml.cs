@@ -1,15 +1,12 @@
-﻿using Quan.ControlLibrary;
+﻿namespace Quan.ControlLibrary.Demo;
 
-namespace Quan.ControlLibrary.Demo
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : QuanWindow
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : QuanWindow
+    public MainWindow()
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

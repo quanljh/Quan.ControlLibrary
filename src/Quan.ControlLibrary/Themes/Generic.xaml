@@ -580,7 +580,6 @@
     <Setter Property="Margin" Value="0,5" />
     <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Border}" />
     <Setter Property="BorderThickness" Value="0,0,0,1" />
-    <Setter Property="local:MonitorPasswordProperty.Value" Value="True" />
     <Setter Property="Background" Value="{DynamicResource Quan.Brushes.Background}" />
     <Setter Property="Template">
       <Setter.Value>
@@ -1181,14 +1180,11 @@
               <Border Name="PART_ContentSite">
                 <Border.LayoutTransform>
                   <TransformGroup>
-                    <ScaleTransform x:Name="ContentSiteScaleTransform" />
-                    <RotateTransform Angle="{Binding Path=ExpandDirection, RelativeSource={RelativeSource AncestorType=Expander}, Converter={local:ExpanderRotateAngleConverter}}" />
+                    <ScaleTransform />
+                    <RotateTransform />
                   </TransformGroup>
                 </Border.LayoutTransform>
                 <Grid Name="PART_ContentPanel" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                  <Grid.LayoutTransform>
-                    <RotateTransform Angle="{Binding Path=ExpandDirection, RelativeSource={RelativeSource AncestorType=Expander}, Converter={local:ExpanderRotateAngleConverter}, ConverterParameter=-1}" />
-                  </Grid.LayoutTransform>
                   <ContentPresenter Name="PART_Content" ContentStringFormat="{TemplateBinding ContentStringFormat}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" Focusable="False" />
                 </Grid>
               </Border>
@@ -1199,26 +1195,26 @@
                   <VisualTransition To="Expanded">
                     <Storyboard>
                       <DoubleAnimation Storyboard.TargetName="PART_ContentPanel" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.25" />
-                      <DoubleAnimation EasingFunction="{StaticResource Quan.EasingFuns.CubicInOut}" Storyboard.TargetName="ContentSiteScaleTransform" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="0" To="1" Duration="0:0:0.25" />
+                      <DoubleAnimation EasingFunction="{StaticResource Quan.EasingFuns.CubicInOut}" Storyboard.TargetName="PART_ContentSite" Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" From="0" To="1" Duration="0:0:0.25" />
                     </Storyboard>
                   </VisualTransition>
                   <VisualTransition To="Collapsed">
                     <Storyboard>
                       <DoubleAnimation Storyboard.TargetName="PART_ContentPanel" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.20" />
-                      <DoubleAnimation EasingFunction="{StaticResource Quan.EasingFuns.CubicInOut}" Storyboard.TargetName="ContentSiteScaleTransform" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" From="1" To="0" Duration="0:0:0.20" />
+                      <DoubleAnimation EasingFunction="{StaticResource Quan.EasingFuns.CubicInOut}" Storyboard.TargetName="PART_ContentSite" Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" From="1" To="0" Duration="0:0:0.20" />
                     </Storyboard>
                   </VisualTransition>
                 </VisualStateGroup.Transitions>
                 <VisualState x:Name="Expanded">
                   <Storyboard>
                     <DoubleAnimation Storyboard.TargetName="PART_ContentPanel" Storyboard.TargetProperty="Opacity" To="1" Duration="0" />
-                    <DoubleAnimation Storyboard.TargetName="ContentSiteScaleTransform" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" To="1" Duration="0" />
+                    <DoubleAnimation Storyboard.TargetName="PART_ContentSite" Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" To="1" Duration="0" />
                   </Storyboard>
                 </VisualState>
                 <VisualState x:Name="Collapsed">
                   <Storyboard>
                     <DoubleAnimation Storyboard.TargetName="PART_ContentPanel" Storyboard.TargetProperty="Opacity" To="0" Duration="0" />
-                    <DoubleAnimation Storyboard.TargetName="ContentSiteScaleTransform" Storyboard.TargetProperty="(ScaleTransform.ScaleY)" To="0" Duration="0" />
+                    <DoubleAnimation Storyboard.TargetName="PART_ContentSite" Storyboard.TargetProperty="(FrameworkElement.LayoutTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" To="0" Duration="0" />
                   </Storyboard>
                 </VisualState>
               </VisualStateGroup>
@@ -1228,10 +1224,36 @@
             <Trigger Property="ExpandDirection" Value="Right">
               <Setter TargetName="PART_HeaderSite" Property="DockPanel.Dock" Value="Left" />
               <Setter TargetName="PART_HeaderSite" Property="Style" Value="{StaticResource Quan.Styles.ToggleButton.ExpanderHeader.Vertical}" />
+              <Setter TargetName="PART_ContentSite" Property="LayoutTransform">
+                <Setter.Value>
+                  <TransformGroup>
+                    <ScaleTransform />
+                    <RotateTransform Angle="-90" />
+                  </TransformGroup>
+                </Setter.Value>
+              </Setter>
+              <Setter TargetName="PART_ContentPanel" Property="LayoutTransform">
+                <Setter.Value>
+                  <RotateTransform Angle="90" />
+                </Setter.Value>
+              </Setter>
             </Trigger>
             <Trigger Property="ExpandDirection" Value="Left">
               <Setter TargetName="PART_HeaderSite" Property="DockPanel.Dock" Value="Right" />
               <Setter TargetName="PART_HeaderSite" Property="Style" Value="{StaticResource Quan.Styles.ToggleButton.ExpanderHeader.Vertical}" />
+              <Setter TargetName="PART_ContentSite" Property="LayoutTransform">
+                <Setter.Value>
+                  <TransformGroup>
+                    <ScaleTransform />
+                    <RotateTransform Angle="90" />
+                  </TransformGroup>
+                </Setter.Value>
+              </Setter>
+              <Setter TargetName="PART_ContentPanel" Property="LayoutTransform">
+                <Setter.Value>
+                  <RotateTransform Angle="-90" />
+                </Setter.Value>
+              </Setter>
             </Trigger>
             <Trigger Property="ExpandDirection" Value="Up">
               <Setter TargetName="PART_HeaderSite" Property="DockPanel.Dock" Value="Bottom" />

@@ -1,7 +1,6 @@
-﻿namespace Quan.ControlLibrary
+﻿namespace Quan.ControlLibrary;
+
+internal class Constants
 {
-    internal class Constants
-    {
-        public const string QUAN_APP = "Quan.ControlLibrary";
-    }
+    public const string QUAN_APP = "Quan.ControlLibrary";
 }

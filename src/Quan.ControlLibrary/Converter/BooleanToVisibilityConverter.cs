@@ -2,48 +2,53 @@
 using System.Globalization;
 using System.Windows;
 
-namespace Quan.ControlLibrary
+namespace Quan.ControlLibrary;
+
+public class BooleanToCollapsedConverter : BaseValueConverter<bool, Visibility>
 {
-    public class BooleanToCollapsedConverter : BaseValueConverter<bool, Visibility>
+    public override Visibility Convert(bool value, object parameter, CultureInfo culture)
     {
-        public override Visibility Convert(bool value, object? parameter, CultureInfo culture)
+        if (parameter != null)
         {
-            if (parameter != null)
-                return value ? Visibility.Collapsed : Visibility.Visible;
-            return value ? Visibility.Visible : Visibility.Collapsed;
+            return value ? Visibility.Collapsed : Visibility.Visible;
         }
 
-        public override bool ConvertBack(Visibility value, object? parameter, CultureInfo culture)
-        {
-            return value == Visibility.Visible;
-        }
+        return value ? Visibility.Visible : Visibility.Collapsed;
     }
 
-    public class BooleanToHiddenConverter : BaseValueConverter<bool, Visibility>
+    public override bool ConvertBack(Visibility value, object parameter, CultureInfo culture)
     {
-        public override Visibility Convert(bool value, object? parameter, CultureInfo culture)
+        return value == Visibility.Visible;
+    }
+}
+
+public class BooleanToHiddenConverter : BaseValueConverter<bool, Visibility>
+{
+    public override Visibility Convert(bool value, object parameter, CultureInfo culture)
+    {
+        if (parameter == null)
         {
-            if (parameter == null)
-                return value ? Visibility.Hidden : Visibility.Visible;
-            return value ? Visibility.Visible : Visibility.Hidden;
+            return value ? Visibility.Hidden : Visibility.Visible;
         }
 
-        public override bool ConvertBack(Visibility value, object? parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+        return value ? Visibility.Visible : Visibility.Hidden;
     }
 
-    public class CollapsedToBooleanConverter : BaseValueConverter<Visibility, bool>
+    public override bool ConvertBack(Visibility value, object parameter, CultureInfo culture)
     {
-        public override bool Convert(Visibility value, object? parameter, CultureInfo culture)
-        {
-            return value == Visibility.Visible;
-        }
+        throw new NotImplementedException();
+    }
+}
 
-        public override Visibility ConvertBack(bool value, object? parameter, CultureInfo culture)
-        {
-            return value ? Visibility.Visible : Visibility.Collapsed;
-        }
+public class CollapsedToBooleanConverter : BaseValueConverter<Visibility, bool>
+{
+    public override bool Convert(Visibility value, object parameter, CultureInfo culture)
+    {
+        return value == Visibility.Visible;
+    }
+
+    public override Visibility ConvertBack(bool value, object parameter, CultureInfo culture)
+    {
+        return value ? Visibility.Visible : Visibility.Collapsed;
     }
 }

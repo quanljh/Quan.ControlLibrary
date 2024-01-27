@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Quan.ControlLibrary.Demo
+namespace Quan.ControlLibrary.Demo;
+
+public interface IControlDemo
 {
-    public interface IControlDemo
-    {
-        List<Demo> GetControlDemos();
-    }
+    List<Demo> GetControlDemos();
 }

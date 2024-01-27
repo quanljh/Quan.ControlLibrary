@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
-namespace Quan.ControlLibrary.Demo
+namespace Quan.ControlLibrary.Demo;
+
+public class ControlDemoService : IControlDemo
 {
-    public class ControlDemoService : IControlDemo
+    /// <inheritdoc />
+    public List<Demo> GetControlDemos()
     {
-        /// <inheritdoc />
-        public List<Demo> GetControlDemos()
-        {
-            return new List<Demo>
+        return new List<Demo>
             {
                 new Demo
                 {
@@ -25,6 +25,5 @@ namespace Quan.ControlLibrary.Demo
                     ViewName = ViewNameConstants.QuanExpanderView,
                 }
             };
-        }
     }
 }

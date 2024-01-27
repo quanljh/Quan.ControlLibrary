@@ -4,11 +4,11 @@
 
 using System.Runtime.InteropServices;
 
-namespace MS.Win32
+namespace MS.Win32;
+
+internal partial class NativeMethods
 {
-    internal partial class NativeMethods
-    {
-        public const int SWP_NOSIZE = 0x0001,
+    public const int SWP_NOSIZE = 0x0001,
         SWP_NOMOVE = 0x0002,
         SWP_NOZORDER = 0x0004,
         SWP_NOACTIVATE = 0x0010,
@@ -16,70 +16,69 @@ namespace MS.Win32
         SWP_HIDEWINDOW = 0x0080,
         SWP_DRAWFRAME = 0x0020;
 
-        [StructLayout(LayoutKind.Sequential)]
-        public class POINT
+    [StructLayout(LayoutKind.Sequential)]
+    public class POINT
+    {
+        public int x;
+        public int y;
+
+        public POINT()
         {
-            public int x;
-            public int y;
-
-            public POINT()
-            {
-            }
-
-            public POINT(int x, int y)
-            {
-                this.x = x;
-                this.y = y;
-            }
-#if DEBUG
-            public override string ToString()
-            {
-                return "{x=" + x + ", y=" + y + "}";
-            }
-#endif
         }
 
-        // NOTE:  this replaces the RECT struct in NativeMethodsCLR.cs because it adds an extra method IsEmpty
-        [StructLayout(LayoutKind.Sequential)]
-        public struct RECT
+        public POINT(int x, int y)
         {
-            public int left;
-            public int top;
-            public int right;
-            public int bottom;
+            this.x = x;
+            this.y = y;
+        }
+#if DEBUG
+        public override string ToString()
+        {
+            return "{x=" + x + ", y=" + y + "}";
+        }
+#endif
+    }
 
-            public RECT(int left, int top, int right, int bottom)
-            {
-                this.left = left;
-                this.top = top;
-                this.right = right;
-                this.bottom = bottom;
-            }
+    // NOTE:  this replaces the RECT struct in NativeMethodsCLR.cs because it adds an extra method IsEmpty
+    [StructLayout(LayoutKind.Sequential)]
+    public struct RECT
+    {
+        public int left;
+        public int top;
+        public int right;
+        public int bottom;
 
-            public int Width
-            {
-                get { return right - left; }
-            }
+        public RECT(int left, int top, int right, int bottom)
+        {
+            this.left = left;
+            this.top = top;
+            this.right = right;
+            this.bottom = bottom;
+        }
 
-            public int Height
-            {
-                get { return bottom - top; }
-            }
+        public int Width
+        {
+            get { return right - left; }
+        }
 
-            public void Offset(int dx, int dy)
-            {
-                left += dx;
-                top += dy;
-                right += dx;
-                bottom += dy;
-            }
+        public int Height
+        {
+            get { return bottom - top; }
+        }
 
-            public bool IsEmpty
+        public void Offset(int dx, int dy)
+        {
+            left += dx;
+            top += dy;
+            right += dx;
+            bottom += dy;
+        }
+
+        public bool IsEmpty
+        {
+            get
             {
-                get
-                {
-                    return left >= right || top >= bottom;
-                }
+                return left >= right || top >= bottom;
             }
         }
     }

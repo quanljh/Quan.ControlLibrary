@@ -1,35 +1,34 @@
 ﻿using Prism.Mvvm;
 using Prism.Regions;
 
-namespace Quan.ControlLibrary.Demo
+namespace Quan.ControlLibrary.Demo;
+
+public class QuanExpanderViewModel : BindableBase, INavigationAware
 {
-    public class QuanExpanderViewModel : BindableBase, INavigationAware
+    #region Constructor
+
+    public QuanExpanderViewModel()
     {
-        #region Constructor
 
-        public QuanExpanderViewModel()
-        {
+    }
 
-        }
+    #endregion
 
-        #endregion
+    /// <inheritdoc />
+    public void OnNavigatedTo(NavigationContext navigationContext)
+    {
 
-        /// <inheritdoc />
-        public void OnNavigatedTo(NavigationContext navigationContext)
-        {
+    }
 
-        }
+    /// <inheritdoc />
+    public bool IsNavigationTarget(NavigationContext navigationContext)
+    {
+        return true;
+    }
 
-        /// <inheritdoc />
-        public bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return true;
-        }
+    /// <inheritdoc />
+    public void OnNavigatedFrom(NavigationContext navigationContext)
+    {
 
-        /// <inheritdoc />
-        public void OnNavigatedFrom(NavigationContext navigationContext)
-        {
-
-        }
     }
 }
