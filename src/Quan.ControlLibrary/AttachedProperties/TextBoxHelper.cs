@@ -1,13 +1,14 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Quan.ControlLibrary.Constants;
+using Quan.ControlLibrary.Helpers;
+using Quan.ControlLibrary.Helpers.Boxes;
 
-namespace Quan.ControlLibrary;
+namespace Quan.ControlLibrary.AttachedProperties;
 
 public static class TextBoxHelper
 {
@@ -20,7 +21,7 @@ public static class TextBoxHelper
             typeof(TextBoxHelper),
             new UIPropertyMetadata(BooleanBoxes.FalseBox, OnIsMonitoringChanged));
 
-    [Category(Constants.QUAN_APP)]
+    [Category(AppName.QuanApp)]
     [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
     [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
     [AttachedPropertyBrowsableForType(typeof(ComboBox))]
@@ -57,7 +58,7 @@ public static class TextBoxHelper
             typeof(TextBoxHelper),
             new FrameworkPropertyMetadata(BooleanBoxes.FalseBox, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsRender));
 
-    [Category(Constants.QUAN_APP)]
+    [Category(AppName.QuanApp)]
     [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
     [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
     [AttachedPropertyBrowsableForType(typeof(ComboBox))]
@@ -75,7 +76,7 @@ public static class TextBoxHelper
         typeof(TextBoxHelper),
         new FrameworkPropertyMetadata(BooleanBoxes.FalseBox));
 
-    [Category(Constants.QUAN_APP)]
+    [Category(AppName.QuanApp)]
     [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
     [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
     [AttachedPropertyBrowsableForType(typeof(ComboBox))]
@@ -96,7 +97,7 @@ public static class TextBoxHelper
             typeof(TextBoxHelper),
             new PropertyMetadata(default(string)));
 
-    [Category(Constants.QUAN_APP)]
+    [Category(AppName.QuanApp)]
     [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
     [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
     [AttachedPropertyBrowsableForType(typeof(ComboBox))]
@@ -114,7 +115,7 @@ public static class TextBoxHelper
             typeof(TextBoxHelper),
             new PropertyMetadata(.46));
 
-    [Category(Constants.QUAN_APP)]
+    [Category(AppName.QuanApp)]
     [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
     [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
     [AttachedPropertyBrowsableForType(typeof(ComboBox))]
@@ -133,7 +134,7 @@ public static class TextBoxHelper
             typeof(TextBoxHelper),
             new FrameworkPropertyMetadata(BooleanBoxes.FalseBox));
 
-    [Category(Constants.QUAN_APP)]
+    [Category(AppName.QuanApp)]
     [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
     [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
     [AttachedPropertyBrowsableForType(typeof(ComboBox))]
@@ -152,7 +153,7 @@ public static class TextBoxHelper
             typeof(TextBoxHelper),
             new FrameworkPropertyMetadata(false, IsUseClearButton_OnChanged));
 
-    [Category(Constants.QUAN_APP)]
+    [Category(AppName.QuanApp)]
     [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
     [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
     [AttachedPropertyBrowsableForType(typeof(ComboBox))]
@@ -214,7 +215,7 @@ public static class TextBoxHelper
             typeof(TextBoxHelper),
             new FrameworkPropertyMetadata(null));
 
-    [Category(Constants.QUAN_APP)]
+    [Category(AppName.QuanApp)]
     [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
     [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
     [AttachedPropertyBrowsableForType(typeof(ComboBox))]
@@ -232,7 +233,7 @@ public static class TextBoxHelper
             typeof(TextBoxHelper),
             new FrameworkPropertyMetadata(null));
 
-    [Category(Constants.QUAN_APP)]
+    [Category(AppName.QuanApp)]
     [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
     [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
     [AttachedPropertyBrowsableForType(typeof(ComboBox))]
@@ -253,7 +254,7 @@ public static class TextBoxHelper
             typeof(TextBoxHelper),
             new PropertyMetadata(BooleanBoxes.FalseBox));
 
-    [Category(Constants.QUAN_APP)]
+    [Category(AppName.QuanApp)]
     [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
     [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
     [AttachedPropertyBrowsableForType(typeof(ComboBox))]
@@ -272,7 +273,7 @@ public static class TextBoxHelper
             typeof(TextBoxHelper),
             new FrameworkPropertyMetadata(BooleanBoxes.FalseBox, IsUseFunctionButton_OnChanged));
 
-    [Category(Constants.QUAN_APP)]
+    [Category(AppName.QuanApp)]
     [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
     [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
     [AttachedPropertyBrowsableForType(typeof(ComboBox))]
@@ -328,7 +329,7 @@ public static class TextBoxHelper
             typeof(TextBoxHelper),
             new PropertyMetadata());
 
-    [Category(Constants.QUAN_APP)]
+    [Category(AppName.QuanApp)]
     [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
     [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
     [AttachedPropertyBrowsableForType(typeof(ComboBox))]
@@ -346,7 +347,7 @@ public static class TextBoxHelper
             typeof(TextBoxHelper),
             new FrameworkPropertyMetadata(null));
 
-    [Category(Constants.QUAN_APP)]
+    [Category(AppName.QuanApp)]
     [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
     [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
     [AttachedPropertyBrowsableForType(typeof(ComboBox))]
@@ -364,7 +365,7 @@ public static class TextBoxHelper
             typeof(TextBoxHelper),
             new FrameworkPropertyMetadata(null));
 
-    [Category(Constants.QUAN_APP)]
+    [Category(AppName.QuanApp)]
     [AttachedPropertyBrowsableForType(typeof(TextBoxBase))]
     [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
     [AttachedPropertyBrowsableForType(typeof(ComboBox))]

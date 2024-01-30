@@ -1,7 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Media;
+using Quan.ControlLibrary.Helpers.Boxes;
 
-namespace Quan.ControlLibrary;
+namespace Quan.ControlLibrary.AttachedProperties;
 
 public static class FloatingTextHelper
 {

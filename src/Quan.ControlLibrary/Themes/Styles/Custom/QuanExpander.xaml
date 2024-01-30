@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:Quan.ControlLibrary">
+    xmlns:attachedProperties="clr-namespace:Quan.ControlLibrary.AttachedProperties"
+    xmlns:controls="clr-namespace:Quan.ControlLibrary.Controls">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Basic/Fonts.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Basic/Common.xaml" />
@@ -48,7 +49,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="ExpandIcon" Property="Foreground" Value="{DynamicResource Quan.Brushes.Primary}" />
+                            <Setter TargetName="ExpandIcon" Property="Foreground" Value="{DynamicResource Quan.Brushes.Accent}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="ExpandIcon" Property="Opacity" Value=".5" />
@@ -65,7 +66,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border Padding="{Binding Path=(local:ExpanderHelper.HorizontalHeaderPadding), RelativeSource={RelativeSource AncestorType=Expander, AncestorLevel=1}}" Background="{TemplateBinding Background}">
+                    <Border Padding="{Binding Path=(attachedProperties:ExpanderHelper.HorizontalHeaderPadding), RelativeSource={RelativeSource AncestorType=Expander, AncestorLevel=1}}" Background="{TemplateBinding Background}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -115,7 +116,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border Padding="{Binding Path=(local:ExpanderHelper.HorizontalHeaderPadding), RelativeSource={RelativeSource AncestorType=Expander, AncestorLevel=1}}" Background="{TemplateBinding Background}">
+                    <Border Padding="{Binding Path=(attachedProperties:ExpanderHelper.HorizontalHeaderPadding), RelativeSource={RelativeSource AncestorType=Expander, AncestorLevel=1}}" Background="{TemplateBinding Background}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -166,24 +167,21 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type local:QuanExpander}">
+    <Style TargetType="{x:Type controls:QuanExpander}">
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Border}" />
-        <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.ForegroundLight}" />
+        <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.ThemeForeground}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Top" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:QuanExpander}">
-                    <Border
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
+                <ControlTemplate TargetType="{x:Type controls:QuanExpander}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                         <DockPanel>
                             <ToggleButton
                                 Name="PART_HeaderSite"
-                                Background="{TemplateBinding local:ExpanderHelper.HeaderBackground}"
+                                Background="{TemplateBinding attachedProperties:ExpanderHelper.HeaderBackground}"
                                 BorderThickness="0"
                                 Content="{TemplateBinding Header}"
                                 ContentStringFormat="{TemplateBinding HeaderStringFormat}"
@@ -196,7 +194,7 @@
                                 IsChecked="{Binding Path=IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                 IsTabStop="False"
                                 Style="{StaticResource Quan.Styles.ToggleButton.ExpanderHeader.Horizontal}"
-                                TextElement.FontSize="{TemplateBinding local:ExpanderHelper.HeaderFontSize}" />
+                                TextElement.FontSize="{TemplateBinding attachedProperties:ExpanderHelper.HeaderFontSize}" />
 
                             <Border Name="PART_ContentSite">
                                 <Border.LayoutTransform>

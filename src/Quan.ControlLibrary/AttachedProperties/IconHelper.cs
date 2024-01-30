@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 
-namespace Quan.ControlLibrary;
+namespace Quan.ControlLibrary.AttachedProperties;
 
 public static class IconHelper
 {

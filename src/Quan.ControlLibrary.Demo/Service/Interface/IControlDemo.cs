@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Quan.ControlLibrary.Demo;
+namespace Quan.ControlLibrary.Demo.Service.Interface;
 
 public interface IControlDemo
 {
-    List<Demo> GetControlDemos();
+    List<Models.Demo> GetControlDemos();
 }

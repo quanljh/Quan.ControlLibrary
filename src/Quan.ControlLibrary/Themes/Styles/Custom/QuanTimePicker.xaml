@@ -1,0 +1,77 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:attachedProperties="clr-namespace:Quan.ControlLibrary.AttachedProperties"
+    xmlns:controls="clr-namespace:Quan.ControlLibrary.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Basic/Fonts.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Default/Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Default/ListBox.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+
+    <ControlTemplate x:Key="Quan.Templates.QuanTimePicker.Default" TargetType="{x:Type controls:QuanTimePicker}">
+        <Grid>
+            <controls:QuanTextBox
+                x:Name="PART_QuanTextBox"
+                attachedProperties:TextBoxHelper.GuideText="{TemplateBinding attachedProperties:TextBoxHelper.GuideText}"
+                Background="{TemplateBinding Background}"
+                FontFamily="{TemplateBinding FontFamily}"
+                FontSize="{TemplateBinding FontSize}" />
+            <Popup
+                x:Name="PART_Popup"
+                AllowsTransparency="True"
+                PlacementTarget="{Binding ElementName=PART_QuanTextBox}"
+                PopupAnimation="Slide"
+                StaysOpen="False">
+                <Border
+                    Width="{Binding ActualWidth, ElementName=PART_QuanTextBox}"
+                    MaxHeight="240"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{DynamicResource Quan.Brushes.Accent}"
+                    BorderThickness="1,0,1,1"
+                    CornerRadius="{TemplateBinding attachedProperties:BorderHelper.CornerRadius}">
+                    <Grid>
+                        <Grid.Resources>
+                            <Style BasedOn="{StaticResource Quan.Styles.ListBox.Default}" TargetType="{x:Type ListBox}">
+                                <Setter Property="ItemStringFormat" Value="D2" />
+                                <Setter Property="SelectionMode" Value="Single" />
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
+                            </Style>
+
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <ListBox x:Name="PART_Popup_HoursListBox" Grid.Column="0" ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HourNumbers}" />
+                        <Rectangle Grid.Column="1" Width="0.5" Fill="{TemplateBinding BorderBrush}" />
+                        <ListBox x:Name="PART_Popup_MinutesListBox" Grid.Column="2" ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=MinutesNumbers}" />
+                        <Rectangle Grid.Column="3" Width="0.5" Fill="{TemplateBinding BorderBrush}" />
+                        <ListBox x:Name="PART_Popup_SecondsListBox" Grid.Column="4" ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SecondsNumbers}" />
+                    </Grid>
+                </Border>
+            </Popup>
+        </Grid>
+        <ControlTemplate.Triggers />
+    </ControlTemplate>
+
+    <Style x:Key="Quan.Styles.QuanTimePicker.Default" TargetType="{x:Type controls:QuanTimePicker}">
+        <Setter Property="FontFamily" Value="{StaticResource Quan.Fonts.Regular}" />
+        <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Regular}" />
+        <Setter Property="Background" Value="{DynamicResource Quan.Brushes.ThemeBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Quan.Brushes.Border}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template" Value="{StaticResource Quan.Templates.QuanTimePicker.Default}" />
+        <Setter Property="attachedProperties:TextBoxHelper.GuideText" Value="Select time" />
+    </Style>
+
+    <Style BasedOn="{StaticResource Quan.Styles.QuanTimePicker.Default}" TargetType="{x:Type controls:QuanTimePicker}" />
+</ResourceDictionary>

@@ -1,7 +1,7 @@
 ﻿using Prism.Regions;
 using Reactive.Bindings;
 
-namespace Quan.ControlLibrary.Demo;
+namespace Quan.ControlLibrary.Demo.ViewModels.Controls;
 
 public class QuanTextBoxViewModel : ViewModelBase, INavigationAware
 {

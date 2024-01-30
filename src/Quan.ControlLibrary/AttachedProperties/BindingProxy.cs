@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Quan.ControlLibrary;
+namespace Quan.ControlLibrary.AttachedProperties;
 
 public class BindingProxy : Freezable
 {

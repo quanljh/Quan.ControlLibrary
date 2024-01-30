@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reactive.Linq;
 using Prism.Mvvm;
 using Prism.Regions;
+using Quan.ControlLibrary.Demo.Constants;
+using Quan.ControlLibrary.Demo.Service.Interface;
 using Reactive.Bindings;
 
-namespace Quan.ControlLibrary.Demo;
+namespace Quan.ControlLibrary.Demo.ViewModels;
 
 public class MainWindowViewModel : BindableBase
 {
@@ -20,9 +21,9 @@ public class MainWindowViewModel : BindableBase
 
     #region Properties
 
-    public ObservableCollection<Demo> ControlDemoCollection { get; private set; } = new ObservableCollection<Demo>();
+    public ObservableCollection<Models.Demo> ControlDemoCollection { get; set; } = new ObservableCollection<Models.Demo>();
 
-    public ReactiveProperty<Demo> SelectedControlDemo { get; }
+    public ReactiveProperty<Models.Demo> SelectedControlDemo { get; }
 
     #endregion
 
@@ -37,7 +38,7 @@ public class MainWindowViewModel : BindableBase
         _regionManager = regionManager;
         _controlDemo = controlDemo;
 
-        SelectedControlDemo = new ReactiveProperty<Demo>(default, ReactivePropertyMode.DistinctUntilChanged);
+        SelectedControlDemo = new ReactiveProperty<Models.Demo>(default, ReactivePropertyMode.DistinctUntilChanged);
 
         Load();
 
@@ -57,7 +58,7 @@ public class MainWindowViewModel : BindableBase
         SelectedControlDemo.Value = ControlDemoCollection.FirstOrDefault();
     }
 
-    private void OnSelectedControlDemoChanged(Demo demo)
+    private void OnSelectedControlDemoChanged(Models.Demo demo)
     {
         if (demo == null)
             return;

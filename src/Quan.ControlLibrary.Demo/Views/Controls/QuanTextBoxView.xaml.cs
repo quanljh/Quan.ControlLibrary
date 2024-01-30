@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Quan.ControlLibrary.Demo;
+namespace Quan.ControlLibrary.Demo.Views.Controls;
 
 /// <summary>
 /// QuanTextBox.xaml の相互作用ロジック

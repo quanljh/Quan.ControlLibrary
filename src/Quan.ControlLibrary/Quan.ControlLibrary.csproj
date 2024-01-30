@@ -1,47 +1,66 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net46;net47;net48;net6.0-windows;net8.0-windows</TargetFrameworks>
-    <UseWPF>true</UseWPF>
+    <AssemblyName>Quan.ControlLibrary</AssemblyName>
+    <Title>Quan.ControlLibrary</Title>
+    <RootNamespace>Quan.ControlLibrary</RootNamespace>
   </PropertyGroup>
 
 	<ItemGroup>
-    <None Remove="Resources\Fonts\FontAwesome.ttf" />
-    <None Remove="Resources\Fonts\NotoSans-Bold.ttf" />
-    <None Remove="Resources\Fonts\NotoSans-BoldItalic.ttf" />
-    <None Remove="Resources\Images\Logo\quan.ico" />
     <None Remove="Themes\Theme.txt" />
     <None Remove="Themes\XamlCombine.exe" />
+    <Page Remove="Themes\Generic.Debug.xaml" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
+    <PackageReference Include="ControlzEx" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" />
+    <PackageReference Include="XAMLTools.MSBuild" PrivateAssets="all" IncludeAssets="build" />
+    <PackageReference Include="Microsoft.Windows.CsWin32" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(DefineConstants.Contains(NETCOREAPP)) == false">
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\Fonts\FontAwesome.ttf" />
-    <Resource Include="Resources\Fonts\NotoSans-Bold.ttf" />
-	  <Resource Include="Resources\Fonts\NotoSans-BoldItalic.ttf" />
-	  <Resource Include="Resources\Fonts\NotoSans-Italic.ttf" />
-	  <Resource Include="Resources\Fonts\NotoSans-Regular.ttf" />
-    <Resource Include="Resources\Images\Logo\quan.ico" />
+    <ControlStyles Include="Themes/Styles/Basic/Fonts.xaml" />
+    <ControlStyles Include="Themes/Styles/Basic/Geometries.xaml" />
+    <ControlStyles Include="Themes/Styles/Basic/Common.xaml" />
+    <ControlStyles Include="Themes/Styles/Basic/ValidationErrorTemplate.xaml" />
+
+    <ControlStyles Include="Themes/Styles/Default/Scroll.xaml" />
+    <ControlStyles Include="Themes/Styles/Default/Button.xaml" />
+    <ControlStyles Include="Themes/Styles/Default/ListBox.xaml" />
+
+    <ControlStyles Include="Themes/Styles/Custom/QuanContentControl.xaml" />
+    <ControlStyles Include="Themes/Styles/Custom/FlyoutsControl.xaml" />
+    <ControlStyles Include="Themes/Styles/Custom/Flyout.xaml" />
+    <ControlStyles Include="Themes/Styles/Custom/QuanButton.xaml" />
+    <ControlStyles Include="Themes/Styles/Custom/QuanRipple.xaml" />
+    <ControlStyles Include="Themes/Styles/Custom/QuanFloatingText.xaml" />
+    <ControlStyles Include="Themes/Styles/Custom/QuanTextBox.xaml" />
+    <ControlStyles Include="Themes/Styles/Custom/QuanTimePicker.xaml" />
+    <ControlStyles Include="Themes/Styles/Custom/QuanExpander.xaml" />
+    <ControlStyles Include="Themes/Styles/Custom/WindowCommands.xaml" />
+    <ControlStyles Include="Themes/Styles/Custom/WindowButtons.xaml" />
+    <ControlStyles Include="Themes/Styles/Custom/QuanWindow.xaml" />
   </ItemGroup>
-	
 
-	<ItemGroup>
-	  <Page Remove="Properties\DesignTimeResources.xaml" />
+  <ItemGroup>
+    <XAMLCombineItems Include="@(ControlStyles)" Condition="'$(Configuration)' == 'Release'">
+      <TargetFile>Themes/Generic.xaml</TargetFile>
+    </XAMLCombineItems>
+
+    <XAMLColorSchemeGeneratorItems Include="Themes\Styles\Colors\Theme.Template.xaml">
+      <ParametersFile>Themes\Styles\Colors\GeneratorParameters.json</ParametersFile>
+      <OutputPath>Themes\Styles\Colors</OutputPath>
+    </XAMLColorSchemeGeneratorItems>
   </ItemGroup>
 
-	<ItemGroup>
-		<None Include="Properties\DesignTimeResources.xaml">
-			<Generator>MSBuild:Compile</Generator>
-			<SubType>Designer</SubType>
-			<ContainsDesignTimeResources>True</ContainsDesignTimeResources>
-		</None>
-	</ItemGroup>
-
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="$(ProjectDir)Themes\XamlCombine.exe $(ProjectDir)Themes\Theme.txt Generic.xaml" />
-  </Target>
+  <Target Name="CopyDebugStyle" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)' == 'Debug'">
+    <Copy SourceFiles="$(ProjectDir)Themes\Generic.Debug.xaml" DestinationFiles="$(ProjectDir)Themes\Generic.xaml"/>
+  </Target>  
 
 </Project>

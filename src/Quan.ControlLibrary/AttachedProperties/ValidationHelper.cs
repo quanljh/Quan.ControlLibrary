@@ -1,8 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+using Quan.ControlLibrary.Helpers.Boxes;
 
-namespace Quan.ControlLibrary;
+namespace Quan.ControlLibrary.AttachedProperties;
 
 public static class ValidationHelper
 {

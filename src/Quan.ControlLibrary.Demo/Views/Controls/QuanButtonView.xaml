@@ -1,13 +1,15 @@
 ﻿<UserControl
-    x:Class="Quan.ControlLibrary.Demo.QuanButtonView"
+    x:Class="Quan.ControlLibrary.Demo.Views.Controls.QuanButtonView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Quan.ControlLibrary.Demo"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
     xmlns:q="http://quan.app.com/winfx/xaml/controls"
     d:DesignHeight="400"
     d:DesignWidth="500"
+    prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
     <StackPanel VerticalAlignment="Center" q:PanelHelper.ChildMargin="0 0 0 20">
         <q:QuanButton

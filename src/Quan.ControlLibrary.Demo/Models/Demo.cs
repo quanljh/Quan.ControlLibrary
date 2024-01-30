@@ -1,6 +1,6 @@
 ﻿using Prism.Mvvm;
 
-namespace Quan.ControlLibrary.Demo;
+namespace Quan.ControlLibrary.Demo.Models;
 
 public class Demo : BindableBase
 {

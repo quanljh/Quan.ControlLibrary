@@ -14,8 +14,14 @@
     <system:Double x:Key="Quan.FontSize.XXLarge">30</system:Double>
 
 
-    <system:String x:Key="Quan.FontIcons.Close">&#xf00d;</system:String>
     <system:String x:Key="Quan.FontIcons.Search">&#xf002;</system:String>
+    <system:String x:Key="Quan.FontIcons.Close">&#xf00d;</system:String>
+    <system:String x:Key="Quan.FontIcons.Clock">&#xf017;</system:String>
     <system:String x:Key="Quan.FontIcons.Chevron-Down">&#xf078;</system:String>
 
+    <CharacterCasing x:Key="Quan.CharacterCasing.Button">Upper</CharacterCasing>
+    <CharacterCasing x:Key="Quan.CharacterCasing.Button.Square">Lower</CharacterCasing>
+    <CharacterCasing x:Key="Quan.CharacterCasing.Button.Dialogs">Normal</CharacterCasing>
+    <CharacterCasing x:Key="Quan.CharacterCasing.Button.Dialogs.Accent">Normal</CharacterCasing>
+    <CharacterCasing x:Key="Quan.CharacterCasing.Button.Dialogs.AccentHighlight">Normal</CharacterCasing>
 </ResourceDictionary>

@@ -1,4 +1,4 @@
-﻿namespace Quan.ControlLibrary.Demo;
+﻿namespace Quan.ControlLibrary.Demo.Constants;
 
 public class ViewNameConstants
 {
@@ -9,6 +9,7 @@ public class ViewNameConstants
     public const string QuanTextBoxView = "QuanTextBoxView";
     public const string QuanButtonView = "QuanButtonView";
     public const string QuanExpanderView = "QuanExpanderView";
+    public const string QuanTimePickerView = "QuanTimePickerView";
 
     #endregion
 }

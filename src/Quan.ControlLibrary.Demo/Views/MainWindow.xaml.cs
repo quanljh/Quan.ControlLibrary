@@ -1,4 +1,6 @@
-﻿namespace Quan.ControlLibrary.Demo;
+﻿using Quan.ControlLibrary.Controls;
+
+namespace Quan.ControlLibrary.Demo.Views;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml

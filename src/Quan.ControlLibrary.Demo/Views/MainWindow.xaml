@@ -1,8 +1,9 @@
 ﻿<q:QuanWindow
-    x:Class="Quan.ControlLibrary.Demo.MainWindow"
+    x:Class="Quan.ControlLibrary.Demo.Views.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:constants="clr-namespace:Quan.ControlLibrary.Demo.Constants"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Quan.ControlLibrary.Demo"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -11,7 +12,9 @@
     Title="MainWindow"
     Width="900"
     Height="600"
+    prism:ViewModelLocator.AutoWireViewModel="True"
     Icon="/Quan.ControlLibrary;Component/Resources/Images/Logo/quan.ico"
+    NonActiveGlowColor="#CDFF0000"
     ShowActivated="True"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
@@ -22,11 +25,11 @@
         </Grid.ColumnDefinitions>
         <ListBox
             Width="130"
-            BorderThickness="0,1,1,0"
+            BorderThickness="0,0,1,0"
             DisplayMemberPath="Name"
             ItemsSource="{Binding ControlDemoCollection}"
             SelectedItem="{Binding SelectedControlDemo.Value}" />
-        <ContentControl Grid.Column="1" prism:RegionManager.RegionName="{x:Static local:ViewNameConstants.MainWindowContent}" />
+        <ContentControl Grid.Column="1" prism:RegionManager.RegionName="{x:Static constants:ViewNameConstants.MainWindowContent}" />
     </Grid>
 
 </q:QuanWindow>

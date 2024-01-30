@@ -338,3 +338,10 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+# Generated files
+*_wpftmp.csproj
+src/Quan.ControlLibrary/Themes/Styles/Colors/*.xaml
+
+# Allowed files
+!src/Quan.ControlLibrary/Themes/Styles/Colors/Theme.Template.xaml

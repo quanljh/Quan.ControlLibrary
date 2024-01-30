@@ -1,0 +1,96 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:o="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <!--  Matadata  -->
+    <system:String x:Key="Theme.Name">{{ThemeName}}</system:String>
+    <system:String x:Key="Theme.Origin">Quan.ControlLibrary</system:String>
+    <system:String x:Key="Theme.DisplayName">{{ThemeDisplayName}}</system:String>
+    <system:String x:Key="Theme.BaseColorScheme">{{BaseColorScheme}}</system:String>
+    <system:String x:Key="Theme.ColorScheme">{{ColorScheme}}</system:String>
+    <Color x:Key="Theme.PrimaryAccentColor">{{Quan.Colors.AccentBase}}</Color>
+    <SolidColorBrush x:Key="Theme.ShowcaseBrush" o:Freeze="True" Color="{{Quan.Colors.AccentBase}}" />
+
+    <!--  Theme Base Colors  -->
+
+    <Color x:Key="Quan.Colors.ThemeBackground">{{Quan.Colors.ThemeBackground}}</Color>
+    <Color x:Key="Quan.Colors.ThemeForeground">{{Quan.Colors.ThemeForeground}}</Color>
+    <Color x:Key="Quan.Colors.ForegroundHighLight">{{Quan.Colors.ForegroundHighLight}}</Color>
+
+    <Color x:Key="Quan.Colors.Highlight">{{Quan.Colors.Highlight}}</Color>
+    <Color x:Key="Quan.Colors.AccentBase">{{Quan.Colors.AccentBase}}</Color>
+    <Color x:Key="Quan.Colors.Accent">{{Quan.Colors.Accent}}</Color>
+    <Color x:Key="Quan.Colors.Accent2">{{Quan.Colors.Accent2}}</Color>
+    <Color x:Key="Quan.Colors.Accent3">{{Quan.Colors.Accent3}}</Color>
+    <Color x:Key="Quan.Colors.Accent4">{{Quan.Colors.Accent4}}</Color>
+
+    <Color x:Key="Quan.Colors.Gray1">{{Quan.Colors.Gray1}}</Color>
+    <Color x:Key="Quan.Colors.Gray2">{{Quan.Colors.Gray2}}</Color>
+    <Color x:Key="Quan.Colors.Gray3">{{Quan.Colors.Gray3}}</Color>
+    <Color x:Key="Quan.Colors.Gray4">{{Quan.Colors.Gray4}}</Color>
+    <Color x:Key="Quan.Colors.Gray5">{{Quan.Colors.Gray5}}</Color>
+    <Color x:Key="Quan.Colors.Gray6">{{Quan.Colors.Gray6}}</Color>
+    <Color x:Key="Quan.Colors.Gray7">{{Quan.Colors.Gray7}}</Color>
+    <Color x:Key="Quan.Colors.Gray8">{{Quan.Colors.Gray8}}</Color>
+    <Color x:Key="Quan.Colors.Gray9">{{Quan.Colors.Gray9}}</Color>
+    <Color x:Key="Quan.Colors.Gray10">{{Quan.Colors.Gray10}}</Color>
+
+
+    <!--  Brushes  -->
+    <SolidColorBrush x:Key="Quan.Brushes.ThemeBackground" o:Freeze="True" Color="{StaticResource Quan.Colors.ThemeBackground}" />
+    <SolidColorBrush x:Key="Quan.Brushes.ThemeForeground" o:Freeze="True" Color="{StaticResource Quan.Colors.ThemeForeground}" />
+
+    <SolidColorBrush x:Key="Quan.Brushes.Border" o:Freeze="True" Color="{StaticResource Quan.Colors.Gray3}" />
+    <SolidColorBrush x:Key="Quan.Brushes.ForegroundHighLight" o:Freeze="True" Color="{StaticResource Quan.Colors.ForegroundHighLight}" />
+    <SolidColorBrush x:Key="Quan.Brushes.ForegroundDisabled" o:Freeze="True" Color="#FFADADAD" />
+
+    <SolidColorBrush x:Key="Quan.Brushes.Transparent" o:Freeze="True" Color="Transparent" />
+    <SolidColorBrush x:Key="Quan.Brushes.SemiTransparent" o:Freeze="True" Color="{{Quan.Colors.SemiTransparent}}" />
+
+    <SolidColorBrush x:Key="Quan.Brushes.Highlight" o:Freeze="True" Color="{StaticResource Quan.Colors.Highlight}" />
+    <SolidColorBrush x:Key="Quan.Brushes.AccentBase" o:Freeze="True" Color="{StaticResource Quan.Colors.AccentBase}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Accent" o:Freeze="True" Color="{StaticResource Quan.Colors.Accent}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Accent2" o:Freeze="True" Color="{StaticResource Quan.Colors.Accent2}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Accent3" o:Freeze="True" Color="{StaticResource Quan.Colors.Accent3}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Accent4" o:Freeze="True" Color="{StaticResource Quan.Colors.Accent4}" />
+
+    <SolidColorBrush x:Key="Quan.Brushes.NonActive" o:Freeze="True" Color="#808080" />
+    <SolidColorBrush x:Key="Quan.Brushes.Warning" o:Freeze="True" Color="#ffa800" />
+    <SolidColorBrush x:Key="Quan.Brushes.Error" o:Freeze="True" Color="#ff4747" />
+    <SolidColorBrush x:Key="Quan.Brushes.Success" o:Freeze="True" Color="#00c541" />
+    <SolidColorBrush x:Key="Quan.Brushes.Focus" o:Freeze="True" Color="#ff82cf" />
+    <SolidColorBrush x:Key="Quan.Brushes.Disabled" o:Freeze="True" Color="#ADADAD" />
+
+    <SolidColorBrush x:Key="Quan.Brushes.Gray1" o:Freeze="True" Color="{StaticResource Quan.Colors.Gray1}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Gray2" o:Freeze="True" Color="{StaticResource Quan.Colors.Gray2}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Gray3" o:Freeze="True" Color="{StaticResource Quan.Colors.Gray3}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Gray4" o:Freeze="True" Color="{StaticResource Quan.Colors.Gray4}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Gray5" o:Freeze="True" Color="{StaticResource Quan.Colors.Gray5}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Gray6" o:Freeze="True" Color="{StaticResource Quan.Colors.Gray6}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Gray7" o:Freeze="True" Color="{StaticResource Quan.Colors.Gray7}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Gray8" o:Freeze="True" Color="{StaticResource Quan.Colors.Gray8}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Gray9" o:Freeze="True" Color="{StaticResource Quan.Colors.Gray9}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Gray10" o:Freeze="True" Color="{StaticResource Quan.Colors.Gray10}" />
+
+    <SolidColorBrush x:Key="Quan.Brushes.Shadow" o:Freeze="True" Color="#AA000000" />
+
+    <!--  Controls  -->
+    <SolidColorBrush x:Key="Quan.Brushes.Control.Disabled" o:Freeze="True" Color="#A5FFFFFF" />
+
+    <!--  Buttons  -->
+    <SolidColorBrush x:Key="Quan.Brushes.WindowButtons.Background.MouseOver" o:Freeze="True" Color="#66DCDCDC" />
+
+    <SolidColorBrush x:Key="Quan.Brushes.Button.Square.Background.MouseOver" o:Freeze="True" Color="{StaticResource Quan.Colors.Gray8}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Button.Square.Foreground.MouseOver" o:Freeze="True" Color="{StaticResource Quan.Colors.ThemeForeground}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Button.AccentedSquare.Background.MouseOver" o:Freeze="True" Color="#66000000" />
+    <SolidColorBrush x:Key="Quan.Brushes.Button.AccentedSquare.Foreground.MouseOver" o:Freeze="True" Color="{StaticResource Quan.Colors.ForegroundHighLight}" />
+
+    <!--  Dialog  -->
+    <SolidColorBrush x:Key="Quan.Brushes.Dialog.Background" o:Freeze="True" Color="{StaticResource Quan.Colors.ThemeBackground}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Dialog.Foreground" o:Freeze="True" Color="{StaticResource Quan.Colors.ThemeForeground}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Dialog.Background.Accent" o:Freeze="True" Color="{StaticResource Quan.Colors.Highlight}" />
+    <SolidColorBrush x:Key="Quan.Brushes.Dialog.Foreground.Accent" o:Freeze="True" Color="{StaticResource Quan.Colors.ForegroundHighLight}" />
+
+</ResourceDictionary>

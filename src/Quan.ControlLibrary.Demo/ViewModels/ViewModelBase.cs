@@ -2,7 +2,7 @@
 using System.Reactive.Disposables;
 using Prism.Mvvm;
 
-namespace Quan.ControlLibrary;
+namespace Quan.ControlLibrary.Demo.ViewModels;
 
 public class ViewModelBase : BindableBase, IDisposable
 {

@@ -1,0 +1,17 @@
+GetKeyNameText
+GetMonitorInfo
+GetWindowPlacement
+GetWindowRect
+LoadLibrary
+LoadString
+MapVirtualKey
+MonitorFromWindow
+ReleaseCapture
+SendMessage
+SetWindowPlacement
+SetWindowPos
+
+HWND_*
+
+WM_HOTKEY
+WM_NCLBUTTONDOWN

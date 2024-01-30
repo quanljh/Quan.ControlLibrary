@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:Quan.ControlLibrary">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="Quan.Styles.Thumb.ScrollBar" TargetType="{x:Type Thumb}">
         <Setter Property="IsTabStop" Value="false" />
@@ -9,7 +9,7 @@
                     <Border
                         Width="{TemplateBinding Width}"
                         Height="{TemplateBinding Height}"
-                        Background="{DynamicResource Quan.Brushes.Primary}"
+                        Background="{DynamicResource Quan.Brushes.Accent}"
                         CornerRadius="5"
                         Opacity="{TemplateBinding Opacity}"
                         SnapsToDevicePixels="True" />
@@ -176,11 +176,10 @@
     <Style BasedOn="{StaticResource Quan.Styles.ScrollBar.Default}" TargetType="{x:Type ScrollBar}" />
 
     <Style x:Key="Quan.Styles.ScrollViewer.Default" TargetType="{x:Type ScrollViewer}">
-        <Setter Property="CanContentScroll" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
-                    <Grid Background="{TemplateBinding Background}">
+                    <Grid x:Name="Grid" Background="{TemplateBinding Background}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
@@ -189,11 +188,11 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <!--<Rectangle
+                        <Rectangle
                             x:Name="Corner"
                             Grid.Row="1"
                             Grid.Column="1"
-                            Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />-->
+                            Fill="Transparent" />
                         <ScrollContentPresenter
                             x:Name="PART_ScrollContentPresenter"
                             Grid.Row="0"
@@ -211,6 +210,7 @@
                             AutomationProperties.AutomationId="VerticalScrollBar"
                             Cursor="Arrow"
                             Maximum="{TemplateBinding ScrollableHeight}"
+                            Minimum="0"
                             ViewportSize="{TemplateBinding ViewportHeight}"
                             Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
                             Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
@@ -221,6 +221,7 @@
                             AutomationProperties.AutomationId="HorizontalScrollBar"
                             Cursor="Arrow"
                             Maximum="{TemplateBinding ScrollableWidth}"
+                            Minimum="0"
                             Orientation="Horizontal"
                             ViewportSize="{TemplateBinding ViewportWidth}"
                             Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"

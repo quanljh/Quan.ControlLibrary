@@ -1,6 +1,15 @@
 <Project>
 	<PropertyGroup>
-		<LangVersion>12.0</LangVersion>
+    <TargetFrameworks>net47;net48;net6.0-windows;net8.0-windows</TargetFrameworks>
+    <LangVersion>latestmajor</LangVersion>
 		<Nullable>disable</Nullable>
-	</PropertyGroup>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="**\*.png;**\*.jpg;**\*.ico;**\*.ttf;**\*.cur" />
+    <Resource Include="**\*.png;**\*.jpg;**\*.ico;**\*.ttf;**\*.cur" />
+  </ItemGroup>
+
 </Project>

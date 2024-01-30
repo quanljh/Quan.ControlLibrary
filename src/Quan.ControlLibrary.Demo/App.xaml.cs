@@ -1,11 +1,14 @@
 ﻿using System.Reactive.Concurrency;
 using System.Windows;
 using Prism.Ioc;
-using Prism.Mvvm;
 using Prism.Regions;
 using Prism.Unity;
+using Quan.ControlLibrary.Demo.Constants;
+using Quan.ControlLibrary.Demo.Service;
+using Quan.ControlLibrary.Demo.Service.Interface;
+using Quan.ControlLibrary.Demo.Views;
+using Quan.ControlLibrary.Demo.Views.Controls;
 using Reactive.Bindings;
-using Unity;
 
 namespace Quan.ControlLibrary.Demo;
 
@@ -22,6 +25,7 @@ public partial class App : PrismApplication
         containerRegistry.RegisterForNavigation<QuanTextBoxView>();
         containerRegistry.RegisterForNavigation<QuanButtonView>();
         containerRegistry.RegisterForNavigation<QuanExpanderView>();
+        containerRegistry.RegisterForNavigation<QuanTimePickerView>();
 
         #endregion
 
@@ -36,11 +40,6 @@ public partial class App : PrismApplication
     protected override void ConfigureViewModelLocator()
     {
         base.ConfigureViewModelLocator();
-
-        ViewModelLocationProvider.Register<MainWindow, MainWindowViewModel>();
-        ViewModelLocationProvider.Register<QuanTextBoxView, QuanTextBoxViewModel>();
-        ViewModelLocationProvider.Register<QuanButtonView, QuanButtonViewModel>();
-        ViewModelLocationProvider.Register<QuanExpanderView, QuanExpanderViewModel>();
     }
 
     /// <inheritdoc />

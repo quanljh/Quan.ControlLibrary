@@ -1,0 +1,302 @@
+﻿{
+  "TemplateFile": "Theme.Template.xaml",
+  "DefaultValues": {
+    "Quan.Colors.ForegroundHighLight": "White"
+  },
+  "BaseColorSchemes": [
+    {
+      "Name": "Dark",
+      "Values": {
+        "Quan.Colors.ThemeForeground": "#FFFFFFFF",
+        "Quan.Colors.ThemeBackground": "#FF252525",
+        "Quan.Colors.Gray": "#FF7D7D7D",
+        "Quan.Colors.Gray1": "#FFF9F9F9",
+        "Quan.Colors.Gray2": "#FF7F7F7F",
+        "Quan.Colors.Gray3": "#FF9D9D9D",
+        "Quan.Colors.Gray4": "#FFA59F93",
+        "Quan.Colors.Gray5": "#FFB9B9B9",
+        "Quan.Colors.Gray6": "#FFCCCCCC",
+        "Quan.Colors.Gray7": "#FF7E7E7E",
+        "Quan.Colors.Gray8": "#FF454545",
+        "Quan.Colors.Gray9": "#5EC9C9C9",
+        "Quan.Colors.Gray10": "#FF2F2F2F",
+        "Quan.Colors.SemiTransparent": "#55FFFFFF"
+      }
+    },
+    {
+      "Name": "Light",
+      "Values": {
+        "Quan.Colors.ThemeForeground": "#FF000000",
+        "Quan.Colors.ThemeBackground": "#FFFFFFFF",
+        "Quan.Colors.Gray": "#FFBEBEBE",
+        "Quan.Colors.Gray1": "#FF333333",
+        "Quan.Colors.Gray2": "#FF7F7F7F",
+        "Quan.Colors.Gray3": "#FF9D9D9D",
+        "Quan.Colors.Gray4": "#FFA59F93",
+        "Quan.Colors.Gray5": "#FFB9B9B9",
+        "Quan.Colors.Gray6": "#FFCCCCCC",
+        "Quan.Colors.Gray7": "#FFD8D8D9",
+        "Quan.Colors.Gray8": "#FFE0E0E0",
+        "Quan.Colors.Gray9": "#5EC9C9C9",
+        "Quan.Colors.Gray10": "#FFF7F7F7",
+        "Quan.Colors.SemiTransparent": "#55000000"
+      }
+    }
+  ],
+  "ColorSchemes": [
+    {
+      "Name": "Amber",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FFF0A30A",
+        "Quan.Colors.Accent": "#CCF0A30A",
+        "Quan.Colors.Accent2": "#99F0A30A",
+        "Quan.Colors.Accent3": "#66F0A30A",
+        "Quan.Colors.Accent4": "#33F0A30A",
+        "Quan.Colors.Highlight": "#FFB17807"
+      }
+    },
+    {
+      "Name": "Blue",
+      "Values": {
+        "Quan.Colors.AccentBase": "#0078D7",
+        "Quan.Colors.Accent": "#3393DF",
+        "Quan.Colors.Accent2": "#6fb7d6",
+        "Quan.Colors.Accent3": "#660078D7",
+        "Quan.Colors.Accent4": "#33F0A30A",
+        "Quan.Colors.Highlight": "#00589F"
+      }
+    },
+    {
+      "Name": "Brown",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FF825A2C",
+        "Quan.Colors.Accent": "#CC825A2C",
+        "Quan.Colors.Accent2": "#99825A2C",
+        "Quan.Colors.Accent3": "#66825A2C",
+        "Quan.Colors.Accent4": "#33825A2C",
+        "Quan.Colors.Highlight": "#FF604220"
+      }
+    },
+    {
+      "Name": "Cobalt",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FF0050EF",
+        "Quan.Colors.Accent": "#CC0050EF",
+        "Quan.Colors.Accent2": "#990050EF",
+        "Quan.Colors.Accent3": "#660050EF",
+        "Quan.Colors.Accent4": "#330050EF",
+        "Quan.Colors.Highlight": "#FF003BB0"
+      }
+    },
+    {
+      "Name": "Crimson",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FFA20025",
+        "Quan.Colors.Accent": "#CCA20025",
+        "Quan.Colors.Accent2": "#99A20025",
+        "Quan.Colors.Accent3": "#66A20025",
+        "Quan.Colors.Accent4": "#33A20025",
+        "Quan.Colors.Highlight": "#FF77001B"
+      }
+    },
+    {
+      "Name": "Cyan",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FF1BA1E2",
+        "Quan.Colors.Accent": "#CC1BA1E2",
+        "Quan.Colors.Accent2": "#991BA1E2",
+        "Quan.Colors.Accent3": "#661BA1E2",
+        "Quan.Colors.Accent4": "#331BA1E2",
+        "Quan.Colors.Highlight": "#FF1377A7"
+      }
+    },
+    {
+      "Name": "Emerald",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FF008A00",
+        "Quan.Colors.Accent": "#CC008A00",
+        "Quan.Colors.Accent2": "#99008A00",
+        "Quan.Colors.Accent3": "#66008A00",
+        "Quan.Colors.Accent4": "#33008A00",
+        "Quan.Colors.Highlight": "#FF006600"
+      }
+    },
+    {
+      "Name": "Green",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FF60A917",
+        "Quan.Colors.Accent": "#CC60A917",
+        "Quan.Colors.Accent2": "#9960A917",
+        "Quan.Colors.Accent3": "#6660A917",
+        "Quan.Colors.Accent4": "#3360A917",
+        "Quan.Colors.Highlight": "#FF477D11"
+      }
+    },
+    {
+      "Name": "Indigo",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FF6A00FF",
+        "Quan.Colors.Accent": "#CC6A00FF",
+        "Quan.Colors.Accent2": "#996A00FF",
+        "Quan.Colors.Accent3": "#666A00FF",
+        "Quan.Colors.Accent4": "#336A00FF",
+        "Quan.Colors.Highlight": "#FF4E00BC"
+      }
+    },
+    {
+      "Name": "Lime",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FFA4C400",
+        "Quan.Colors.Accent": "#CCA4C400",
+        "Quan.Colors.Accent2": "#99A4C400",
+        "Quan.Colors.Accent3": "#66A4C400",
+        "Quan.Colors.Accent4": "#33A4C400",
+        "Quan.Colors.Highlight": "#FF799100"
+      }
+    },
+    {
+      "Name": "Magenta",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FFD80073",
+        "Quan.Colors.Accent": "#CCD80073",
+        "Quan.Colors.Accent2": "#99D80073",
+        "Quan.Colors.Accent3": "#66D80073",
+        "Quan.Colors.Accent4": "#33D80073",
+        "Quan.Colors.Highlight": "#FF9F0055"
+      }
+    },
+    {
+      "Name": "Mauve",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FF76608A",
+        "Quan.Colors.Accent": "#CC76608A",
+        "Quan.Colors.Accent2": "#9976608A",
+        "Quan.Colors.Accent3": "#6676608A",
+        "Quan.Colors.Accent4": "#3376608A",
+        "Quan.Colors.Highlight": "#FF574766"
+      }
+    },
+    {
+      "Name": "Olive",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FF6D8764",
+        "Quan.Colors.Accent": "#CC6D8764",
+        "Quan.Colors.Accent2": "#996D8764",
+        "Quan.Colors.Accent3": "#666D8764",
+        "Quan.Colors.Accent4": "#336D8764",
+        "Quan.Colors.Highlight": "#FF50634A"
+      }
+    },
+    {
+      "Name": "Orange",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FFFA6800",
+        "Quan.Colors.Accent": "#CCFA6800",
+        "Quan.Colors.Accent2": "#99FA6800",
+        "Quan.Colors.Accent3": "#66FA6800",
+        "Quan.Colors.Accent4": "#33FA6800",
+        "Quan.Colors.Highlight": "#FFB94C00"
+      }
+    },
+    {
+      "Name": "Pink",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FFF472D0",
+        "Quan.Colors.Accent": "#CCF472D0",
+        "Quan.Colors.Accent2": "#99F472D0",
+        "Quan.Colors.Accent3": "#66F472D0",
+        "Quan.Colors.Accent4": "#33F472D0",
+        "Quan.Colors.Highlight": "#FFB45499"
+      }
+    },
+    {
+      "Name": "Purple",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FF6459DF",
+        "Quan.Colors.Accent": "#CC6459DF",
+        "Quan.Colors.Accent2": "#996459DF",
+        "Quan.Colors.Accent3": "#666459DF",
+        "Quan.Colors.Accent4": "#336459DF",
+        "Quan.Colors.Highlight": "#FF4A41A5"
+      }
+    },
+    {
+      "Name": "Red",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FFE51400",
+        "Quan.Colors.Accent": "#CCE51400",
+        "Quan.Colors.Accent2": "#99E51400",
+        "Quan.Colors.Accent3": "#66E51400",
+        "Quan.Colors.Accent4": "#33E51400",
+        "Quan.Colors.Highlight": "#FFA90E00"
+      }
+    },
+    {
+      "Name": "Sienna",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FFA0522D",
+        "Quan.Colors.Accent": "#CCA0522D",
+        "Quan.Colors.Accent2": "#99A0522D",
+        "Quan.Colors.Accent3": "#66A0522D",
+        "Quan.Colors.Accent4": "#33A0522D",
+        "Quan.Colors.Highlight": "#FF763C21"
+      }
+    },
+    {
+      "Name": "Steel",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FF647687",
+        "Quan.Colors.Accent": "#CC647687",
+        "Quan.Colors.Accent2": "#99647687",
+        "Quan.Colors.Accent3": "#66647687",
+        "Quan.Colors.Accent4": "#33647687",
+        "Quan.Colors.Highlight": "#FF4A5763"
+      }
+    },
+    {
+      "Name": "Taupe",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FF87794E",
+        "Quan.Colors.Accent": "#CC87794E",
+        "Quan.Colors.Accent2": "#9987794E",
+        "Quan.Colors.Accent3": "#6687794E",
+        "Quan.Colors.Accent4": "#3387794E",
+        "Quan.Colors.Highlight": "#FF635939"
+      }
+    },
+    {
+      "Name": "Teal",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FF00ABA9",
+        "Quan.Colors.Accent": "#CC00ABA9",
+        "Quan.Colors.Accent2": "#9900ABA9",
+        "Quan.Colors.Accent3": "#6600ABA9",
+        "Quan.Colors.Accent4": "#3300ABA9",
+        "Quan.Colors.Highlight": "#FF007E7D"
+      }
+    },
+    {
+      "Name": "Violet",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FFAA00FF",
+        "Quan.Colors.Accent": "#CCAA00FF",
+        "Quan.Colors.Accent2": "#99AA00FF",
+        "Quan.Colors.Accent3": "#66AA00FF",
+        "Quan.Colors.Accent4": "#33AA00FF",
+        "Quan.Colors.Highlight": "#FF7D00BC"
+      }
+    },
+    {
+      "Name": "Yellow",
+      "Values": {
+        "Quan.Colors.AccentBase": "#FFFEDE06",
+        "Quan.Colors.Accent": "#CCFEDE06",
+        "Quan.Colors.Accent2": "#99FEDE06",
+        "Quan.Colors.Accent3": "#66FEDE06",
+        "Quan.Colors.Accent4": "#33FEDE06",
+        "Quan.Colors.Highlight": "#FFBBA404",
+        "Quan.Colors.IdealForeground": "Black"
+      }
+    }
+  ]
+}

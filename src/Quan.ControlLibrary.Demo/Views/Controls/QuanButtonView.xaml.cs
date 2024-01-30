@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Reactive.Bindings;
 
-namespace Quan.ControlLibrary.Demo;
+namespace Quan.ControlLibrary.Demo.Views.Controls;
 
 /// <summary>
 /// QuanButtonView.xaml の相互作用ロジック

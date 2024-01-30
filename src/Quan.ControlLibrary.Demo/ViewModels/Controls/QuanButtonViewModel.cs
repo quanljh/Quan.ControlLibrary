@@ -1,7 +1,7 @@
 ﻿using Prism.Mvvm;
 using Prism.Regions;
 
-namespace Quan.ControlLibrary.Demo;
+namespace Quan.ControlLibrary.Demo.ViewModels.Controls;
 
 public class QuanButtonViewModel : BindableBase, INavigationAware
 {
