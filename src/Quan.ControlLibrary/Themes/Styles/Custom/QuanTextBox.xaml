@@ -68,6 +68,8 @@
                             attachedProperties:TextBoxHelper.IsUseClearButton="{TemplateBinding attachedProperties:TextBoxHelper.IsShowClearButton}"
                             Content="{StaticResource Quan.FontIcons.Close}"
                             Focusable="False"
+                            FontFamily="{StaticResource Quan.Fonts.Icon.Regular}"
+                            FontSize="{StaticResource Quan.FontSize.Icon}"
                             Foreground="{TemplateBinding BorderBrush}"
                             IsTabStop="False"
                             Style="{StaticResource Quan.Styles.Button.FontIcon}"
@@ -88,6 +90,8 @@
                             attachedProperties:TextBoxHelper.IsUseFunctionButton="{TemplateBinding attachedProperties:TextBoxHelper.IsShowFunctionButton}"
                             Content="{TemplateBinding attachedProperties:TextBoxHelper.FunctionButtonContent}"
                             Focusable="False"
+                            FontFamily="{StaticResource Quan.Fonts.Icon.Regular}"
+                            FontSize="{StaticResource Quan.FontSize.Icon}"
                             Foreground="{TemplateBinding BorderBrush}"
                             IsTabStop="False"
                             Style="{StaticResource Quan.Styles.Button.FontIcon}"
@@ -203,6 +207,8 @@
                             attachedProperties:TextBoxHelper.IsUseClearButton="{TemplateBinding attachedProperties:TextBoxHelper.IsShowClearButton}"
                             Content="{StaticResource Quan.FontIcons.Close}"
                             Focusable="False"
+                            FontFamily="{StaticResource Quan.Fonts.Icon.Regular}"
+                            FontSize="{StaticResource Quan.FontSize.Icon}"
                             Foreground="{TemplateBinding BorderBrush}"
                             IsTabStop="False"
                             Style="{StaticResource Quan.Styles.Button.FontIcon}"
@@ -271,7 +277,7 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Padding" Value="3,0" />
         <Setter Property="CaretBrush" Value="{DynamicResource Quan.Brushes.Accent}" />
-        <Setter Property="MinHeight" Value="26" />
+        <Setter Property="MinHeight" Value="30" />
         <Setter Property="Template" Value="{StaticResource Quan.Templates.QuanTextBox.Default}" />
         <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
         <Setter Property="attachedProperties:TextBoxHelper.IsMonitoring" Value="True" />

@@ -13,7 +13,7 @@
     Width="900"
     Height="600"
     prism:ViewModelLocator.AutoWireViewModel="True"
-    Icon="/Quan.ControlLibrary;Component/Resources/Images/Logo/quan.ico"
+    Icon="/Quan.ControlLibrary;Component/Resources/Images/Logo/quan-inverse.ico"
     NonActiveGlowColor="#CDFF0000"
     ShowActivated="True"
     WindowStartupLocation="CenterScreen"

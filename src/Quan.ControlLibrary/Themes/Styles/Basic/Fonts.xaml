@@ -1,23 +1,22 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:system="clr-namespace:System;assembly=mscorlib">
 
-    <FontFamily x:Key="Quan.Fonts.Regular">pack://application:,,,/Quan.ControlLibrary;component/Resources/Fonts/#Noto Sans</FontFamily>
-    <FontFamily x:Key="Quan.Fonts.FontAwesome">pack://application:,,,/Quan.ControlLibrary;component/Resources/Fonts/#FontAwesome</FontFamily>
+    <FontFamily x:Key="Quan.Fonts.Regular">Segoe UI</FontFamily>
+    <FontFamily x:Key="Quan.Fonts.Icon.Regular">pack://application:,,,/Quan.ControlLibrary;component/Resources/Fonts/#FluentSystemIcons-Regular</FontFamily>
+    <FontFamily x:Key="Quan.Fonts.Icon.Filled">pack://application:,,,/Quan.ControlLibrary;component/Resources/Fonts/#FluentSystemIcons-Filled</FontFamily>
 
-    <system:Double x:Key="Quan.FontSize.VeryVerySmall">6</system:Double>
-    <system:Double x:Key="Quan.FontSize.VerySmall">8</system:Double>
-    <system:Double x:Key="Quan.FontSize.Smaller">10</system:Double>
-    <system:Double x:Key="Quan.FontSize.Small">12</system:Double>
-    <system:Double x:Key="Quan.FontSize.Regular">14</system:Double>
-    <system:Double x:Key="Quan.FontSize.Bigger">16</system:Double>
+    <system:Double x:Key="Quan.FontSize.Smaller">12</system:Double>
+    <system:Double x:Key="Quan.FontSize.Small">14</system:Double>
+    <system:Double x:Key="Quan.FontSize.Regular">16</system:Double>
+    <system:Double x:Key="Quan.FontSize.Bigger">18</system:Double>
     <system:Double x:Key="Quan.FontSize.Large">20</system:Double>
     <system:Double x:Key="Quan.FontSize.XLarge">24</system:Double>
-    <system:Double x:Key="Quan.FontSize.XXLarge">30</system:Double>
 
+    <system:Double x:Key="Quan.FontSize.Icon">24</system:Double>
 
-    <system:String x:Key="Quan.FontIcons.Search">&#xf002;</system:String>
-    <system:String x:Key="Quan.FontIcons.Close">&#xf00d;</system:String>
-    <system:String x:Key="Quan.FontIcons.Clock">&#xf017;</system:String>
-    <system:String x:Key="Quan.FontIcons.Chevron-Down">&#xf078;</system:String>
+    <system:String x:Key="Quan.FontIcons.Search">&#xF690;</system:String>
+    <system:String x:Key="Quan.FontIcons.Close">&#xF36A;</system:String>
+    <system:String x:Key="Quan.FontIcons.Clock">&#xF2DE;</system:String>
+    <system:String x:Key="Quan.FontIcons.Chevron-Down">&#xF2A4;</system:String>
 
     <CharacterCasing x:Key="Quan.CharacterCasing.Button">Upper</CharacterCasing>
     <CharacterCasing x:Key="Quan.CharacterCasing.Button.Square">Lower</CharacterCasing>

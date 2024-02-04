@@ -3,15 +3,12 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
   </PropertyGroup>
-
   <ItemGroup Label="Build">
     <PackageVersion Include="ControlzEx" Version="7.0.0-alpha0018" />
     <PackageVersion Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
+    <PackageVersion Include="Prism.DryIoc" Version="8.1.97" />
     <PackageVersion Include="XAMLTools.MSBuild" Version="1.0.0-alpha0164" />
     <PackageVersion Include="Microsoft.Windows.CsWin32" Version="0.3.49-beta" />
-
-
-    <PackageVersion Include="Prism.Unity" Version="8.1.97" />
     <PackageVersion Include="ReactiveProperty.WPF" Version="7.6.1" />
   </ItemGroup>
 </Project>

@@ -5,7 +5,7 @@
   </PropertyGroup>
 	
 	<ItemGroup>
-	  <PackageReference Include="Prism.Unity" />
+	  <PackageReference Include="Prism.DryIoc" />
 	  <PackageReference Include="ReactiveProperty.WPF" />
 	</ItemGroup>
 

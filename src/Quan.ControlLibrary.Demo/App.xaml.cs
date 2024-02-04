@@ -1,8 +1,8 @@
 ﻿using System.Reactive.Concurrency;
 using System.Windows;
+using Prism.DryIoc;
 using Prism.Ioc;
 using Prism.Regions;
-using Prism.Unity;
 using Quan.ControlLibrary.Demo.Constants;
 using Quan.ControlLibrary.Demo.Service;
 using Quan.ControlLibrary.Demo.Service.Interface;

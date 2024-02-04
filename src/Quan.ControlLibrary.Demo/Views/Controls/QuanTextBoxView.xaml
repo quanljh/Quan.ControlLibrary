@@ -33,7 +33,7 @@
 
         <q:QuanTextBox
             Grid.Row="1"
-            Width="160"
+            Width="170"
             Margin="15"
             HorizontalAlignment="Left"
             q:TextBoxHelper.GuideText="Not show clear button"

@@ -9,7 +9,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="Quan.Styles.ToggleButton.ExpanderIcon" TargetType="{x:Type ToggleButton}">
-        <Setter Property="FontFamily" Value="{StaticResource Quan.Fonts.FontAwesome}" />
+        <Setter Property="FontFamily" Value="{StaticResource Quan.Fonts.Regular}" />
         <Setter Property="FontSize" Value="{StaticResource Quan.FontSize.Bigger}" />
         <Setter Property="Foreground" Value="{DynamicResource Quan.Brushes.Border}" />
         <Setter Property="Height" Value="24" />
@@ -22,6 +22,8 @@
                             x:Name="ExpandIcon"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
+                            FontFamily="{StaticResource Quan.Fonts.Icon.Regular}"
+                            FontSize="{StaticResource Quan.FontSize.Icon}"
                             RenderTransformOrigin="0.5 0.5"
                             Text="{StaticResource Quan.FontIcons.Chevron-Down}">
                             <TextBlock.LayoutTransform>

@@ -17,7 +17,7 @@ public class FlyoutAutomationPeer(Flyout owner) : FrameworkElementAutomationPeer
 
     protected override string GetNameCore()
     {
-        string? nameCore = base.GetNameCore();
+        var nameCore = base.GetNameCore();
         if (string.IsNullOrEmpty(nameCore))
         {
             nameCore = ((Flyout)this.Owner).Header as string;
