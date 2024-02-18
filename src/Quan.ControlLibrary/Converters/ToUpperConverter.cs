@@ -1,15 +1,21 @@
 ﻿using System.Globalization;
+using System.Windows.Data;
 
 namespace Quan.ControlLibrary.Converters;
 
-public class ToUpperConverter : BaseValueConverter<string, string>
+public class ToUpperConverter : BaseValueConverter, IValueConverter
 {
-    public override string Convert(string value, object parameter, CultureInfo culture)
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return value.ToUpper(culture);
+        if (value is not string stringValue)
+        {
+            throw new ArgumentException();
+        }
+
+        return stringValue.ToUpper(culture);
     }
 
-    public override string ConvertBack(string value, object parameter, CultureInfo culture)
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }

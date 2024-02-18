@@ -18,8 +18,9 @@
         <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Custom/QuanRippleLine.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Custom/QuanFloatingText.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Custom/QuanTextBox.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Custom/QuanTimePicker.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Custom/QuanExpander.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Custom/QuanClock.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Custom/QuanTimePicker.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Custom/WindowCommands.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Custom/WindowButtons.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Quan.ControlLibrary;component/Themes/Styles/Custom/QuanWindow.xaml" />

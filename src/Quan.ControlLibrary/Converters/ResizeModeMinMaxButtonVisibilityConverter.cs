@@ -1,12 +1,13 @@
 ﻿using System.Globalization;
 using System.Windows;
+using System.Windows.Data;
 using Quan.ControlLibrary.Enums;
 
 namespace Quan.ControlLibrary.Converters;
 
-public class ResizeModeMinMaxButtonVisibilityConverter : BaseMultiValueConverter<Visibility>
+public class ResizeModeMinMaxButtonVisibilityConverter : BaseValueConverter, IMultiValueConverter
 {
-    public override Visibility Convert(object[] values, object parameter, CultureInfo culture)
+    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
         if (values != null && parameter is ResizeModeButtonType whichButton)
         {
@@ -40,7 +41,7 @@ public class ResizeModeMinMaxButtonVisibilityConverter : BaseMultiValueConverter
         return Visibility.Visible;
     }
 
-    public override object[] ConvertBack(Visibility value, object parameter, CultureInfo culture)
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }

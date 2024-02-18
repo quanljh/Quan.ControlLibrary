@@ -9,6 +9,7 @@ public static class FloatingTextHelper
     private const double DefaultFloatingScale = 0.75;
     private static readonly Point DefaultFloatingOffset = new Point(0, -15);
     private const double DefaultHintOpacity = 0.46;
+    internal static readonly Brush DefaultBackground = new SolidColorBrush(Colors.Transparent);
 
     #region IsUseFloating
 

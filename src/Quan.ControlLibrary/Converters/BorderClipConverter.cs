@@ -1,41 +1,42 @@
 ﻿using System.Globalization;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Media;
 
 namespace Quan.ControlLibrary.Converters;
 
-public class BorderClipConverter : BaseMultiValueConverter<object>
+public class BorderClipConverter : BaseValueConverter, IMultiValueConverter
 {
-    public override object Convert(object[] values, object parameter, CultureInfo culture)
+    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
-        if (values is not { Length: > 1 } || values[0] is not double height || values[1] is not double width)
+        if (values.Length > 1 && values[0] is double width && values[1] is double height)
         {
-            return DependencyProperty.UnsetValue;
-        }
-        if (height < 1.0 || width < 1.0)
-        {
-            return Geometry.Empty;
-        }
-
-        var cornerRadius = default(CornerRadius);
-        var borderThickness = default(Thickness);
-        if (values.Length > 2 && values[2] is CornerRadius radius)
-        {
-            cornerRadius = radius;
-            if (values.Length > 3 && values[3] is Thickness thickness)
+            if (width < 1.0 || height < 1.0)
             {
-                borderThickness = thickness;
+                return Geometry.Empty;
             }
+
+            CornerRadius cornerRadius = default;
+            Thickness borderThickness = default;
+            if (values.Length > 2 && values[2] is CornerRadius radius)
+            {
+                cornerRadius = radius;
+                if (values.Length > 3 && values[3] is Thickness thickness)
+                {
+                    borderThickness = thickness;
+                }
+            }
+
+            var geometry = GetRoundRectangle(new Rect(0, 0, width, height), borderThickness, cornerRadius);
+            geometry.Freeze();
+
+            return geometry;
         }
 
-        var geometry = GetRoundRectangle(new Rect(0, 0, width, height), borderThickness, cornerRadius);
-        geometry.Freeze();
-
-        return geometry;
-
+        return DependencyProperty.UnsetValue;
     }
 
-    public override object[] ConvertBack(object value, object parameter, CultureInfo culture)
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }

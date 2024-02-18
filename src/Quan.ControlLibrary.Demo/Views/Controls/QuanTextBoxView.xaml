@@ -23,7 +23,7 @@
 
 
         <q:QuanTextBox
-            Width="160"
+            Width="170"
             Margin="15"
             HorizontalAlignment="Left"
             q:TextBoxHelper.GuideText="Email or username"
@@ -41,7 +41,7 @@
 
         <q:QuanTextBox
             Grid.Row="2"
-            Width="160"
+            Width="170"
             Margin="15"
             HorizontalAlignment="Left"
             q:TextBoxHelper.GuideText="Email or username"
@@ -49,7 +49,7 @@
 
         <q:QuanTextBox
             Grid.Row="3"
-            Width="160"
+            Width="170"
             Margin="15"
             HorizontalAlignment="Left"
             q:TextBoxHelper.GuideText="Email or username"
@@ -58,7 +58,7 @@
 
         <q:QuanTextBox
             Grid.Row="4"
-            Width="160"
+            Width="170"
             Margin="15"
             HorizontalAlignment="Left"
             q:TextBoxHelper.FunctionButtonContent="{StaticResource Quan.FontIcons.Search}"

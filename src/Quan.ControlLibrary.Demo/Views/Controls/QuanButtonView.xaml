@@ -27,7 +27,7 @@
         <q:QuanButton
             Width="100"
             Height="30"
-            BorderBrush="{DynamicResource Quan.Brushes.LightPrimary}"
+            BorderBrush="{DynamicResource Quan.Brushes.Accent2}"
             BorderThickness="1"
             Content="333"
             DisplayMode="Flat" />

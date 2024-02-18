@@ -31,8 +31,8 @@
                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                 <controls:QuanRipple.Clip>
                     <MultiBinding Converter="{converters:BorderClipConverter}">
-                        <Binding ElementName="PART_Border" Path="ActualHeight" />
                         <Binding ElementName="PART_Border" Path="ActualWidth" />
+                        <Binding ElementName="PART_Border" Path="ActualHeight" />
                         <Binding ElementName="PART_Border" Path="CornerRadius" />
                         <Binding ElementName="PART_Border" Path="BorderThickness" />
                     </MultiBinding>
@@ -71,8 +71,8 @@
                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                 <controls:QuanRipple.Clip>
                     <MultiBinding Converter="{converters:BorderClipConverter}">
-                        <Binding ElementName="PART_Border" Path="ActualHeight" />
                         <Binding ElementName="PART_Border" Path="ActualWidth" />
+                        <Binding ElementName="PART_Border" Path="ActualHeight" />
                         <Binding ElementName="PART_Border" Path="CornerRadius" />
                         <Binding ElementName="PART_Border" Path="BorderThickness" />
                     </MultiBinding>

@@ -1,13 +1,13 @@
 ﻿using System.Globalization;
+using System.Windows.Data;
 using System.Windows.Media;
 using Point = System.Drawing.Point;
 
 namespace Quan.ControlLibrary.Converters;
 
-public class FloatingTextTransformConverter : BaseMultiValueConverter<Transform>
+public class FloatingTextTransformConverter : BaseValueConverter, IMultiValueConverter
 {
-    /// <inheritdoc />
-    public override Transform Convert(object[] values, object parameter, CultureInfo culture)
+    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
     {
         if (values is not { Length: 3 }
             || values.Any(o => o == null)
@@ -35,8 +35,7 @@ public class FloatingTextTransformConverter : BaseMultiValueConverter<Transform>
         return transformGroup;
     }
 
-    /// <inheritdoc />
-    public override object[] ConvertBack(Transform value, object parameter, CultureInfo culture)
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }

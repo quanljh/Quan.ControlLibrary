@@ -9,8 +9,11 @@
 	<ItemGroup>
     <None Remove="Themes\Theme.txt" />
     <None Remove="Themes\XamlCombine.exe" />
-    <Page Remove="Themes\Generic.Debug.xaml" />
   </ItemGroup>
+
+	<ItemGroup>
+	  <Page Remove="Themes\Generic.Debug.xaml" />
+	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="ControlzEx" />
@@ -41,11 +44,16 @@
     <ControlStyles Include="Themes/Styles/Custom/QuanRipple.xaml" />
     <ControlStyles Include="Themes/Styles/Custom/QuanFloatingText.xaml" />
     <ControlStyles Include="Themes/Styles/Custom/QuanTextBox.xaml" />
-    <ControlStyles Include="Themes/Styles/Custom/QuanTimePicker.xaml" />
     <ControlStyles Include="Themes/Styles/Custom/QuanExpander.xaml" />
+    <ControlStyles Include="Themes/Styles/Custom/QuanClock.xaml" />
+    <ControlStyles Include="Themes/Styles/Custom/QuanTimePicker.xaml" />
     <ControlStyles Include="Themes/Styles/Custom/WindowCommands.xaml" />
     <ControlStyles Include="Themes/Styles/Custom/WindowButtons.xaml" />
     <ControlStyles Include="Themes/Styles/Custom/QuanWindow.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Themes\Generic.Debug.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -60,7 +68,7 @@
   </ItemGroup>
 
   <Target Name="CopyDebugStyle" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)' == 'Debug'">
-    <Copy SourceFiles="$(ProjectDir)Themes\Generic.Debug.xaml" DestinationFiles="$(ProjectDir)Themes\Generic.xaml"/>
+    <Copy SourceFiles="$(ProjectDir)Themes\Generic.Debug.xaml" DestinationFiles="$(ProjectDir)Themes\Generic.xaml" />
   </Target>  
 
 </Project>

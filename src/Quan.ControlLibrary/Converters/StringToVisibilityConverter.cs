@@ -1,13 +1,23 @@
 ﻿using System.Globalization;
 using System.Windows;
+using System.Windows.Data;
 
 namespace Quan.ControlLibrary.Converters;
 
-public class StringToVisibilityConverter : BaseValueConverter<string, Visibility>
+public class StringToVisibilityConverter : BaseValueConverter, IValueConverter
 {
-    public override Visibility Convert(string value, object parameter, CultureInfo culture)
-        => string.IsNullOrEmpty(value) ? Visibility.Visible : Visibility.Collapsed;
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is not string stringValue)
+        {
+            throw new ArgumentException();
+        }
 
-    public override string ConvertBack(Visibility value, object parameter, CultureInfo culture)
-        => throw new NotImplementedException();
+        return string.IsNullOrEmpty(stringValue) ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
 }

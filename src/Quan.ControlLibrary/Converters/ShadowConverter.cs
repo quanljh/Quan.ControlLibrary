@@ -1,15 +1,20 @@
 ﻿using System.Globalization;
+using System.Windows.Data;
 using System.Windows.Media.Effects;
 using Quan.ControlLibrary.AttachedProperties;
 using Quan.ControlLibrary.Helpers;
 
 namespace Quan.ControlLibrary.Converters;
 
-public class ShadowConverter : BaseValueConverter<ShadowEffect, DropShadowEffect>
+public class ShadowConverter : BaseValueConverter, IValueConverter
 {
-    public override DropShadowEffect Convert(ShadowEffect value, object parameter, CultureInfo culture)
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return value switch
+        if (value is not ShadowEffect effect)
+        {
+            throw new ArgumentException();
+        }
+        return effect switch
         {
             ShadowEffect.Effect1 => Clone(ResourceHelper.GetResource<DropShadowEffect>("Quan.ShadowEffects.Effect1")),
             ShadowEffect.Effect2 => Clone(ResourceHelper.GetResource<DropShadowEffect>("Quan.ShadowEffects.Effect2")),
@@ -18,11 +23,6 @@ public class ShadowConverter : BaseValueConverter<ShadowEffect, DropShadowEffect
             ShadowEffect.Effect5 => Clone(ResourceHelper.GetResource<DropShadowEffect>("Quan.ShadowEffects.Effect5")),
             _ => Clone(ResourceHelper.GetResource<DropShadowEffect>("Quan.ShadowEffects.Effect0"))
         };
-    }
-
-    public override ShadowEffect ConvertBack(DropShadowEffect value, object parameter, CultureInfo culture)
-    {
-        throw new System.NotImplementedException();
     }
 
     private static DropShadowEffect Clone(DropShadowEffect dropShadowEffect)
@@ -37,5 +37,10 @@ public class ShadowConverter : BaseValueConverter<ShadowEffect, DropShadowEffect
             RenderingBias = dropShadowEffect.RenderingBias,
             ShadowDepth = dropShadowEffect.ShadowDepth
         };
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
     }
 }

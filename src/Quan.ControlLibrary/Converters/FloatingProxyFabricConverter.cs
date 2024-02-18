@@ -7,7 +7,7 @@ namespace Quan.ControlLibrary.Converters;
 
 public class FloatingProxyFabricConverter : IValueConverter
 {
-    private static readonly Lazy<FloatingProxyFabricConverter> _instance = new Lazy<FloatingProxyFabricConverter>();
+    private static readonly Lazy<FloatingProxyFabricConverter> _instance = new();
 
     public static FloatingProxyFabricConverter Instance => _instance.Value;
 

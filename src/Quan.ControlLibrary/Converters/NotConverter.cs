@@ -3,15 +3,17 @@ using System.Windows.Data;
 
 namespace Quan.ControlLibrary.Converters;
 
-public class IsNullConverter : BaseValueConverter, IValueConverter
+public class NotConverter : BaseValueConverter, IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return value is null;
+        if (value is null) return null;
+        return !(value as bool?) ?? !bool.Parse(value.ToString() ?? bool.TrueString);
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        throw new NotImplementedException();
+        if (value is null) return null;
+        return !(value as bool?) ?? !bool.Parse(value.ToString() ?? bool.TrueString);
     }
 }

@@ -1,15 +1,21 @@
 ﻿using System.Globalization;
+using System.Windows.Data;
 
 namespace Quan.ControlLibrary.Converters;
 
-public class ToLowerConverter : BaseValueConverter<string, string>
+public class ToLowerConverter : BaseValueConverter, IValueConverter
 {
-    public override string Convert(string value, object parameter, CultureInfo culture)
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return value.ToLower(culture);
+        if (value is not string stringValue)
+        {
+            throw new ArgumentException();
+        }
+
+        return stringValue.ToLower(culture);
     }
 
-    public override string ConvertBack(string value, object parameter, CultureInfo culture)
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }

@@ -1,317 +1,712 @@
 ﻿using System.Globalization;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Threading;
+using Quan.ControlLibrary.Enums;
+using Quan.ControlLibrary.Events;
 using Quan.ControlLibrary.Helpers;
 
 namespace Quan.ControlLibrary.Controls;
 
-[TemplatePart(Name = QuanTextBoxName, Type = typeof(QuanTextBox))]
-[TemplatePart(Name = PopupName, Type = typeof(Popup))]
-[TemplatePart(Name = PopupHoursListBoxName, Type = typeof(Popup))]
-[TemplatePart(Name = PopupMinutesListBoxName, Type = typeof(Popup))]
-[TemplatePart(Name = PopupSecondsListBoxName, Type = typeof(Popup))]
+[TemplatePart(Name = ButtonPartName, Type = typeof(Button))]
+[TemplatePart(Name = PopupPartName, Type = typeof(Popup))]
+[TemplatePart(Name = TextBoxPartName, Type = typeof(QuanTextBox))]
 public class QuanTimePicker : Control
 {
-    #region Enums
+    public const string ButtonPartName = "PART_Button";
+    public const string PopupPartName = "PART_Popup";
+    public const string TextBoxPartName = "PART_TextBox";
 
-    #endregion
-
-    #region Properties
-
-    private const string QuanTextBoxName = "PART_QuanTextBox";
-
-    private const string PopupName = "PART_Popup";
-
-    private const string PopupHoursListBoxName = "PART_Popup_HoursListBox";
-
-    private const string PopupMinutesListBoxName = "PART_Popup_MinutesListBox";
-
-    private const string PopupSecondsListBoxName = "PART_Popup_SecondsListBox";
-
-    private const string TimeFormat = @"hh\:mm\:ss";
-
-    private QuanTextBox _quanTextBox;
-
+    private readonly ContentControl _clockHostContentControl;
+    private readonly QuanClock _clock;
+    private TextBox _textBox;
     private Popup _popup;
+    private Button _dropDownButton;
+    private bool _disablePopupReopen;
+    private DateTime? _lastValidTime;
+    private bool _isManuallyMutatingText;
 
-    private ListBox _popupHoursListBox;
+    #region Events
 
-    private ListBox _popupMinutesListBox;
+    public event RoutedPropertyChangedEventHandler<DateTime?> SelectedTimeChanged
+    {
+        add => AddHandler(SelectedTimeChangedEvent, value);
+        remove => RemoveHandler(SelectedTimeChangedEvent, value);
+    }
 
-    private ListBox _popupSecondsListBox;
+    public static readonly RoutedEvent SelectedTimeChangedEvent =
+        EventManager.RegisterRoutedEvent(
+            nameof(SelectedTime),
+            RoutingStrategy.Bubble,
+            typeof(RoutedPropertyChangedEventHandler<DateTime?>),
+            typeof(QuanTimePicker));
 
     #endregion
 
     #region Dependency Properties
 
+    #region Text
+
+    public string Text
+    {
+        get => (string)GetValue(TextProperty);
+        set => SetValue(TextProperty, value);
+    }
+
+    public static readonly DependencyProperty TextProperty =
+        DependencyProperty.Register(
+            nameof(Text),
+            typeof(string),
+            typeof(QuanTimePicker),
+            new FrameworkPropertyMetadata(
+                default(string),
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
+                TextPropertyChangedCallback));
+
+    private static void TextPropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+    {
+        var quanTimePicker = (QuanTimePicker)dependencyObject;
+        if (!quanTimePicker._isManuallyMutatingText)
+        {
+            quanTimePicker.SetSelectedTime();
+        }
+
+        if (quanTimePicker._textBox != null)
+        {
+            quanTimePicker.UpdateTextBoxText(dependencyPropertyChangedEventArgs.NewValue as string ?? "");
+        }
+    }
+
+    #endregion
+
     #region SelectedTime
 
-    public TimeSpan SelectedTime
+    public DateTime? SelectedTime
     {
-        get => (TimeSpan)GetValue(SelectedTimeProperty);
+        get => (DateTime?)GetValue(SelectedTimeProperty);
         set => SetValue(SelectedTimeProperty, value);
     }
 
-    public static readonly DependencyProperty SelectedTimeProperty =
-        DependencyProperty.Register(
-            nameof(SelectedTime),
-            typeof(TimeSpan),
-            typeof(QuanTimePicker),
-            new UIPropertyMetadata(TimeSpan.Zero, OnSelectedTimeChanged));
+    public static readonly DependencyProperty SelectedTimeProperty = DependencyProperty.Register(
+        nameof(SelectedTime), typeof(DateTime?), typeof(QuanTimePicker), new FrameworkPropertyMetadata(default(DateTime?), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, SelectedTimePropertyChangedCallback));
+
+    private static void SelectedTimePropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+    {
+        var quanTimePicker = (QuanTimePicker)dependencyObject;
+        quanTimePicker._isManuallyMutatingText = true;
+        quanTimePicker.SetCurrentValue(TextProperty, quanTimePicker.DateTimeToString(quanTimePicker.SelectedTime));
+        quanTimePicker._isManuallyMutatingText = false;
+        quanTimePicker._lastValidTime = quanTimePicker.SelectedTime;
+
+        OnSelectedTimeChanged(quanTimePicker, dependencyPropertyChangedEventArgs);
+    }
 
     private static void OnSelectedTimeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is not QuanTimePicker { IsLoaded: true } timePicker)
+        var instance = (QuanTimePicker)d;
+        var args = new RoutedPropertyChangedEventArgs<DateTime?>(
+                (DateTime?)e.OldValue,
+                (DateTime?)e.NewValue)
+        { RoutedEvent = SelectedTimeChangedEvent };
+        instance.RaiseEvent(args);
+    }
+
+    #endregion
+
+    #region SelectedTimeFormat
+
+    public DatePickerFormat SelectedTimeFormat
+    {
+        get => (DatePickerFormat)GetValue(SelectedTimeFormatProperty);
+        set => SetValue(SelectedTimeFormatProperty, value);
+    }
+
+    public static readonly DependencyProperty SelectedTimeFormatProperty =
+        DependencyProperty.Register(
+            nameof(SelectedTimeFormat),
+            typeof(DatePickerFormat),
+            typeof(QuanTimePicker),
+            new PropertyMetadata(DatePickerFormat.Short));
+
+    #endregion
+
+    #region IsDropDownOpen
+
+    public bool IsDropDownOpen
+    {
+        get => (bool)GetValue(IsDropDownOpenProperty);
+        set => SetValue(IsDropDownOpenProperty, value);
+    }
+
+    public static readonly DependencyProperty IsDropDownOpenProperty =
+        DependencyProperty.Register(
+            nameof(IsDropDownOpen),
+            typeof(bool),
+            typeof(QuanTimePicker),
+            new FrameworkPropertyMetadata(
+                false,
+                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
+                OnIsDropDownOpenChanged,
+                OnCoerceIsDropDownOpen));
+
+    private static void OnIsDropDownOpenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var quanTimePicker = (QuanTimePicker)d;
+
+        var newValue = (bool)e.NewValue;
+        if (quanTimePicker._popup == null || quanTimePicker._popup.IsOpen == newValue) return;
+
+        quanTimePicker._popup.IsOpen = newValue;
+        if (newValue)
         {
-            return;
+            //TODO set time
+            //dp._originalSelectedDate = dp.SelectedDate;
+
+            quanTimePicker.Dispatcher?.BeginInvoke(DispatcherPriority.Input, new Action(() =>
+            {
+                quanTimePicker._clock.Focus();
+            }));
         }
+    }
+
+    private static object OnCoerceIsDropDownOpen(DependencyObject d, object baseValue)
+    {
+        var quanTimePicker = (QuanTimePicker)d;
+        return quanTimePicker.IsEnabled ? baseValue : false;
+    }
+
+    #endregion
+
+    #region Is24Hours
+
+    public bool Is24Hours
+    {
+        get => (bool)GetValue(Is24HoursProperty);
+        set => SetValue(Is24HoursProperty, value);
+    }
+
+    public static readonly DependencyProperty Is24HoursProperty =
+        DependencyProperty.Register(
+            nameof(Is24Hours),
+            typeof(bool),
+            typeof(QuanTimePicker),
+            new PropertyMetadata(default(bool), Is24HoursChanged));
+
+    private static void Is24HoursChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+    {
+        var quanTimePicker = (QuanTimePicker)dependencyObject;
+        quanTimePicker._isManuallyMutatingText = true;
+        quanTimePicker.SetCurrentValue(TextProperty, quanTimePicker.DateTimeToString(quanTimePicker.SelectedTime));
+        quanTimePicker._isManuallyMutatingText = false;
+    }
+
+    #endregion
+
+    #region IsHeaderVisible
+
+    public bool IsHeaderVisible
+    {
+        get => (bool)GetValue(IsHeaderVisibleProperty);
+        set => SetValue(IsHeaderVisibleProperty, value);
+    }
+
+    public static readonly DependencyProperty IsHeaderVisibleProperty =
+        DependencyProperty.Register(
+            nameof(IsHeaderVisible),
+            typeof(bool),
+            typeof(QuanTimePicker),
+            new PropertyMetadata(default(bool)));
 
 
-        if (e.NewValue is not TimeSpan timeSpan)
+    #endregion
+
+    #region ClockStyle
+
+    public Style ClockStyle
+    {
+        get => (Style)GetValue(ClockStyleProperty);
+        set => SetValue(ClockStyleProperty, value);
+    }
+
+    public static readonly DependencyProperty ClockStyleProperty =
+        DependencyProperty.Register(
+            nameof(ClockStyle),
+            typeof(Style),
+            typeof(QuanTimePicker),
+            new PropertyMetadata(default(Style)));
+
+    #endregion
+
+    #region ClockHostContentControlStyle
+
+    public Style ClockHostContentControlStyle
+    {
+        get => (Style)GetValue(ClockHostContentControlStyleProperty);
+        set => SetValue(ClockHostContentControlStyleProperty, value);
+    }
+
+    public static readonly DependencyProperty ClockHostContentControlStyleProperty =
+        DependencyProperty.Register(
+            nameof(ClockHostContentControlStyle),
+            typeof(Style),
+            typeof(QuanTimePicker),
+            new PropertyMetadata(default(Style)));
+
+    #endregion
+
+    #region IsInvalidTextAllowed
+
+    /// <summary>
+    /// Set to true to stop invalid text reverting back to previous valid value. Useful in cases where you
+    /// want to display validation messages and allow the user to correct the data without it reverting.
+    /// </summary>
+    public bool IsInvalidTextAllowed
+    {
+        get => (bool)GetValue(IsInvalidTextAllowedProperty);
+        set => SetValue(IsInvalidTextAllowedProperty, value);
+    }
+
+    public static readonly DependencyProperty IsInvalidTextAllowedProperty =
+        DependencyProperty.Register(
+            nameof(IsInvalidTextAllowed),
+            typeof(bool),
+            typeof(QuanTimePicker),
+            new PropertyMetadata(default(bool)));
+
+    #endregion
+
+    #region WithSeconds
+
+    public bool WithSeconds
+    {
+        get => (bool)GetValue(WithSecondsProperty);
+        set => SetValue(WithSecondsProperty, value);
+    }
+
+    public static readonly DependencyProperty WithSecondsProperty =
+        DependencyProperty.Register(
+            nameof(WithSeconds),
+            typeof(bool),
+            typeof(QuanTimePicker),
+            new PropertyMetadata(default(bool), WithSecondsPropertyChanged));
+
+
+    private static void WithSecondsPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+    {
+        if (sender is QuanTimePicker picker)
         {
-            return;
+            // update the clock's behavior as needed when the WithSeconds value changes
+            picker._clock.DisplayAutomation = picker.WithSeconds ? ClockDisplayAutomation.ToSeconds : ClockDisplayAutomation.ToMinutesOnly;
         }
-
-        var timeString = timeSpan.ToString(TimeFormat);
-
-        timePicker._quanTextBox.Text = timeString;
     }
 
     #endregion
 
-    #region HourNumbers
-
-    public IEnumerable<int> HourNumbers
-    {
-        get => (IEnumerable<int>)GetValue(HourNumbersProperty);
-        set => SetValue(HourNumbersProperty, value);
-    }
-
-    public static readonly DependencyProperty HourNumbersProperty =
-        DependencyProperty.Register(
-            nameof(HourNumbers),
-            typeof(IEnumerable<int>),
-            typeof(QuanTimePicker),
-            new PropertyMetadata(Enumerable.Range(0, 24)));
-
     #endregion
 
-    #region MinutesNumbers
-
-    public IEnumerable<int> MinutesNumbers
-    {
-        get => (IEnumerable<int>)GetValue(MinutesNumbersProperty);
-        set => SetValue(MinutesNumbersProperty, value);
-    }
-
-    public static readonly DependencyProperty MinutesNumbersProperty =
-        DependencyProperty.Register(
-            nameof(MinutesNumbers),
-            typeof(IEnumerable<int>),
-            typeof(QuanTimePicker),
-            new PropertyMetadata(Enumerable.Range(0, 60)));
-
-    #endregion
-
-    #region SecondsNumbers
-
-    public IEnumerable<int> SecondsNumbers
-    {
-        get => (IEnumerable<int>)GetValue(SecondsNumbersProperty);
-        set => SetValue(SecondsNumbersProperty, value);
-    }
-
-    public static readonly DependencyProperty SecondsNumbersProperty =
-        DependencyProperty.Register(
-            nameof(SecondsNumbers),
-            typeof(IEnumerable<int>),
-            typeof(QuanTimePicker),
-            new PropertyMetadata(Enumerable.Range(0, 60)));
-
-    #endregion
-
-    #endregion
-
-    #region Constructor
+    #region Constructors
 
     static QuanTimePicker()
     {
         DefaultStyleKeyProperty.OverrideMetadata(typeof(QuanTimePicker), new FrameworkPropertyMetadata(typeof(QuanTimePicker)));
+        EventManager.RegisterClassHandler(typeof(QuanTimePicker), UIElement.GotFocusEvent, new RoutedEventHandler(OnGotFocus));
+    }
+
+    public QuanTimePicker()
+    {
+        _clock = new QuanClock
+        {
+            DisplayAutomation = ClockDisplayAutomation.ToMinutesOnly
+        };
+        _clockHostContentControl = new ContentControl
+        {
+            Content = _clock
+        };
+        InitializeClock();
     }
 
     #endregion
+
 
     #region Overrides
 
     public override void OnApplyTemplate()
     {
-        if (_quanTextBox != null)
-        {
-            _quanTextBox.KeyUp -= QuanTextBoxOnKeyUp;
-            _quanTextBox.PreviewMouseUp -= QuanTextBoxOnPreviewMouseButtonUp;
-        }
-
         if (_popup != null)
         {
+            _popup.RemoveHandler(PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(PopupOnPreviewMouseLeftButtonDown));
             _popup.Opened -= PopupOnOpened;
+            _popup.Closed -= PopupOnClosed;
+            _popup.Child = null;
+        }
+        if (_dropDownButton != null)
+        {
+            _dropDownButton.Click -= DropDownButtonOnClick;
+        }
+        if (_textBox != null)
+        {
+            _textBox.RemoveHandler(KeyDownEvent, new KeyEventHandler(TextBoxOnKeyDown));
+            _textBox.RemoveHandler(TextBoxBase.TextChangedEvent, new TextChangedEventHandler(TextBoxOnTextChanged));
+            _textBox.RemoveHandler(LostFocusEvent, new RoutedEventHandler(TextBoxOnLostFocus));
         }
 
-        if (_popupHoursListBox != null)
+        _textBox = GetTemplateChild(TextBoxPartName) as TextBox;
+        if (_textBox != null)
         {
-            _popupHoursListBox.SelectionChanged -= PopupHoursListBoxOnSelectionChanged;
+            _textBox.AddHandler(KeyDownEvent, new KeyEventHandler(TextBoxOnKeyDown));
+            _textBox.AddHandler(TextBoxBase.TextChangedEvent, new TextChangedEventHandler(TextBoxOnTextChanged));
+            _textBox.AddHandler(LostFocusEvent, new RoutedEventHandler(TextBoxOnLostFocus));
+            _textBox.Text = Text;
         }
 
-        if (_popupMinutesListBox != null)
+        _popup = GetTemplateChild(PopupPartName) as Popup;
+        if (_popup != null)
         {
-            _popupMinutesListBox.SelectionChanged -= PopupMinutesListBoxOnSelectionChanged;
+            _popup.AddHandler(PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(PopupOnPreviewMouseLeftButtonDown));
+            _popup.Opened += PopupOnOpened;
+            _popup.Closed += PopupOnClosed;
+            _popup.Child = _clockHostContentControl;
+            if (IsDropDownOpen)
+            {
+                _popup.IsOpen = true;
+            }
         }
 
-        if (_popupSecondsListBox != null)
+        _dropDownButton = GetTemplateChild(ButtonPartName) as Button;
+        if (_dropDownButton != null)
         {
-            _popupSecondsListBox.SelectionChanged -= PopupSecondsListBoxOnSelectionChanged;
+            _dropDownButton.Click += DropDownButtonOnClick;
         }
 
         base.OnApplyTemplate();
-
-        _quanTextBox = GetTemplateChild(QuanTextBoxName) as QuanTextBox;
-        _popup = GetTemplateChild(PopupName) as Popup;
-        _popupHoursListBox = GetTemplateChild(PopupHoursListBoxName) as ListBox;
-        _popupMinutesListBox = GetTemplateChild(PopupMinutesListBoxName) as ListBox;
-        _popupSecondsListBox = GetTemplateChild(PopupSecondsListBoxName) as ListBox;
-
-        if (_popup != null)
-        {
-            _popup.Opened += PopupOnOpened;
-        }
-
-        if (_quanTextBox != null)
-        {
-            _quanTextBox.Text = SelectedTime.ToString(TimeFormat);
-            _quanTextBox.KeyUp += QuanTextBoxOnKeyUp;
-            _quanTextBox.PreviewMouseUp += QuanTextBoxOnPreviewMouseButtonUp;
-        }
-
-        if (_popupHoursListBox != null)
-        {
-            _popupHoursListBox.SelectionChanged += PopupHoursListBoxOnSelectionChanged;
-        }
-
-        if (_popupMinutesListBox != null)
-        {
-            _popupMinutesListBox.SelectionChanged += PopupMinutesListBoxOnSelectionChanged;
-        }
-
-
-        if (_popupSecondsListBox != null)
-        {
-            _popupSecondsListBox.SelectionChanged += PopupSecondsListBoxOnSelectionChanged;
-        }
-
     }
-
-
 
     #endregion
 
-    #region Events  
+    #region Methods
 
-    private void QuanTextBoxOnKeyUp(object sender, KeyEventArgs e)
+    private static void OnGotFocus(object sender, RoutedEventArgs e)
     {
-        if (!_popup.IsOpen)
+        // When QuanTimePicker gets focus move it to the TextBox
+        var picker = (QuanTimePicker)sender;
+        if ((!e.Handled) && (picker._textBox != null))
         {
-            Dispatcher.InvokeAsync(() =>
+            if (e.OriginalSource == picker)
             {
-                _popup.IsOpen = true;
+                picker._textBox.Focus();
+                e.Handled = true;
+            }
+            else if (e.OriginalSource == picker._textBox)
+            {
+                picker._textBox.SelectAll();
+                e.Handled = true;
+            }
+        }
+    }
+
+    internal void Clear() => _textBox?.Clear();
+
+    private void TextBoxOnLostFocus(object sender, RoutedEventArgs routedEventArgs)
+    {
+        string text = _textBox?.Text;
+        if (string.IsNullOrEmpty(text))
+        {
+            SetCurrentValue(SelectedTimeProperty, null);
+            return;
+        }
+
+        if (IsTimeValid(text!, out DateTime time))
+        {
+            SetSelectedTime(time);
+            UpdateTextBoxTextIfNeeded(text!);
+        }
+        else // Invalid time, jump back to previous good time
+        {
+            SetInvalidTime();
+        }
+    }
+
+    private void SetInvalidTime()
+    {
+        if (IsInvalidTextAllowed) return;
+
+        if (_textBox is { } textBox)
+        {
+            if (_lastValidTime != null)
+            {
+                //SetCurrentValue(SelectedTimeProperty, _lastValidTime.Value);
+                //_textBox.Text = _lastValidTime.Value.ToString(_lastValidTime.Value.Hour % 12 > 9 ? "hh:mm tt" : "h:mm tt");
+                textBox.Text = DateTimeToString(_lastValidTime.Value, DatePickerFormat.Short);
+            }
+
+            else
+            {
+                SetCurrentValue(SelectedTimeProperty, null);
+                textBox.Text = "";
+            }
+        }
+
+    }
+
+    private void TextBoxOnKeyDown(object sender, KeyEventArgs keyEventArgs) => keyEventArgs.Handled = ProcessKey(keyEventArgs) || keyEventArgs.Handled;
+
+    private bool ProcessKey(KeyEventArgs keyEventArgs)
+    {
+        switch (keyEventArgs.Key)
+        {
+            case Key.System:
+                {
+                    switch (keyEventArgs.SystemKey)
+                    {
+                        case Key.Down:
+                            {
+                                if ((Keyboard.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt)
+                                {
+                                    TogglePopup();
+                                    return true;
+                                }
+
+                                break;
+                            }
+                    }
+
+                    break;
+                }
+
+            case Key.Enter:
+                {
+                    SetSelectedTime();
+                    return true;
+                }
+        }
+
+        return false;
+    }
+
+    private void TextBoxOnTextChanged(object sender, TextChangedEventArgs textChangedEventArgs)
+    {
+        if (_textBox is { } textBox &&
+            (_popup?.IsOpen == true || IsInvalidTextAllowed))
+        {
+            _isManuallyMutatingText = true;
+            SetCurrentValue(TextProperty, textBox.Text);
+            _isManuallyMutatingText = false;
+        }
+
+        if (_popup?.IsOpen == false)
+        {
+            SetSelectedTime(true);
+        }
+    }
+
+    private void UpdateTextBoxText(string text)
+    {
+        // Save and restore the cursor position
+        if (_textBox is { } textBox)
+        {
+            int caretIndex = textBox.CaretIndex;
+            textBox.Text = text;
+            textBox.CaretIndex = caretIndex;
+        }
+    }
+
+    private void UpdateTextBoxTextIfNeeded(string lastText)
+    {
+        if (_textBox?.Text == lastText)
+        {
+            string formattedText = DateTimeToString(SelectedTime);
+            if (formattedText != lastText)
+            {
+                UpdateTextBoxText(formattedText);
+            }
+        }
+    }
+
+    private void SetSelectedTime(in DateTime time)
+        => SetCurrentValue(SelectedTimeProperty, (SelectedTime?.Date ?? DateTime.Today).Add(time.TimeOfDay));
+
+    private void SetSelectedTime(bool beCautious = false)
+    {
+        string currentText = _textBox?.Text;
+        if (!string.IsNullOrEmpty(currentText))
+        {
+            ParseTime(currentText!, t =>
+            {
+                if (!beCautious || DateTimeToString(t) == currentText)
+                {
+                    SetSelectedTime(t);
+                }
+
+                if (!beCautious)
+                {
+                    UpdateTextBoxTextIfNeeded(currentText!);
+                }
             });
         }
-
-        if (sender is not QuanTextBox quanTextBox)
+        else
         {
-            return;
-        }
-
-        if (quanTextBox.Text.Length != 8)
-        {
-            return;
-        }
-
-        if (TimeSpan.TryParseExact(quanTextBox.Text, TimeFormat, CultureInfo.CurrentCulture, out var timeSpan))
-        {
-            SetValue(SelectedTimeProperty, timeSpan);
+            SetCurrentValue(SelectedTimeProperty, null);
         }
     }
 
-    private void QuanTextBoxOnPreviewMouseButtonUp(object sender, MouseButtonEventArgs e)
+    private void ParseTime(string s, Action<DateTime> successContinuation)
     {
-        if (!_popup.IsOpen)
+        if (IsTimeValid(s, out DateTime time))
         {
-            Dispatcher.InvokeAsync(() =>
+            successContinuation(time);
+        }
+    }
+
+    private bool IsTimeValid(string s, out DateTime time)
+    {
+        CultureInfo culture = Language.GetSpecificCulture();
+
+        return DateTime.TryParse(s,
+                                 culture,
+                                 DateTimeStyles.AssumeLocal | DateTimeStyles.AllowWhiteSpaces | DateTimeStyles.NoCurrentDateDefault,
+                                 out time);
+    }
+
+    private string DateTimeToString(DateTime? d)
+        => d.HasValue ? DateTimeToString(d.Value) : null;
+
+    private string DateTimeToString(DateTime d)
+        => DateTimeToString(d, SelectedTimeFormat);
+
+    private string DateTimeToString(DateTime datetime, DatePickerFormat format)
+    {
+        CultureInfo culture = Language.GetSpecificCulture();
+        DateTimeFormatInfo dtfi = culture.GetDateFormat();
+
+        string hourFormatChar = Is24Hours ? "H" : "h";
+
+        var sb = new StringBuilder();
+        sb.Append(hourFormatChar);
+        if (format == DatePickerFormat.Long)
+        {
+            sb.Append(hourFormatChar);
+        }
+
+        sb.Append(dtfi.TimeSeparator);
+        sb.Append("mm");
+        if (WithSeconds)
+        {
+            sb.Append(dtfi.TimeSeparator);
+            sb.Append("ss");
+        }
+
+        if (!Is24Hours && (!string.IsNullOrEmpty(dtfi.AMDesignator) || !string.IsNullOrEmpty(dtfi.PMDesignator)))
+        {
+            sb.Append(" tt");
+        }
+
+        return datetime.ToString(sb.ToString(), culture);
+    }
+
+    private void PopupOnPreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs mouseButtonEventArgs)
+    {
+        if (sender is not Popup popup || popup.StaysOpen) return;
+
+        if (_dropDownButton?.InputHitTest(mouseButtonEventArgs.GetPosition(_dropDownButton)) != null)
+        {
+            // This popup is being closed by a mouse press on the drop down button 
+            // The following mouse release will cause the closed popup to immediately reopen. 
+            // Raise a flag to block re-opening the popup
+            _disablePopupReopen = true;
+        }
+    }
+
+    private void PopupOnClosed(object sender, EventArgs eventArgs)
+    {
+        if (IsDropDownOpen)
+        {
+            SetCurrentValue(IsDropDownOpenProperty, false);
+        }
+
+        if (_clock.IsKeyboardFocusWithin)
+        {
+            MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
+        }
+
+        //TODO Clock closed event
+        //OnCalendarClosed(new RoutedEventArgs());
+    }
+
+    private void PopupOnOpened(object sender, EventArgs eventArgs)
+    {
+        if (!IsDropDownOpen)
+        {
+            SetCurrentValue(IsDropDownOpenProperty, true);
+        }
+
+        if (_clock != null)
+        {
+            _clock.DisplayMode = ClockDisplayMode.Hours;
+            _clock.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
+        }
+
+        //TODO ClockOpenedEvent
+        //this.OnCalendarOpened(new RoutedEventArgs());
+    }
+
+    private void InitializeClock()
+    {
+        _clock.AddHandler(QuanClock.ClockChoiceMadeEvent, new ClockChoiceMadeEventHandler(ClockChoiceMadeHandler));
+        _clock.SetBinding(ForegroundProperty, GetBinding(ForegroundProperty));
+        _clock.SetBinding(StyleProperty, GetBinding(ClockStyleProperty));
+        _clock.SetBinding(QuanClock.TimeProperty, GetBinding(SelectedTimeProperty, new NullableDateTimeToCurrentDateConverter()));
+        _clock.SetBinding(QuanClock.Is24HoursProperty, GetBinding(Is24HoursProperty));
+        _clockHostContentControl.SetBinding(StyleProperty, GetBinding(ClockHostContentControlStyleProperty));
+    }
+
+    private void ClockChoiceMadeHandler(object sender, ClockChoiceMadeEventArgs clockChoiceMadeEventArgs)
+    {
+        if (WithSeconds && clockChoiceMadeEventArgs.Mode == ClockDisplayMode.Seconds ||
+            !WithSeconds && clockChoiceMadeEventArgs.Mode == ClockDisplayMode.Minutes)
+        {
+            TogglePopup();
+            if (SelectedTime == null)
             {
-                _popup.IsOpen = true;
-            });
+                SelectedTime = _clock.Time;
+            }
         }
     }
 
-    private void PopupOnOpened(object sender, EventArgs e)
+    private void DropDownButtonOnClick(object sender, RoutedEventArgs routedEventArgs)
+        => TogglePopup();
+
+    private void TogglePopup()
     {
-        _popupHoursListBox.SelectedIndex = SelectedTime.Hours;
-        _popupMinutesListBox.SelectedIndex = SelectedTime.Minutes;
-        _popupSecondsListBox.SelectedIndex = SelectedTime.Seconds;
+        if (IsDropDownOpen)
+        {
+            SetCurrentValue(IsDropDownOpenProperty, false);
+        }
+        else
+        {
+            if (_disablePopupReopen)
+            {
+                _disablePopupReopen = false;
+            }
+            else
+            {
+                SetSelectedTime();
+                SetCurrentValue(IsDropDownOpenProperty, true);
+            }
+        }
     }
 
-    private void PopupHoursListBoxOnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    private BindingBase GetBinding(DependencyProperty property, IValueConverter converter = null)
     {
-        if (sender is not ListBox { SelectedValue: int hours } listBox)
+        var binding = new Binding(property.Name)
         {
-            return;
-        }
-
-        SelectedTime = new TimeSpan(0, hours, SelectedTime.Minutes, SelectedTime.Seconds);
-
-        var scrollViewer = listBox.FindVisualChild<ScrollViewer>();
-        if (scrollViewer == null)
-        {
-            return;
-        }
-
-        scrollViewer.ScrollToBottom();
-        listBox.ScrollIntoView(hours);
-    }
-    private void PopupMinutesListBoxOnSelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if (sender is not ListBox { SelectedValue: int minutes } listBox)
-        {
-            return;
-        }
-
-        SelectedTime = new TimeSpan(0, SelectedTime.Hours, minutes, SelectedTime.Seconds);
-
-        var scrollViewer = listBox.FindVisualChild<ScrollViewer>();
-        if (scrollViewer == null)
-        {
-            return;
-        }
-        scrollViewer.ScrollToBottom();
-        listBox.ScrollIntoView(minutes);
-    }
-
-    private void PopupSecondsListBoxOnSelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if (sender is not ListBox { SelectedValue: int seconds } listBox)
-        {
-            return;
-        }
-
-        SelectedTime = new TimeSpan(0, SelectedTime.Hours, SelectedTime.Minutes, seconds);
-        var scrollViewer = listBox.FindVisualChild<ScrollViewer>();
-        if (scrollViewer == null)
-        {
-            return;
-        }
-        scrollViewer.ScrollToBottom();
-        listBox.ScrollIntoView(seconds);
+            Source = this,
+            Converter = converter
+        };
+        return binding;
     }
 
     #endregion

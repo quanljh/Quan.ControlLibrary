@@ -1,15 +1,12 @@
 ﻿using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
-using System.Windows.Markup;
 using System.Windows.Media;
 
 namespace Quan.ControlLibrary.Converters;
 
-public class BackgroundToForegroundConverter : MarkupExtension, IValueConverter, IMultiValueConverter
+public class BackgroundToForegroundConverter : BaseValueConverter, IValueConverter, IMultiValueConverter
 {
-    public override object ProvideValue(IServiceProvider serviceProvider) => this;
-
     /// <summary>
     /// Determining Ideal Text Color Based on Specified Background Color
     /// http://www.codeproject.com/KB/GDI-plus/IdealTextColor.aspx
